@@ -653,10 +653,10 @@ namespace FellowShip_Program
         public void file_Operation()
         {
             String textFile = "./Test_File.txt";
-            List<String> al = new List<string>();
-            using (StreamWriter sw = File.CreateText(textFile))
+            IList<String> list = new List<string>();
+            using (StreamWriter streamWriter = File.CreateText(textFile))
             {
-                sw.WriteLine("Hello how are you");
+                streamWriter.WriteLine("Hello how are you");
                
             }
             StreamReader stream = File.OpenText(textFile);
@@ -664,7 +664,7 @@ namespace FellowShip_Program
            String []arr= str.Split(' ');
             foreach(String s in arr)
             {
-                al.Add(s);
+                list.Add(s);
             }
             for(int i=0;i<arr.Length;i++)
             {
@@ -673,7 +673,7 @@ namespace FellowShip_Program
 
                 Console.WriteLine("Enter the to be search in file:");
             String search = Convert.ToString(Console.ReadLine());
-           if(al.Contains(search))
+           if(list.Contains(search))
             {
                 Console.WriteLine("Wrod is present in file:: " + search);
             }
