@@ -1,16 +1,18 @@
 ﻿using FellowShip_Program.Coin_Percentage;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FellowShip_Program.Add
-
 {
-    class Program
+    /// <summary>
+    /// Main
+    /// </summary>
+   public class Program
     {
-       public static void Main(String[] args)
+        /// <summary>
+        /// Main entry point
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        public static void Main(String[] args)
         {
             Console.WriteLine("1)FlipCoin" +
                 "\n 2)Gambler_problem" +
@@ -31,7 +33,9 @@ namespace FellowShip_Program.Add
                "\n 17)Monthly Payment" +
                "\n 18)Inseration Sort" +
                "\n 19)Vending Machine" +
-               "\n 20)File operation");
+               "\n 20)File operation" +
+               "\n 21)String Permutation" +
+               "");
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -39,88 +43,95 @@ namespace FellowShip_Program.Add
             {
                 case 1:
                     FlipCoin flipCoin = new FlipCoin();
-                    flipCoin.coin_percentage1();
+                    flipCoin.CoinPercentage1();
                     break;
                 case 2:
                     GamblerProblem gamblerProblem = new GamblerProblem();
-                    gamblerProblem.Gambler_Problem();
+                    gamblerProblem.Gamblerproblem();
                     break;
 
                 case 3:
                     Harmonic harmonic = new Harmonic();
-                      harmonic.Harmonic_Series();
+                      harmonic.HarmonicSeries();
                     break;
                 case 4:
                     Prime_Number prime = new Prime_Number();
-                    prime.Prime_Factor();
+                    prime.PrimeFactor();
                     break;
                 case 5:
                     LeapYear leapYear = new LeapYear();
-                    leapYear.LeapYear_Checker();
+                    leapYear.LeapYearChecker();
                     break;
                 case 6:
                     PowerTable powerTable = new PowerTable();
-                    powerTable.Power_Table();
+                    powerTable.Powertable();
                     break;
                 case 7:
                     Coupon_Generation coupon = new Coupon_Generation();
-                    coupon.Generate_Coupon();
+                    coupon.GenerateCoupon();
                     break;
                 case 8:
-                    TwoD_Array two= new TwoD_Array();
-                    two.twoD_Array();
+                    TwoDArray two = new TwoDArray();
+                    two.TwoD_Array();
                     break;
                 case 9:
                     Array_Triplets array_Triplets = new Array_Triplets();
-                    array_Triplets.Array_triplets();
+                    array_Triplets.Arraytriplets();
                     break;
                 case 10:
                     Anagram anagram = new Anagram();
-                    anagram.Anagram_checker();
+                    anagram.AnagramChecker();
                     break;
                 case 11:
                     Prime_Range prime_Range = new Prime_Range();
-                    prime_Range.prime_Range_Printer();
+                    prime_Range.PrimeRangePrinter();
                     break;
                 case 12:
                     BinarySearchInteger binary = new BinarySearchInteger();
-                    binary.binarySearch();
+                    binary.BinarySearch();
                     break;
                 case 13:
-                    Bubble_Sort bubble = new Bubble_Sort();
-                    bubble.bubble_sort();
+                    BubbleSort bubble = new BubbleSort();
+                    bubble.Bubblesort();
                     break;
                 case 14:
-                    Day_Of_week day = new Day_Of_week();
-                    day.day_Of_Week();
+                    DayOfweek day = new DayOfweek();
+                    day.DayOfWeek();
                     break;
                 case 15:
-                    Binary_Of_Number binary_Of_Number = new Binary_Of_Number();
-                    binary_Of_Number.binary_of_digit();
+                    BinaryOfNumber binaryOfNumber = new BinaryOfNumber();
+                    binaryOfNumber.BinaryOfDigit();
                     break;
                 case 16:
                     Tempeature_Conversion tempeature_Conversion = new Tempeature_Conversion();
-                    tempeature_Conversion.Convert_tempeature();
+                    tempeature_Conversion.ConvertTemperature();
                     break;
                 case 17:
                     MonthlyPayment payment = new MonthlyPayment();
-                    payment.car_loan();
+                    payment.Car_loan();
                     break;
                 case 18:
                     Inseration_Sort inseration_ = new Inseration_Sort();
-                    inseration_.inseration_sort();
+                    inseration_.InsertionSort();
                     break;
                 case 19:
                     Vending_machine vending = new Vending_machine();
-                    vending.vending_Machine();
+                    vending.VendingMachine();
                     break;
                 case 20:
                     File_Operation operation = new File_Operation();
                     operation.Operation_File();
                     break;
+                case 21:
+                    Permutation permutation = new Permutation();
+                    permutation.StringPermutation();                  
+                    break;
+                case 22:
+                    TicTacToe ticTacToe = new TicTacToe();
+                    ticTacToe.PlayGame();
+                    break;
             }
-
-            
+           
             Console.ReadKey();
         }
     }

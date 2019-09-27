@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
-   public class Tempeature_Conversion
+    /// <summary>
+    /// Convert the temperature
+    /// </summary>
+    public class Tempeature_Conversion
     {
-        public void Convert_tempeature()
+        /// <summary>
+        /// ConvertTemperature() used to called function in Utility class i.e utility.Temprature()
+        /// </summary>
+        public void ConvertTemperature()
         {
             Utility utility = new Utility();
-            utility.tempeature();
+            utility.ConvertTemperatureFromCelciusToOtherType();
         }
     }
 }

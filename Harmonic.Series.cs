@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
+    /// <summary>
+    /// Print the harmonic series upto of given number 
+    /// </summary>
     public class Harmonic
     {
-        public void Harmonic_Series()
+        /// <summary>
+        /// Harmonics the series.
+        /// </summary>
+        public void HarmonicSeries()
         {
             Utility utility = new Utility();
-            utility.harmonic();
+            utility.PrintHarmonicSeriesOfNumber();
         }
     }
 }

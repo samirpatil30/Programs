@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
+    /// <summary>
+    /// print power table
+    /// </summary>
     public class PowerTable
     {
-        public void Power_Table()
+        /// <summary>
+        /// Powers the table.
+        /// </summary>
+        public void Powertable()
         {
             Utility utility = new Utility();
-            utility.power_of();
-
+            utility.PrintTableOfNumberPower();
         }
     }
 }

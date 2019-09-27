@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FellowShip_Program
 {
-    public class Day_Of_week
+    /// <summary>
+    /// Print day
+    /// </summary>
+    public class DayOfweek
     {
-        public void day_Of_Week()
+        /// <summary>
+        /// Days the of week.
+        /// </summary>
+        public void DayOfWeek()
         {
             Utility utility = new Utility();
-            utility.day();
-
+            utility.PrintDayOfWeek();
         }
     }
 }

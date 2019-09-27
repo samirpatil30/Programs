@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
-   public class BinarySearchInteger
+    /// <summary>
+    /// Binary Search
+    /// </summary>
+    public class BinarySearchInteger
     {
-        public void binarySearch()
+        /// <summary>
+        /// Binaries the search.
+        /// </summary>
+        public void BinarySearch()
         {
-            Utility utility = new Utility();
-
-           
-            utility.binarySearch();
+            Utility utility = new Utility();         
+            utility.BinarySearchOfGivenNumber();
         }
     }
 }

@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
-   public class Prime_Number
+    /// <summary>
+    /// Print prime factors of number
+    /// </summary>
+    public class Prime_Number
     {
-        public void Prime_Factor()
+        /// <summary>
+        /// Primes the factor.
+        /// </summary>
+        public void PrimeFactor()
         {
             Utility utility = new Utility();
-            utility.prime_factor();
+            utility.PrintPrimeFactorOfNumber();
         }
     }
 }

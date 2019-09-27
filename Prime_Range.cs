@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
+    /// <summary>
+    ///  Print Prime number
+    /// </summary>
     public class Prime_Range
     {
-        public void prime_Range_Printer()
+        /// <summary>
+        /// Print Prime number in given range
+        /// </summary>
+        public void PrimeRangePrinter()
         {
             Utility utility = new Utility();
-            utility.prime_Range();
+            utility.PrintPrimeNumberInGivenRange();
         }
     }
 }

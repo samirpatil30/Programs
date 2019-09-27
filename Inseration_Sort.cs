@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
-   public class Inseration_Sort
+    /// <summary>
+    /// Sorting array using inserition sort
+    /// </summary>
+    public class Inseration_Sort
     {
-        public void inseration_sort()
+        /// <summary>
+        /// Insertions the sort.
+        /// </summary>
+        public void InsertionSort()
         {
             Utility utility = new Utility();
-            utility.inseration_sort();
+            utility.SortArrayUsingInserationsort();
         }
     }
 }

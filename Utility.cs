@@ -1,29 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Utility.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace FellowShip_Program
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+
+    /// <summary>
+    /// Utility class which contains all generic(s) methods.
+    /// </summary>
     public class Utility
     {
-
-        //******************Function to check percentage of coin Flipping*******************************
-        public void coin()
+        /// <summary>
+        /// Calculate(s) the percentage for coin tossed.
+        /// </summary>
+        public void CalculatesPercentageForCoinTossed()
         {
-
-            Console.WriteLine(" how many times you want to toss coin");
-
-            int toss_time = Convert.ToInt32(Console.ReadLine());
-            //  int head[] = new int[toss_time];
-            // Console.WriteLine(toss_time);
+            Console.WriteLine("How many times you want to toss coin");
+            int noOfCoinedTossed = Convert.ToInt32(Console.ReadLine());
+            ////  int head[] = new int[toss_time];
+            //// Console.WriteLine(toss_time);
             int head = 0;
             int tail = 0;
 
+            //// Creates the instance of random function.
             Random random = new Random();
-            for (int i = 0; i < toss_time; i++)
+
+            //// iterates the number of coin tossed
+            for (int i = 0; i < noOfCoinedTossed; i++)
             {
                 double number = random.NextDouble();
                 if (number > 0.5)
@@ -33,411 +41,57 @@ namespace FellowShip_Program
                 else
                 {
                     tail++;
-
                 }
             }
+
             Console.WriteLine(head + "  " + tail);
 
-            int percentage_of_head = head * 100 / toss_time;
-            int percentage_of_tail = tail * 100 / toss_time;
+            int percentage_of_head = head * 100 / noOfCoinedTossed;
+            int percentage_of_tail = tail * 100 / noOfCoinedTossed;
 
             Console.WriteLine("percentage of head  " + percentage_of_head + "%");
 
             Console.WriteLine("percentage of tail  " + percentage_of_tail + "%");
         }
 
-        //***************Function to check year is leap year or not****************************
-        public void leap_year()
+        /// <summary>
+        /// Converts the type of the temperature from celcius to other and vice versa.
+        /// </summary>
+        public void ConvertTemperatureFromCelciusToOtherType()
         {
-            Console.WriteLine(" Enter Year");
-            Boolean flag = false;
-            int year = Convert.ToInt32(Console.ReadLine());
+            int tempeature = 0, celsius = 0, fahrenheit = 0;
 
-            if (year % 400 == 0)
-            {
-                flag = true;
-            }
-            else if (year % 4 == 0)
-            {
-                flag = true;
-            }
-            else
-            {
-                flag = false;
-            }
-
-            if (flag)
-            {
-                Console.WriteLine("Year {0} is leap year", year);
-            }
-            else
-            {
-                Console.WriteLine(" year {0} is not leap year", year);
-            }
-        }
-
-        //**********Function to check power of number***********************
-        public void power_of()
-        {
-            double n = 2;
-
-            Console.WriteLine(" upto how many power of table you want: ");
-            int power = Convert.ToInt32(Console.ReadLine());
-            for (int i = 1; i < power; i++)
-            {
-                double temp = Math.Pow(n, i);
-                Console.WriteLine(temp);
-            }
-        }
-
-        //**********Function to print addition of number*************************
-        public void addi()
-        {
-            int a = 10, b = 20;
-            int c = a + b;
-            Console.WriteLine(c);
-        }
-
-        //**************Function to find Harmonic of Nth number*******************
-        public void harmonic()
-        {
-            Console.WriteLine("Enter the number upto which you want to find Harmonic number");
-            double number = Convert.ToDouble(Console.ReadLine());
-            double harmonic = 0.0;
-
-            double i, start = 0.0;
-            for (i = 1; i <= number; i++)
-            {
-                start = start + 1 / i;
-            }
-
-            Console.WriteLine(start);
-        }
-
-        //*************Gambler Function To determine how many times user win or lose*****************
-        public void Gambler_Game()
-        {
-            double cash = 0, stake, trials, goal, bet = 0, win = 0, lose = 0;
-
-            Console.WriteLine(" Enter the stake or Cash");
-            stake = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine(" Enter the goal upto which you want to reach");
-            goal = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine(" How many times you want to play or trials");
-            trials = Convert.ToDouble(Console.ReadLine());
-
-            Random random = new Random();
-            for (int i = 1; i < trials; i++)
-            {
-                cash = stake;
-
-                while (cash > 0 && cash < goal)
-                {
-                    bet++;
-                    double number = random.NextDouble();
-                    if (number > 0.5)
-                    {
-                        cash++;
-                    }
-                    else
-                    {
-                        cash--;
-                    }
-
-                }
-                if (cash == goal)
-                {
-                    win++;
-                }
-                else
-                {
-                    lose++;
-                }
-            }
-            Console.WriteLine("cash " + cash);
-            Console.WriteLine("win " + win + " lose " + lose);
-        }
-
-        //***********Function to print prime Factors of number*******************
-        public void prime_factor()
-        {
-            Console.WriteLine("Enter the number of which you want to print prime factor");
-            int number = Convert.ToInt32(Console.ReadLine());
-
-            for(int i=2;i<=number;i++)
-            {
-                while(number%i==0)
-                {
-                    Console.WriteLine(i + " ");
-                    number = number / i;
-                }
-               
-            }
-            
-         
-        }
-
-        //***************Function to Generate Coupons***************
-        public void coupon()
-        {
-            char []chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
-            String[] output = new String[10];
-            Random random = new Random();
-            Console.WriteLine(" How many coupon you want");
-            int number = Convert.ToInt32(Console.ReadLine());
-            String str = "";
-            HashSet<String> hashSet = new HashSet<string>();
-            for(int i=0;i<number;i++)
-            {
-                for(int j=0;j<10;j++)
-                {
-                    char c = chars[random.Next(chars.Length)];
-                    str = str+c;
-                }
-                
-                    hashSet.Add(str);
-                    str = "";       
-            }
-           
-            foreach(String string_fetch in hashSet)
-            {
-                Console.WriteLine(string_fetch);
-            } 
-        }
-
-        //*************Function to print 2D Array of different data types********************
-        public void add_in_Array()
-        {
-            Console.WriteLine("1)Integer \n 2)String \n 3)Double");
+            Console.WriteLine("\n Enter your choice 1) celsius_to_fahrenheit 2) fahrenheit_to_celsius");
             int choice = Convert.ToInt32(Console.ReadLine());
 
             switch (choice)
             {
                 case 1:
-                    int[,] array = new int[3,3];
-                    for (int i = 0; i < 3; i++)
-                    {
-                        for (int j = 0; j < 3; j++)
-                        {
-                            array[i,j] = Convert.ToInt32(Console.ReadLine());
-                        }
-                    }
-
-                    for (int i = 0; i < 3; i++)
-                    {
-                        for (int j = 0; j < 3; j++)
-                        {
-                            Console.Write(array[i,j]+" ");
-                        }
-                        Console.WriteLine();
-                    }
+                    Console.WriteLine("\n enter the tempeature in celsius");
+                    tempeature = Convert.ToInt32(Console.ReadLine());
+                    celsius = (tempeature * 9) / 5 + 32;
+                    Console.WriteLine("\n tempeature in fahrenheit is " + celsius);
                     break;
 
                 case 2:
-                    String[,] array1 = new String[3, 3];
-                    for (int i = 0; i < 3; i++)
-                    {
-                        for (int j = 0; j <3; j++)
-                        {
-                            array1[i, j] = Convert.ToString(Console.ReadLine());
-                        }
-                    }
-
-                    for (int i = 0; i < 3; i++)
-                    {
-                        for (int j = 0; j < 3; j++)
-                        {
-                            Console.Write(array1[i, j]+" ");
-                        }
-                        Console.WriteLine();
-                    }
+                    Console.WriteLine("\n enter the tempeature fahrenheit");
+                    tempeature = Convert.ToInt32(Console.ReadLine());
+                    fahrenheit = ((tempeature - 32) * 5) / 9;
+                    Console.WriteLine("\n tempeature in celsius is" + fahrenheit);
                     break;
-
-                case 3:
-                    double[,] array2 = new double[3, 3];
-                    for (int i = 0; i < 3; i++)
-                    {
-                        for (int j = 0; j <3; j++)
-                        {
-                            array2[i, j] = Convert.ToDouble(Console.ReadLine());
-                        }
-                    }
-
-                    for (int i = 0; i < 3; i++)
-                    {
-                        for (int j = 0; j < 3; j++)
-                        {
-                            Console.Write(array2[i, j]+" ");
-                        }
-                        Console.WriteLine();
-                    }
+                default:
+                    Console.WriteLine("\n enter correct choice");
                     break;
             }
         }
-
-        //*****************Function to find array triplets which is equal to zero**********************
-        public void Array_Triplets()
-        {
-            int[] array = { 0, -1, 2, -3, 1 };
-            int i, j, k;
-            for( i=0;i<array.Length;i++)
-            {
-                for(j=i+1;j<array.Length;j++)
-                {
-                    for(k=j+1;k<array.Length;k++)
-                    {
-                        if(array[i]+array[j]+array[k]==0)
-                        {
-                            Console.WriteLine("{0},{1},{2}", array[i], array[j], array[k]);
-                        }
-                    }
-                }
-            }
-        }
-
-
-        //******************Function to Check given Strings are anagram or not************************
-       public void Anagram_checker()
-        {
-            String string1 = "java";
-            String string2 = "sjav";
-            char[] array1 = string1.ToCharArray();
-            char[] array2 = string2.ToCharArray();
-            Boolean flag = false;
-            Array.Sort(array1);
-            Array.Sort(array2);
-
-            for(int i=0;i<array1.Length;i++)
-            {
-                for(int j=0;j<array2.Length;j++)
-                {
-                    if (array1[i] == array2[j])
-                        flag = true;
-                    
-                }
-                if (flag)
-                {
-                    Console.WriteLine("String Are anagram");
-                }
-                else
-                {
-                    Console.WriteLine("Not anagram");
-                }
-            }  
-        }
-
-        //****************Find prime number in range***************
-        public void prime_Range()
-        {
-            int number = 50;
-
-            for(int i=2;i<number;i++)
-            {
-                Boolean isPrime = true;
-               for(int j=2;j<i;j++)
-                {
-                    if(i%j==0)
-                    {
-                        isPrime = false;
-                        break;
-                    }
-                }
-               if(isPrime)
-                {
-                    Console.WriteLine(i);
-                }
-            }
-        }
-
-        //*************Binary Search on Integers****************
-        public void binarySearch()
-        {     
-                int[] arr = { 2, 3, 5, 15, 45, 113, 210, 330 };
-            int key = 3;
-            int last = arr.Length - 1;
-            int first = 0;
-            int mid = (first + last) / 2;
-            while (first <= last)
-            {
-                if (arr[mid] < key)
-                {
-                    first = mid + 1;
-                }
-                else if (arr[mid] == key)
-                {
-                    Console.WriteLine("Element is found at index: " + mid);
-                    break;
-                }
-                else
-                {
-                    last = mid - 1;
-                }
-                mid = (first + last) / 2;
-                Console.WriteLine("new mid" + mid);
-            }
-            if (first > last)
-            {
-               Console.WriteLine("Element is not found!");
-            }
-        }
-
-        //***************Function to perform Bubble Sort on Integer AND Using String****************************
-        public void bubble_sort()
-        {
-            Console.WriteLine("1) Bubble sort using integer" +
-                "\n 2)Bubble sort using string");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
-            {
-                case 1:
-                    int[] array = { 2, 4, 1, 5, 7, 6, 3 };
-                    int temp;
-                    for (int i = 0; i < array.Length; i++)
-                    {
-                        for (int j = i + 1; j < array.Length; j++)
-                        {
-                            if (array[i] > array[j])
-                            {
-                                temp = array[i];
-                                array[i] = array[j];
-                                array[j] = temp;
-                            }
-                        }
-                    }
-                    Console.WriteLine("after Sorting");
-                    for (int i = 0; i < array.Length; i++)
-                    {
-                        Console.WriteLine(array[i]);
-                    }
-                    break;
-                case 2:
-                    String[] array2 = { "abc", "def", "pqr", "add", "abb" };
-                    for (int i = 0; i < array2.Length; i++)
-                    {
-                        for (int j = i + 1; j < array2.Length; j++)
-                        {
-                            if (array2[i].CompareTo(array2[j]) > 0)
-                            {
-                                String temp2 = array2[i];
-                                array2[i] = array2[j];
-                                array2[j] = temp2;
-                            }
-                        }
-                        Console.WriteLine(array2[i]);
-                    }
-                    break;
-            }
-        }
-
-        //***************Function to print day of week*****************************
-        public void day()
+        /// <summary>
+        /// Print the day of week.
+        /// </summary>
+        public void PrintDayOfWeek()
         {
             int m0 = 0, y0, d0, x;
             int year, month, day;
 
-          
             Console.WriteLine("\n enter day");
             day = Convert.ToInt32(Console.ReadLine());
 
@@ -447,10 +101,10 @@ namespace FellowShip_Program
             Console.WriteLine("\n enter year");
             year = Convert.ToInt32(Console.ReadLine());
 
-            y0 = year - (14 - month) / 12;
+            y0 = (year - (14 - month)) / 12;
             x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
             m0 = month + 12 * ((14 - month) / 12) - 2;
-            d0 = (day + x + 31 * m0 / 12) % 7;
+            d0 = ((day + x + 31 * m0 / 12) % 7);
 
             if (d0 == 0)
             {
@@ -482,93 +136,145 @@ namespace FellowShip_Program
             }
         }
 
-        //**********Function to find Binary of number******************
-        public void binary(int number)
+        /// <summary>
+        /// operation on file if the word is avaiable in file then print it.
+        /// </summary>
+        public void File_Operation()
         {
-            int[] binaryNum = new int[10];
-
-            // counter for binary array 
-            int i = 0;
-            while (number > 0)
+            string textFile = "./Test_File.txt";
+            IList<string> list = new List<string>();
+            using (StreamWriter streamWriter = File.CreateText(textFile))
             {
-                // storing remainder in binary array 
-                binaryNum[i] = number % 2;
-                number = number / 2;
-                i++;                          // Here At last i will be 8
+                streamWriter.WriteLine("Hello how are you");
             }
-
-            // printing binary array in reverse order 
-            for (int j = i - 1; j >= 0; j--)                //i=8;
-            {
-                Console.Write(binaryNum[j] + " ");
-            }
-            Console.WriteLine("\n");
-            int[] array = new int[binaryNum.Length];  
-
-            for(int k=1;k<100;k*=2)
-            {
-                array[k] = k;
-            }   
-        }
-
-        //**************Function for Tempeature Conversion********************
-        public void tempeature()
-        {
-            int tempeature = 0, celsius = 0, fahrenheit = 0;
+            //// Create the instance of StreamReader function
+            StreamReader stream = File.OpenText(textFile);
+            string str = stream.ReadLine();
+            string[] array = str.Split(' ');
             
-            Console.WriteLine("\n Enter your choice 1) celsius_to_fahrenheit 2) fahrenheit_to_celsius");
-            int ch = Convert.ToInt32(Console.ReadLine());
+            //// iterate(s) till length of string array
+            foreach (string string1 in array)
+            {
+                list.Add(string1);
+            }
 
-            switch (ch)
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine(array[i]);
+            }
+
+            Console.WriteLine("Enter the to be search in file:");
+            string search = Convert.ToString(Console.ReadLine());
+            if (list.Contains(search))
+            {
+                Console.WriteLine("Wrod is present in file:: " + search);
+            }
+            else
+            {
+                Console.WriteLine("Word is not present in file");
+            }
+        }
+        /// <summary>
+        /// Vending the machine for getting notes.
+        /// </summary>
+        public void VendingMachineForGettingNotes()
+        {
+            int[] note = { 2000, 500, 100 };
+            int[] note_count = { 20, 30, 40 };
+            int[] getting_notes = new int[3];
+            int[] remaining_notes = new int[3];
+            Console.WriteLine("Enter withdraw amount");
+            int amount = Convert.ToInt32(Console.ReadLine());
+
+            ////iterates till given amount become zero
+            while (amount > 0)
+            {
+                ///iterates the notes
+                for (int i = 0; i < note.Length; i++)
+                {
+                    getting_notes[i] = amount / note[i];
+                    amount = amount % note[i];
+                    remaining_notes[i] = note_count[i] - getting_notes[i];
+                }
+            }
+            //// iterate the getting notes
+            for (int i = 0; i < getting_notes.Length; i++)
+            {
+                Console.WriteLine(note[i] + " x " + getting_notes[i]);
+            }
+          ////  iterate(s) the remaining notes
+            for (int i = 0; i < remaining_notes.Length; i++)
+            {
+                Console.WriteLine(note[i] + "remaining notes are " + remaining_notes[i]);
+            }
+        }
+        /// <summary>
+        /// Sorts the array using bubble sort.
+        /// </summary>
+        public void SortArrayUsingBubbleSort()
+        {
+            Console.WriteLine("1) Bubble sort using integer" +
+                     "\n 2)Bubble sort using string");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
             {
                 case 1:
-                    Console.WriteLine("\n enter the tempeature in celsius");
-                    tempeature = Convert.ToInt32(Console.ReadLine());
-                    celsius = tempeature * 9 / 5 + 32;
-                    Console.WriteLine("\n tempeature in fahrenheit is " + celsius);
+                    IntegerSort();
                     break;
-
                 case 2:
-                    Console.WriteLine("\n enter the tempeature fahrenheit");
-                    tempeature = Convert.ToInt32(Console.ReadLine());
-                    fahrenheit = ((tempeature - 32) * 5) / 9;
-                    Console.WriteLine("\n tempeature in celsius is" + fahrenheit);
-                    break;
-                default:
-                    Console.WriteLine("\n enter correct choice");
+                    StringSorting();
                     break;
             }
+            /////Function to sort integer array
+            void IntegerSort()
+            {
+                int[] array = { 2, 4, 1, 5, 7, 6, 3 };
+                int temp;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    for (int j = i + 1; j < array.Length; j++)
+                    {
+                        if (array[i] > array[j])
+                        {
+                            temp = array[i];
+                            array[i] = array[j];
+                            array[j] = temp;
+                        }
+                    }
+                }
+
+                Console.WriteLine("after Sorting");
+                for (int i = 0; i < array.Length; i++)
+                {
+                    Console.WriteLine(array[i]);
+                }
+            }
+            ////Function to sort String array
+            void StringSorting()
+            {
+                string[] array2 = { "abc", "def", "pqr", "add", "abb" };
+                for (int i = 0; i < array2.Length; i++)
+                {
+                    for (int j = i + 1; j < array2.Length; j++)
+                    {
+                        if (array2[i].CompareTo(array2[j]) > 0)
+                        {
+                            string temp2 = array2[i];
+                            array2[i] = array2[j];
+                            array2[j] = temp2;
+                        }
+                    }
+
+                    Console.WriteLine(array2[i]);
+                }
+            }           
         }
 
-        //***************Function to print Monthly Payment*********************
-        public void Monthly_Payment()
-        {
-            double year = 0, rate = 0, principal = 0;
-            double n = 12;
-           
-            Console.WriteLine("\n enter principal amount ");
-            principal =Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("\n enter number of years ");
-            year = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("\n enter rate ");
-            rate = Convert.ToDouble(Console.ReadLine());
-
-
-
-            double r = (rate / 100) / 12;   // monthly interest rate
-            n = 12 * year;
-
-            double payment = principal * r / (1 - Math.Pow(1 + r, -n));
-            double interest = payment * n - principal;
-            
-            Console.WriteLine("Monthly payments = " + payment);
-            Console.WriteLine("Total interest   = " + interest);
-        }
-
-        //***************Function for Inseration sort****************
-        public void inseration_sort()
+        /// <summary>
+        /// Sorts the array using inserationsort.
+        /// </summary>
+        public void SortArrayUsingInserationsort()
         {
             Console.WriteLine("1) inseration sort on integer \n 2) inseration sort on string");
             int choice = Convert.ToInt32(Console.ReadLine());
@@ -587,100 +293,483 @@ namespace FellowShip_Program
                             array[j] = array[j - 1];
                             j = j - 1;
                         }
+
                         array[j] = temp;
                     }
+
                     Console.WriteLine("After Sorting");
                     for (int i = 0; i < array.Length; i++)
                     {
                         Console.WriteLine(array[i]);
                     }
+
                     break;
 
                 case 2:
-                    String[] array2 = { "samir", "rahul", "abhi", "sujit", "ganesh" };
-                    String str = "";
-                    for (int i = 1; i < array2.Length; i++)
+                    StringSort();
+                    break;
+            }
+            void StringSort()
+            {
+                string[] array2 = { "samir", "rahul", "abhi", "sujit", "ganesh" };
+                string str = "";
+                ////Iterate the Array2
+                for (int i = 1; i < array2.Length; i++)
+                {
+                    str = array2[i];
+                    int j = i;
+
+                    //// CompareTo() return 3 val are= 0(if both str is equal), 1(if 1st str is greater), -1(if 2nd str is greater)
+                    while (j > 0 && array2[j - 1].CompareTo(str) > 0)
                     {
-                        str = array2[i];
-                        int j = i;
-                        while (j > 0 && array2[j - 1].CompareTo(str) > 0)    // CompareTo() return 3 val are= 0(if both str is equal), 1(if 1st str is greater), -1(if 2nd str is greater)
-                        {
-                            array2[j] = array2[j - 1];
-                            j = j - 1;
-                        }
-                        array2[j] = str;
+                        array2[j] = array2[j - 1];
+                        j = j - 1;
                     }
 
-                    for (int i = 0; i < array2.Length; i++)
+                    array2[j] = str;
+                }
+
+                for (int i = 0; i < array2.Length; i++)
+                {
+                    Console.WriteLine(array2[i]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Prints the binary of number.
+        /// </summary>
+        /// <param name="number">The number.</param>
+        public void PrintBinaryOFNumber(int number)
+        {
+            int[] binaryNumber = new int[10];
+            int i = 0;
+            while (number > 0)
+            {
+                //// storing remainder in binary array 
+                binaryNumber[i] = number % 2;
+                number = number / 2;
+                /// Here At last i will be 8
+                i++;
+            }
+
+            ////iterate BinaryNumber array
+            //// printing binaryNumber array in reverse order 
+            for (int j = i - 1; j >= 0; j--)               
+            {
+                Console.Write(binaryNumber[j] + " ");
+            }
+
+            Console.WriteLine("\n");
+            int[] array = new int[binaryNumber.Length];
+
+            for (int k = 1; k < 100; k *= 2)
+            {
+                array[k] = k;
+            }
+        }
+
+        /// <summary>
+        /// Prints the leapyear.
+        /// </summary>
+        public void PrintLeapyear()
+        {
+            Console.WriteLine(" Enter Year");
+            bool flag = false;
+            int year = Convert.ToInt32(Console.ReadLine());
+
+            if (year % 400 == 0)
+            {
+                flag = true;
+            }
+            else if (year % 4 == 0)
+            {
+                flag = true;
+            }
+            else
+            {
+                flag = false;
+            }
+
+            if (flag)
+            {
+                Console.WriteLine("Year {0} is leap year", year);
+            }
+            else
+            {
+                Console.WriteLine(" year {0} is not leap year", year);
+            }
+        }
+
+        /// <summary>
+        /// Prints the table of number power.
+        /// </summary>
+        public void PrintTableOfNumberPower()
+        {
+            double n = 2;
+
+            Console.WriteLine(" upto how many power of table you want: ");
+            int PowerNumber = Convert.ToInt32(Console.ReadLine());
+            
+            ////iterate the power number
+            for (int i = 1; i < PowerNumber; i++)
+            {
+                double temp = Math.Pow(n, i);
+                Console.WriteLine(temp);
+            }
+        }
+
+        /// <summary>
+        /// Prints the harmonic series of number.
+        /// </summary>
+        public void PrintHarmonicSeriesOfNumber()
+        {
+            Console.WriteLine("Enter the number upto which you want to find Harmonic number");
+            double number = Convert.ToDouble(Console.ReadLine());
+
+            double i, start = 0.0;
+            ////iterate the number
+            for (i = 1; i <= number; i++)
+            {
+                start = (start + 1) / i;
+            }
+
+            Console.WriteLine(start);
+        }
+
+        /// <summary>
+        /// Gambler game problem.
+        /// </summary>
+        public void GamblerGameProblem()
+        {
+            double cash = 0, stake, trials, goal, bet = 0, win = 0, lose = 0;
+            Console.WriteLine(" Enter the stake or Cash");
+            stake = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine(" Enter the goal upto which you want to reach");
+            goal = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine(" How many times you want to play or trials");
+            trials = Convert.ToDouble(Console.ReadLine());
+
+            //// create instance of Random function
+            Random random = new Random();
+            //// iterate the trials
+            for (int i = 1; i < trials; i++)
+            {
+                cash = stake;
+
+                while (cash > 0 && cash < goal)
+                {
+                    bet++;
+                    double number = random.NextDouble();
+                    if (number > 0.5)
                     {
-                        Console.WriteLine(array2[i]);
+                        cash++;
                     }
+                    else
+                    {
+                        cash--;
+                    }
+                }
+
+                if (cash == goal)
+                {
+                    win++;
+                }
+                else
+                {
+                    lose++;
+                }
+            }
+
+            Console.WriteLine("cash " + cash);
+            Console.WriteLine("win " + win + " lose " + lose);
+        }
+
+        /// <summary>
+        /// Print the prime factor of number.
+        /// </summary>
+        public void PrintPrimeFactorOfNumber()
+        {
+            Console.WriteLine("Enter the number of which you want to print prime factor");
+            int number = Convert.ToInt32(Console.ReadLine());
+
+            ////iterate the number
+            for (int i = 2; i <= number; i++)
+            {
+                while (number % i == 0)
+                {
+                    Console.WriteLine(i + " ");
+                    number = number / i;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Generates the coupons.
+        /// </summary> 
+        public void GenerateCoupons()
+        {
+            char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
+            string[] output = new string[10];
+            Random random = new Random();
+            Console.WriteLine(" How many coupon you want");
+            int numberOfCoupons = Convert.ToInt32(Console.ReadLine());
+            string str = "";
+            HashSet<string> hashSet = new HashSet<string>();
+            ////Iterate the number of coupons
+            for (int i = 0; i < numberOfCoupons; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    char c = chars[random.Next(chars.Length)];
+                    str = str + c;
+                }
+
+                hashSet.Add(str);
+                str = "";
+            }
+            ////iterate the HashSet values
+            foreach (string string_fetch in hashSet)
+            {
+                Console.WriteLine(string_fetch);
+            }
+        }
+
+        /// <summary>
+        /// print the 2D Array of data type
+        /// </summary>
+        public void PrintThe2DArrayOfDataType()
+        {
+            Console.WriteLine("1)Integer \n 2)String \n 3)Double");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    int[,] arrayOfInteger = new int[3, 3];
+                    ////iterate the array of integer
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            arrayOfInteger[i, j] = Convert.ToInt32(Console.ReadLine());
+                        }
+                    }
+                    //// iterate and print the array of integer
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            Console.Write(arrayOfInteger[i, j] + " ");
+                        }
+
+                        Console.WriteLine();
+                    }
+
+                    break;
+
+                case 2:
+                    string[,] arrayOfString = new string[3, 3];
+                    ////iterate the array of string
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            arrayOfString[i, j] = Convert.ToString(Console.ReadLine());
+                        }
+                    }
+
+                    ////iterate and print the array of string Type
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            Console.Write(arrayOfString[i, j] + " ");
+                        }
+
+                        Console.WriteLine();
+                    }
+
+                    break;
+
+                case 3:
+                    double[,] arrayOfDouble = new double[3, 3];
+                    ////iterate the array of double
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            arrayOfDouble[i, j] = Convert.ToDouble(Console.ReadLine());
+                        }
+                    }
+
+                    ////iterate and print array of double Type
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            Console.Write(arrayOfDouble[i, j] + " ");
+                        }
+
+                        Console.WriteLine();
+                    }
+
                     break;
             }
         }
 
-        //************Function to search the word from flie******************
-        public void vending_Machine()
+        /// <summary>
+        /// Prints the array triplets equals to zero.
+        /// </summary>
+        public void PrintArrayTripletsEqualsToZero()
         {
-            int[] note = { 2000, 500, 100 };
-            int[] note_count = { 20, 30, 40 };
-            int[] getting_notes = new int[3];
-            int[] remaining_notes = new int[3];
-
-            Console.WriteLine("Enter withdraw amount");
-            int amount = Convert.ToInt32(Console.ReadLine());
-            while(amount>0)
+            int[] array = { 0, -1, 2, -3, 1 };
+            int i, j, k;
+            //// iterate the array
+            for (i = 0; i < array.Length; i++)
             {
-                for (int i = 0; i < note.Length; i++)
+                for (j = i + 1; j < array.Length; j++)
                 {
-                    getting_notes[i] = amount / note[i];
-                    amount = amount % note[i];
-                    remaining_notes[i] = note_count[i] - getting_notes[i];
+                    for (k = j + 1; k < array.Length; k++)
+                    {
+                        if (array[i] + array[j] + array[k] == 0)
+                        {
+                            Console.WriteLine("{0},{1},{2}", array[i], array[j], array[k]);
+                        }
+                    }
                 }
             }
-
-            for(int i=0;i<getting_notes.Length;i++)
-            {
-                Console.WriteLine(note[i] + " x " + getting_notes[i]);
-
-            }
-            for (int i = 0; i < getting_notes.Length; i++)
-            {
-                Console.WriteLine(note[i] + "remaining notes are " + remaining_notes[i]);
-            }            
         }
-        //*****************Function to create file and search in file***************
-        public void file_Operation()
+
+        /// <summary>
+        /// Strings the is anagram or not.
+        /// </summary>
+        public void StringIsAnagramOrNot()
         {
-            String textFile = "./Test_File.txt";
-            IList<String> list = new List<string>();
-            using (StreamWriter streamWriter = File.CreateText(textFile))
+            string string1 = "java";
+            string string2 = "sjav";
+            char[] chararray1 = string1.ToCharArray();
+            char[] chararray2 = string2.ToCharArray();
+            bool flag = false;
+            Array.Sort(chararray1);
+            Array.Sort(chararray2);
+            
+            ////iterate CharArray1
+            for (int i = 0; i < chararray1.Length; i++)
             {
-                streamWriter.WriteLine("Hello how are you");
-               
-            }
-            StreamReader stream = File.OpenText(textFile);
-            String str = stream.ReadLine();
-           String []arr= str.Split(' ');
-            foreach(String s in arr)
-            {
-                list.Add(s);
-            }
-            for(int i=0;i<arr.Length;i++)
-            {
-                Console.WriteLine(arr[i]);
-            }
+                ////iterate charArray2
+                for (int j = 0; j < chararray2.Length; j++)
+                {
+                    ////Check the characters in CharArray1 and CharArray2
+                    if (chararray1[i] == chararray2[j])
+                    {
+                        flag = true;
+                    }
+                }
 
-                Console.WriteLine("Enter the to be search in file:");
-            String search = Convert.ToString(Console.ReadLine());
-           if(list.Contains(search))
-            {
-                Console.WriteLine("Wrod is present in file:: " + search);
-            }
-            else
-            {
-                Console.WriteLine("Word is not present in file");
+                if (flag)
+                {
+                    Console.WriteLine("String Are anagram");
+                }
+                else
+                {
+                    Console.WriteLine("Not anagram");
+                }
             }
         }
+
+        /// <summary>
+        /// Prints the prime number in given range.
+        /// </summary>
+        public void PrintPrimeNumberInGivenRange()
+        {
+            int number = 50;
+            //// iterate the number
+            for (int i = 2; i < number; i++)
+            {
+                bool isPrime = true;
+
+                for (int j = 2; j < i; j++)
+                {
+                    if (i % j == 0)
+                    {
+                        isPrime = false;
+                        break;
+                    }
+                }
+
+                if (isPrime)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Binary search of given number.
+        /// </summary>
+        public void BinarySearchOfGivenNumber()
+        {
+            int[] arr = { 2, 3, 5, 15, 45, 113, 210, 330 };
+            int key = 3;
+            int last = arr.Length - 1;
+            int first = 0;
+            int mid = (first + last) / 2;
+            //// iterate till first is less than or equal to Last
+            while (first <= last)
+            {
+                if (arr[mid] < key)
+                {
+                    first = mid + 1;
+                }
+                else if (arr[mid] == key)
+                {
+                    Console.WriteLine("Element is found at index: " + mid);
+                    break;
+                }
+                else
+                {
+                    last = mid - 1;
+                }
+
+                mid = (first + last) / 2;
+                Console.WriteLine("new mid" + mid);
+
+                if (first > last)
+                {
+                    Console.WriteLine("Element is not found!");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Monthly payment.
+        /// </summary>
+        public void MonthlyPayment()
+        {
+            double year = 0, rateOfInterest = 0, principalAmount = 0;
+            double n = 12;
+            Console.WriteLine("\n enter principal ");
+            principalAmount = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("\n enter year ");
+            year = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("\n enter rate ");
+            rateOfInterest = Convert.ToDouble(Console.ReadLine());
+
+            double monthlyInterestRate = (rateOfInterest / 100) / 12;   // monthly interest rate
+            n = 12 * year;
+
+            double payment = principalAmount * monthlyInterestRate / (1 - Math.Pow(1 + monthlyInterestRate, -n));
+            double interest = (payment * n) - principalAmount;
+
+            Console.WriteLine("Monthly payments = " + payment);
+            Console.WriteLine("Total interest   = " + interest);   
+        }
+
+       
     }
 }

@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿/// <summary>
+/// Program to Print array triplets which are equal to zero
+/// </summary>
 namespace FellowShip_Program
 {
-   public class Array_Triplets
+    /// <summary>
+    /// Array Triplets
+    /// </summary>
+    public class Array_Triplets
     {
-        
-       
-        public void Array_triplets()
+        /// <summary>
+        /// The array_triplets function called ArrayTriplets() in utility
+        /// </summary>
+        public void Arraytriplets()
         {
             Utility utility = new Utility();
             
-            utility.Array_Triplets();
+            utility.PrintArrayTripletsEqualsToZero();
         }
     }
 }

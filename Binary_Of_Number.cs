@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿/// <summary>
+/// 
+/// </summary>
 namespace FellowShip_Program
 {
-   public class Binary_Of_Number
+    /// <summary>
+    /// Binary
+    /// </summary>
+    public class BinaryOfNumber
     {
-        public void binary_of_digit()
+        /// <summary>
+        /// Binaries the ofdigit.
+        /// </summary>
+        public void BinaryOfDigit()
         {
-            Utility utility = new Utility();
+            Utility utility = new Utility(); 
             int number = 155;
-            utility.binary(number);
+            utility.PrintBinaryOFNumber(number);
         }
     }
 }

@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
-  public class GamblerProblem
+    /// <summary>
+    /// Print result
+    /// </summary>
+    public class GamblerProblem
     {
-        public void Gambler_Problem()
+        /// <summary>
+        /// Gamblers the problem.
+        /// </summary>
+        public void Gamblerproblem()
         {
             Utility utility = new Utility();
-            utility.Gambler_Game();
+            utility.GamblerGameProblem();
         }
     }
 }

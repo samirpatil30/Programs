@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
-    public class Bubble_Sort
+    /// <summary>
+    /// Bubble Sort
+    /// </summary>
+    public class BubbleSort
     {
-        public void bubble_sort()
+        /// <summary>
+        /// Bubbles the sort.
+        /// </summary>
+        public void Bubblesort()
         {
             Utility utility = new Utility();
-            utility.bubble_sort();
+            utility.SortArrayUsingBubbleSort();
         }
     }
 }

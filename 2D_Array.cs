@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿/// <summary>
+/// Bridgelabz
+/// </summary>
 namespace FellowShip_Program
 {
-   public class TwoD_Array
+    /// <summary>
+    /// Definition for the print generic 2D Array
+    /// </summary>
+    public class TwoDArray
     {
-        public void twoD_Array()
+        /// <summary>
+        /// TwoD_Array function used to called function in utility
+        /// </summary>
+        public void TwoD_Array()
         {
             Utility utility = new Utility();
-            utility.add_in_Array();
+            utility.PrintThe2DArrayOfDataType();
         }
     }
 }

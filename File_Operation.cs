@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
-   public class File_Operation
+    /// <summary>
+    /// Performs operations on file
+    /// </summary>
+    public class File_Operation
     {
+        /// <summary>
+        /// Operations the file.
+        /// </summary>
         public void Operation_File()
         {
             Utility utility = new Utility();
-            utility.file_Operation();
+          utility.File_Operation();
         }
     }
 }

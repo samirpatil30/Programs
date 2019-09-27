@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
-  public  class Coupon_Generation
+    /// <summary>
+    /// Program to Generates a Coupons
+    /// </summary>
+    public class Coupon_Generation
     {
-        public void Generate_Coupon()
+        /// <summary>
+        /// Generates the coupon.
+        /// </summary>
+        public void GenerateCoupon()
         {
             Utility utility = new Utility();
-            utility.coupon();
+            utility.GenerateCoupons();
         }
     }
 }

@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FellowShip_Program
+﻿namespace FellowShip_Program
 {
-   public class MonthlyPayment
+    /// <summary>
+    /// Calculate monthly payment
+    /// </summary>
+    public class MonthlyPayment
     {
-        public void car_loan()
+        /// <summary>
+        /// Car loan Monthly payment.
+        /// </summary>
+        public void Car_loan()
         {
             Utility utility = new Utility();
-            utility.Monthly_Payment();
+            utility.MonthlyPayment();
         }
     }
 }
