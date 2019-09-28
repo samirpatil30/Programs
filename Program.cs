@@ -1,18 +1,24 @@
-﻿using FellowShip_Program.Coin_Percentage;
-using System;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Program.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
 namespace FellowShip_Program.Add
 {
+    using System;
+    using FellowShip_Program.Coin_Percentage;
+
     /// <summary>
-    /// Main
+    /// Main: Entry point in program
     /// </summary>
-   public class Program
+    public class Program
     {
         /// <summary>
         /// Main entry point
         /// </summary>
         /// <param name="args">The arguments.</param>
-        public static void Main(String[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("1)FlipCoin" +
                 "\n 2)Gambler_problem" +
@@ -35,7 +41,10 @@ namespace FellowShip_Program.Add
                "\n 19)Vending Machine" +
                "\n 20)File operation" +
                "\n 21)String Permutation" +
-               "");
+               "\n 22)Euclidean Distance" +
+               "\n 23)Magic number" +
+               "\n 24)Quadratic" +
+               "\n 25)String Repalce");
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -72,7 +81,7 @@ namespace FellowShip_Program.Add
                     break;
                 case 8:
                     TwoDArray two = new TwoDArray();
-                    two.TwoD_Array();
+                    two.Two_DArray();
                     break;
                 case 9:
                     Array_Triplets array_Triplets = new Array_Triplets();
@@ -103,7 +112,7 @@ namespace FellowShip_Program.Add
                     binaryOfNumber.BinaryOfDigit();
                     break;
                 case 16:
-                    Tempeature_Conversion tempeature_Conversion = new Tempeature_Conversion();
+                    TemperatureConversion tempeature_Conversion = new TemperatureConversion();
                     tempeature_Conversion.ConvertTemperature();
                     break;
                 case 17:
@@ -111,15 +120,15 @@ namespace FellowShip_Program.Add
                     payment.Car_loan();
                     break;
                 case 18:
-                    Inseration_Sort inseration_ = new Inseration_Sort();
+                    Insertion_Sort inseration_ = new Insertion_Sort();
                     inseration_.InsertionSort();
                     break;
                 case 19:
-                    Vending_machine vending = new Vending_machine();
+                    Vendingmachine vending = new Vendingmachine();
                     vending.VendingMachine();
                     break;
                 case 20:
-                    File_Operation operation = new File_Operation();
+                    FileOperation operation = new FileOperation();
                     operation.Operation_File();
                     break;
                 case 21:
@@ -127,8 +136,20 @@ namespace FellowShip_Program.Add
                     permutation.StringPermutation();                  
                     break;
                 case 22:
-                    TicTacToe ticTacToe = new TicTacToe();
-                    ticTacToe.PlayGame();
+                    DistanceBetweenPoint distance = new DistanceBetweenPoint();
+                    distance.CalculateDistance();
+                    break;
+                case 23:
+                    MagicNumber magic = new MagicNumber();
+                    magic.FindMagicNumber();
+                    break;
+                case 24:
+                    Quadratic quadratic = new Quadratic();
+                    quadratic.QuadraticMethod();
+                    break;
+                case 25:
+                    StringReplace replace = new StringReplace();
+                    replace.ReplaceString();
                     break;
             }
            

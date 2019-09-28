@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Array_Triplets.cs" company="Bridgelabz">
+// <copyright file="BubbleSort.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
@@ -7,18 +7,17 @@
 namespace FellowShip_Program
 {
     /// <summary>
-    /// Array Triplets
+    /// Bubble Sort
     /// </summary>
-    public class Array_Triplets
+    public class BubbleSort
     {
         /// <summary>
-        /// The array_triplets function called ArrayTriplets() in utility
+        /// Bubbles the sort.
         /// </summary>
-        public void Arraytriplets()
+        public void Bubblesort()
         {
             Utility utility = new Utility();
-            
-            utility.PrintArrayTripletsEqualsToZero();
+            utility.SortArrayUsingBubbleSort();
         }
     }
 }

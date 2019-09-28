@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Array_Triplets.cs" company="Bridgelabz">
+// <copyright file="FileOperation.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
@@ -7,18 +7,17 @@
 namespace FellowShip_Program
 {
     /// <summary>
-    /// Array Triplets
+    /// Performs operations on file
     /// </summary>
-    public class Array_Triplets
+    public class FileOperation
     {
         /// <summary>
-        /// The array_triplets function called ArrayTriplets() in utility
+        /// Operations the file.
         /// </summary>
-        public void Arraytriplets()
+        public void Operation_File()
         {
             Utility utility = new Utility();
-            
-            utility.PrintArrayTripletsEqualsToZero();
+          utility.File_Operation();
         }
     }
 }

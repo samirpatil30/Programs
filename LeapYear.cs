@@ -1,4 +1,10 @@
-﻿namespace FellowShip_Program
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LeapYear.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
+namespace FellowShip_Program
 {
     /// <summary>
     /// Find leap year

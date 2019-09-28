@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Array_Triplets.cs" company="Bridgelabz">
+// <copyright file="StringReplace.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
@@ -7,18 +7,17 @@
 namespace FellowShip_Program
 {
     /// <summary>
-    /// Array Triplets
+    /// Replacement of String
     /// </summary>
-    public class Array_Triplets
+    public class StringReplace
     {
         /// <summary>
-        /// The array_triplets function called ArrayTriplets() in utility
+        /// Replaces the string.
         /// </summary>
-        public void Arraytriplets()
+        public void ReplaceString()
         {
             Utility utility = new Utility();
-            
-            utility.PrintArrayTripletsEqualsToZero();
+            utility.StringReplace();
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿namespace FellowShip_Program
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BinarySearchInteger.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
+namespace FellowShip_Program
 {
     /// <summary>
     /// Binary Search

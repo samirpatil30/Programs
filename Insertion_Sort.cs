@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Array_Triplets.cs" company="Bridgelabz">
+// <copyright file="Insertion_Sort.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
@@ -7,18 +7,17 @@
 namespace FellowShip_Program
 {
     /// <summary>
-    /// Array Triplets
+    /// Sorting array using insertion sort
     /// </summary>
-    public class Array_Triplets
+    public class Insertion_Sort
     {
         /// <summary>
-        /// The array_triplets function called ArrayTriplets() in utility
+        /// Insertions the sort.
         /// </summary>
-        public void Arraytriplets()
+        public void InsertionSort()
         {
             Utility utility = new Utility();
-            
-            utility.PrintArrayTripletsEqualsToZero();
+            utility.SortArrayUsingInserationsort();
         }
     }
 }

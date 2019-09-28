@@ -16,6 +16,30 @@ namespace FellowShip_Program
     public class Utility
     {
         /// <summary>
+        /// Calculates the square root.
+        /// </summary>
+        public static void CalculateSquareRoot()
+        {
+            ///// Console.WriteLine(" Enter the frist value");
+            //// double a = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine(" Enter the second value");
+            double b = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine(" Enter the third value");
+            double c = Convert.ToDouble(Console.ReadLine());
+
+            double discriminant = (b * b) - (4.0 * c);
+            double sqroot = Math.Sqrt(discriminant);
+
+            double root1 = (-b + sqroot) / 2.0;
+            double root2 = (-b - sqroot) / 2.0;
+
+            Console.WriteLine(root1);
+            Console.WriteLine(root2);
+        }
+
+        /// <summary>
         /// Calculate(s) the percentage for coin tossed.
         /// </summary>
         public void CalculatesPercentageForCoinTossed()
@@ -55,9 +79,9 @@ namespace FellowShip_Program
         }
 
         /// <summary>
-        /// Converts the type of the temperature from celcius to other and vice versa.
+        /// Converts the type of the temperature from celsius to other and vice versa.
         /// </summary>
-        public void ConvertTemperatureFromCelciusToOtherType()
+        public void ConvertTemperatureFromCelsiusToOtherType()
         {
             int tempeature = 0, celsius = 0, fahrenheit = 0;
 
@@ -84,12 +108,13 @@ namespace FellowShip_Program
                     break;
             }
         }
+
         /// <summary>
         /// Print the day of week.
         /// </summary>
         public void PrintDayOfWeek()
         {
-            int m0 = 0, y0, d0, x;
+            int monthM = 0, yearY, dayD, x;
             int year, month, day;
 
             Console.WriteLine("\n enter day");
@@ -101,43 +126,44 @@ namespace FellowShip_Program
             Console.WriteLine("\n enter year");
             year = Convert.ToInt32(Console.ReadLine());
 
-            y0 = (year - (14 - month)) / 12;
-            x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
-            m0 = month + 12 * ((14 - month) / 12) - 2;
-            d0 = ((day + x + 31 * m0 / 12) % 7);
+            yearY = year - (14 - month) / 12;
+            x = (yearY + yearY) / (4 - yearY) / (100 + yearY) / 400;             
+            monthM = month + 12 * ((14 - month) / 12) - 2;
+             dayD = ((day + x) + ((31 * monthM) / 12)) % 7;
+            ////   dayD = ((day + x) + 31 * (monthM / 12)) % 7;
 
-            if (d0 == 0)
+            if (dayD == 0)
             {
                 Console.WriteLine("The is sunday");
             }
-            else if (d0 == 1)
+            else if (dayD == 1)
             {
                 Console.WriteLine("The is Monday");
             }
-            else if (d0 == 2)
+            else if (dayD == 2)
             {
                 Console.WriteLine("The is Tuesday");
             }
-            else if (d0 == 3)
+            else if (dayD == 3)
             {
                 Console.WriteLine("The is Wedday");
             }
-            else if (d0 == 4)
+            else if (dayD == 4)
             {
                 Console.WriteLine("The is Thrusday");
             }
-            else if (d0 == 5)
+            else if (dayD == 5)
             {
                 Console.WriteLine("The is Friday");
             }
-            else if (d0 == 6)
+            else if (dayD == 6)
             {
                 Console.WriteLine("The is Saturday");
             }
         }
 
         /// <summary>
-        /// operation on file if the word is avaiable in file then print it.
+        /// operation on file if the word is available in file then print it.
         /// </summary>
         public void File_Operation()
         {
@@ -174,6 +200,7 @@ namespace FellowShip_Program
                 Console.WriteLine("Word is not present in file");
             }
         }
+
         /// <summary>
         /// Vending the machine for getting notes.
         /// </summary>
@@ -183,31 +210,47 @@ namespace FellowShip_Program
             int[] note_count = { 20, 30, 40 };
             int[] getting_notes = new int[3];
             int[] remaining_notes = new int[3];
-            Console.WriteLine("Enter withdraw amount");
-            int amount = Convert.ToInt32(Console.ReadLine());
-
-            ////iterates till given amount become zero
-            while (amount > 0)
+           
+            ////iterates till given amount become zero   
+            try
             {
-                ///iterates the notes
-                for (int i = 0; i < note.Length; i++)
+                Console.WriteLine("Enter withdraw amount");
+                int amount = Convert.ToInt32(Console.ReadLine());
+
+                while (amount > 0)
                 {
-                    getting_notes[i] = amount / note[i];
-                    amount = amount % note[i];
-                    remaining_notes[i] = note_count[i] - getting_notes[i];
+                   ////iterates the notes
+                   for (int i = 0; i < note.Length; i++)
+                   {
+                      getting_notes[i] = amount / note[i];
+                      amount = amount % note[i];
+                      remaining_notes[i] = note_count[i] - getting_notes[i];
+                   }                   
+                }
+                //// iterate the getting notes
+                for (int i = 0; i < getting_notes.Length; i++)
+                {
+                    Console.WriteLine(note[i] + " x " + getting_notes[i]);
+                }
+                ////  iterate(s) the remaining notes
+                for (int i = 0; i < remaining_notes.Length; i++)
+                {
+                    Console.WriteLine(note[i] + "remaining notes are " + remaining_notes[i]);
                 }
             }
-            //// iterate the getting notes
-            for (int i = 0; i < getting_notes.Length; i++)
+            catch (OverflowException exception)
             {
-                Console.WriteLine(note[i] + " x " + getting_notes[i]);
+                Console.WriteLine("Enter Correct value  " + exception);
             }
-          ////  iterate(s) the remaining notes
-            for (int i = 0; i < remaining_notes.Length; i++)
+            finally
             {
-                Console.WriteLine(note[i] + "remaining notes are " + remaining_notes[i]);
-            }
+                for (int i = 0; i < note_count.Length; i++)
+                {
+                    Console.WriteLine(note[i] + " x " + note_count[i]);
+                }
+            }         
         }
+
         /// <summary>
         /// Sorts the array using bubble sort.
         /// </summary>
@@ -272,7 +315,7 @@ namespace FellowShip_Program
         }
 
         /// <summary>
-        /// Sorts the array using inserationsort.
+        /// Sorts the array using insertion sort.
         /// </summary>
         public void SortArrayUsingInserationsort()
         {
@@ -284,6 +327,7 @@ namespace FellowShip_Program
                     int temp;
                     int[] array = { 5, 1, 6, 2, 3, 4 };
 
+                    //// iterate array
                     for (int i = 1; i < array.Length; i++)
                     {
                         temp = array[i];
@@ -309,10 +353,12 @@ namespace FellowShip_Program
                     StringSort();
                     break;
             }
+
             void StringSort()
             {
                 string[] array2 = { "samir", "rahul", "abhi", "sujit", "ganesh" };
-                string str = "";
+                //// Declareing empty string str="";
+                string str = string.Empty;
                 ////Iterate the Array2
                 for (int i = 1; i < array2.Length; i++)
                 {
@@ -349,7 +395,7 @@ namespace FellowShip_Program
                 //// storing remainder in binary array 
                 binaryNumber[i] = number % 2;
                 number = number / 2;
-                /// Here At last i will be 8
+                //// Here At last i will be 8
                 i++;
             }
 
@@ -370,7 +416,7 @@ namespace FellowShip_Program
         }
 
         /// <summary>
-        /// Prints the leapyear.
+        /// Prints the leap year.
         /// </summary>
         public void PrintLeapyear()
         {
@@ -409,10 +455,10 @@ namespace FellowShip_Program
             double n = 2;
 
             Console.WriteLine(" upto how many power of table you want: ");
-            int PowerNumber = Convert.ToInt32(Console.ReadLine());
+            int powerNumber = Convert.ToInt32(Console.ReadLine());
             
             ////iterate the power number
-            for (int i = 1; i < PowerNumber; i++)
+            for (int i = 1; i < powerNumber; i++)
             {
                 double temp = Math.Pow(n, i);
                 Console.WriteLine(temp);
@@ -516,7 +562,8 @@ namespace FellowShip_Program
             Random random = new Random();
             Console.WriteLine(" How many coupon you want");
             int numberOfCoupons = Convert.ToInt32(Console.ReadLine());
-            string str = "";
+            //// Declareing empty string str="";
+            string str = string.Empty;
             HashSet<string> hashSet = new HashSet<string>();
             ////Iterate the number of coupons
             for (int i = 0; i < numberOfCoupons; i++)
@@ -528,7 +575,8 @@ namespace FellowShip_Program
                 }
 
                 hashSet.Add(str);
-                str = "";
+                ////Empty string str="";
+                str = string.Empty;
             }
             ////iterate the HashSet values
             foreach (string string_fetch in hashSet)
@@ -703,6 +751,7 @@ namespace FellowShip_Program
                 if (isPrime)
                 {
                     Console.WriteLine(i);
+                    this.PrintPrimePalindrome(i);
                 }
             }
         }
@@ -760,7 +809,8 @@ namespace FellowShip_Program
             Console.WriteLine("\n enter rate ");
             rateOfInterest = Convert.ToDouble(Console.ReadLine());
 
-            double monthlyInterestRate = (rateOfInterest / 100) / 12;   // monthly interest rate
+            //// monthly interest rate
+            double monthlyInterestRate = (rateOfInterest / 100) / 12;   
             n = 12 * year;
 
             double payment = principalAmount * monthlyInterestRate / (1 - Math.Pow(1 + monthlyInterestRate, -n));
@@ -770,6 +820,104 @@ namespace FellowShip_Program
             Console.WriteLine("Total interest   = " + interest);   
         }
 
-       
+        /// <summary>
+        /// Distances the between point.
+        /// </summary>
+        public void DistanceBetweenPoint()
+        {
+            int pointx1 = 0, pointx2 = 0, pointy1 = 0, pointy2 = 0;
+            
+           Console.WriteLine(" enter the x1 value");
+            pointx1 = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine(" enter the x2 value");
+            pointx2 = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine(" enter the y1 value");
+            pointy1 = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine(" enter the y2 value");
+            pointy2 = Convert.ToInt32(Console.ReadLine());
+
+            double distance = Math.Sqrt(Math.Pow(pointx2 - pointx1, 2) + Math.Pow(pointy2 - pointy1, 2));
+            Console.WriteLine("Eculidian distance of point is " + distance);
+        }
+
+        /// <summary>
+        /// Find the magic number.
+        /// </summary>
+        public void FindMagicNumber()
+        {
+            int low = 0, high = 127, mid;
+            Console.WriteLine("\n enter the number betwwen 1 to 127");
+            int number = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                if (number > 1 && number < 127)
+                {
+                    while (low != high)
+                    {
+                        mid = (low + high) / 2;
+                        Console.WriteLine("enter 1 if no is between " + low + " - " + mid + "\nEnter 2 if no is between "
+                                + (mid + 1) + " - " + high);
+                        int c = Convert.ToInt32(Console.ReadLine());
+                        mid = (low + high) / 2;
+                        if (c == 1)
+                        {
+                            high = mid;
+                        }
+                        else
+                        {
+                            low = mid + 1;
+                        }      
+                       //// return low;
+                       //// return low;
+                    }
+
+                    Console.WriteLine("Gussed number " + low);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(" Enter the number between 1-127 " + exception);
+            }            
+        }
+
+        /// <summary>
+        /// Strings the replace.
+        /// </summary>
+        public void StringReplace()
+        {
+            string string1 = "hello, username how are you.";
+            string string2 = "ABC";
+            Console.WriteLine("Before replaceing \n" + string1);
+            string string3 = string1.Replace("username", string2);
+            Console.WriteLine("after replaceing \n" + string3);
+        }
+
+        /// <summary>
+        /// Prints the prime palindrome.
+        /// </summary>
+        /// <param name="number">The number.</param>
+        public void PrintPrimePalindrome(int number)
+        {
+            int reminder, sum = 0, temp;        
+            temp = number;
+            while (number > 0)
+            {
+                reminder = number % 10;  
+                sum = (sum * 10) + reminder;
+                number = number / 10;
+            }
+
+            if (temp == sum)
+            {
+                Console.WriteLine("palindrome number " + sum);
+            }                
+            else
+            {
+                Console.WriteLine("not palindrome");
+            }              
+        }     
     }
 }

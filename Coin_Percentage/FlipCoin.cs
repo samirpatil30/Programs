@@ -1,4 +1,10 @@
-﻿namespace FellowShip_Program.Coin_Percentage
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FlipCoin.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
+namespace FellowShip_Program.Coin_Percentage
 {
     /// <summary>
     /// Flip Coin 

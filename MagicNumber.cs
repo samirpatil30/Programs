@@ -1,24 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Array_Triplets.cs" company="Bridgelabz">
+// <copyright file="MagicNumber.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
 // -------------------------------------------------------------------------------------------------------------------
 namespace FellowShip_Program
 {
+    using System;
+
     /// <summary>
-    /// Array Triplets
+    /// Magic Number
     /// </summary>
-    public class Array_Triplets
+    public class MagicNumber
     {
         /// <summary>
-        /// The array_triplets function called ArrayTriplets() in utility
+        /// Find the magic number.
         /// </summary>
-        public void Arraytriplets()
+        public void FindMagicNumber()
         {
             Utility utility = new Utility();
-            
-            utility.PrintArrayTripletsEqualsToZero();
+            utility.FindMagicNumber();                
         }
     }
 }

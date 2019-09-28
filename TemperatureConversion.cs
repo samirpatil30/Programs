@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Array_Triplets.cs" company="Bridgelabz">
+// <copyright file="TemperatureConversion.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
@@ -7,18 +7,17 @@
 namespace FellowShip_Program
 {
     /// <summary>
-    /// Array Triplets
+    /// Temperature Conversion
     /// </summary>
-    public class Array_Triplets
+    public class TemperatureConversion
     {
         /// <summary>
-        /// The array_triplets function called ArrayTriplets() in utility
+        /// ConvertTemperature() used to called function in Utility class i.e utility.Temperature
         /// </summary>
-        public void Arraytriplets()
+        public void ConvertTemperature()
         {
             Utility utility = new Utility();
-            
-            utility.PrintArrayTripletsEqualsToZero();
+            utility.ConvertTemperatureFromCelsiusToOtherType();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Array_Triplets.cs" company="Bridgelabz">
+// <copyright file="TwoDArray.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
@@ -7,18 +7,17 @@
 namespace FellowShip_Program
 {
     /// <summary>
-    /// Array Triplets
+    /// Definition for the print generic 2D Array
     /// </summary>
-    public class Array_Triplets
+    public class TwoDArray
     {
         /// <summary>
-        /// The array_triplets function called ArrayTriplets() in utility
+        /// TwoD_Array function used to called function in utility
         /// </summary>
-        public void Arraytriplets()
+        public void Two_DArray()
         {
             Utility utility = new Utility();
-            
-            utility.PrintArrayTripletsEqualsToZero();
+            utility.PrintThe2DArrayOfDataType();
         }
     }
 }

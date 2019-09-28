@@ -1,7 +1,13 @@
-﻿namespace FellowShip_Program
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GamblerProblem.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
+namespace FellowShip_Program
 {
     /// <summary>
-    /// Print result
+    /// Gambler Problem
     /// </summary>
     public class GamblerProblem
     {

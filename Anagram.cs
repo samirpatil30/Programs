@@ -1,6 +1,9 @@
-﻿/// <copyright file="Anagram.cs" company="Bridgelabz">
-/// Name: Samir Patil
-/// </summary>
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Anagram.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
 namespace FellowShip_Program
 {
     /// <summary>

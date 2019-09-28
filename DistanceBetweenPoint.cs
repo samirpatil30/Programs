@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Array_Triplets.cs" company="Bridgelabz">
+// <copyright file="DistanceBetweenPoint.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
@@ -7,18 +7,17 @@
 namespace FellowShip_Program
 {
     /// <summary>
-    /// Array Triplets
+    /// Distance Between Point 
     /// </summary>
-    public class Array_Triplets
+    public class DistanceBetweenPoint
     {
         /// <summary>
-        /// The array_triplets function called ArrayTriplets() in utility
+        /// Calculate the distance.
         /// </summary>
-        public void Arraytriplets()
+        public void CalculateDistance()
         {
             Utility utility = new Utility();
-            
-            utility.PrintArrayTripletsEqualsToZero();
+            utility.DistanceBetweenPoint();
         }
     }
 }

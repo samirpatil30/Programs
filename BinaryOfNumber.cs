@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Array_Triplets.cs" company="Bridgelabz">
+// <copyright file="BinaryOfNumber.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
@@ -7,18 +7,18 @@
 namespace FellowShip_Program
 {
     /// <summary>
-    /// Array Triplets
+    /// Binary Of Number
     /// </summary>
-    public class Array_Triplets
+    public class BinaryOfNumber
     {
         /// <summary>
-        /// The array_triplets function called ArrayTriplets() in utility
+        /// Binary Of digit.
         /// </summary>
-        public void Arraytriplets()
+        public void BinaryOfDigit()
         {
-            Utility utility = new Utility();
-            
-            utility.PrintArrayTripletsEqualsToZero();
+            Utility utility = new Utility(); 
+            int number = 155;
+            utility.PrintBinaryOFNumber(number);
         }
     }
 }

@@ -43,20 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="2D_Array.cs" />
+    <Compile Include="TwoDArray.cs" />
     <Compile Include="Anagram.cs" />
     <Compile Include="Array_Triplets.cs" />
     <Compile Include="BinarySearchInteger.cs" />
-    <Compile Include="Binary_Of_Number.cs" />
-    <Compile Include="Bubble_Sort.cs" />
+    <Compile Include="BinaryOfNumber.cs" />
+    <Compile Include="BubbleSort.cs" />
     <Compile Include="Coin_Percentage\FlipCoin.cs" />
     <Compile Include="Coupon_Generation.cs" />
-    <Compile Include="Day_Of_week.cs" />
-    <Compile Include="File_Operation.cs" />
+    <Compile Include="DayOfweek.cs" />
+    <Compile Include="DistanceBetweenPoint.cs" />
+    <Compile Include="FileOperation.cs" />
     <Compile Include="GamblerProblem.cs" />
-    <Compile Include="Harmonic.Series.cs" />
-    <Compile Include="Inseration_Sort.cs" />
+    <Compile Include="Harmonic.cs" />
+    <Compile Include="Insertion_Sort.cs" />
     <Compile Include="LeapYear.cs" />
+    <Compile Include="MagicNumber.cs" />
     <Compile Include="MonthlyPayment.cs" />
     <Compile Include="Permutation.cs" />
     <Compile Include="PowerTable.cs" />
@@ -64,10 +66,11 @@
     <Compile Include="Prime_Range.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tempeature_Conversion.cs" />
-    <Compile Include="TicTacToe.cs" />
+    <Compile Include="Quadratic.cs" />
+    <Compile Include="StringReplace.cs" />
+    <Compile Include="TemperatureConversion.cs" />
     <Compile Include="Utility.cs" />
-    <Compile Include="Vending_machine.cs" />
+    <Compile Include="Vendingmachine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
