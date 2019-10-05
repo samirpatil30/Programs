@@ -1,0 +1,7 @@
+C:\Users\admin\source\repos\FellowShip_DataStructure\FellowShip_DataStructure\bin\Debug\FellowShip_DataStructure.exe.config
+C:\Users\admin\source\repos\FellowShip_DataStructure\FellowShip_DataStructure\bin\Debug\FellowShip_DataStructure.exe
+C:\Users\admin\source\repos\FellowShip_DataStructure\FellowShip_DataStructure\bin\Debug\FellowShip_DataStructure.pdb
+C:\Users\admin\source\repos\FellowShip_DataStructure\FellowShip_DataStructure\obj\Debug\FellowShip_DataStructure.csprojAssemblyReference.cache
+C:\Users\admin\source\repos\FellowShip_DataStructure\FellowShip_DataStructure\obj\Debug\FellowShip_DataStructure.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\FellowShip_DataStructure\FellowShip_DataStructure\obj\Debug\FellowShip_DataStructure.exe
+C:\Users\admin\source\repos\FellowShip_DataStructure\FellowShip_DataStructure\obj\Debug\FellowShip_DataStructure.pdb
