@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="InventoryDetails.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
 namespace ObjectOriented.Inventory
 {
-   public class InventoryDetails
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// InventoryDetails
+    /// </summary>
+    public class InventoryDetails
     {
-        
         public IList<Rice> rice { get; set; }
         public IList<Wheats> wheats { get; set; }
         public IList<Pulses> pulses { get; set; }
     }
-
     public class Rice
     {
         public string name { get; set; }
@@ -31,3 +36,4 @@ namespace ObjectOriented.Inventory
         public double weight { get; set; }
     }
 }
+

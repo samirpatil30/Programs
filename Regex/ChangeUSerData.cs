@@ -8,10 +8,17 @@ namespace ObjectOriented
 {
     using System;
     using System.Text.RegularExpressions;
+    /// <summary>
+    /// Change User Data
+    /// </summary>
     public class ChangeUserData
     {
+        /// <summary>
+        /// Replace Name
+        /// </summary>
         public void ReplaceName()
         {
+            ////Create instance of Regex
             Regex regex = new Regex("[a - zA - Z][a-zA-Z]");
             Regex regexForMobile = new Regex(("(0/91)?[7-9][0-9]{9}"));
             string userString = " Hello <<name>>, We have your full name as <<full name>> in our system. your contact number is 91-xxxxxxxxxx. Please,let us know in case of any clarification Thank you";
@@ -19,7 +26,7 @@ namespace ObjectOriented
             Console.WriteLine();    
             Console.WriteLine("User enter your full name");      
             string userName = Console.ReadLine();          
-            bool result= true;
+            bool result = true;
             result = regex.IsMatch(userName);          
             do
             {
@@ -33,13 +40,13 @@ namespace ObjectOriented
                     userName = Console.ReadLine();
                     result = regex.IsMatch(userName);
                     goto lable;
-                }     
-            
+                }              
             } while (result == true);
 
             char[] array = userName.ToCharArray();
             string firstName = string.Empty;
 
+            ////Iterate array
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] != ' ')
@@ -75,7 +82,6 @@ namespace ObjectOriented
                     goto lable1;
                 }
             } while (result1 == true);
-
 
             regex = new Regex(nameInstring);
             string updatedUserResult = regex.Replace(userString, firstName);

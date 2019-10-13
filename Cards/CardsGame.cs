@@ -12,13 +12,16 @@ namespace ObjectOriented.Cards
     /// Cards Game
     /// </summary>
     public class CardsGame
-   {      
-      public void GameOfCards()
+   {
+        /// <summary>
+        /// Game Of Cards
+        /// </summary>
+        public void GameOfCards()
       {
-            ///Crete the instance of Utility
+            ////Crete the instance of Utility
             Utility utility = new Utility();
-           // AbstactCard abstactCard = utility;
-           // abstactCard.showList();
+           //// AbstactCard abstactCard = utility;
+           //// abstactCard.showList();
 
             char character = ' ';
             do
@@ -34,6 +37,7 @@ namespace ObjectOriented.Cards
                         {
                             utility.InsertIntoList(temp);
                         }
+
                         break;
 
                     case 2:
@@ -46,7 +50,8 @@ namespace ObjectOriented.Cards
 
                 Console.WriteLine("Continoue y or n");
                 character = Convert.ToChar(Console.ReadLine());
-            } while (character == 'y');     
-      }
-   }
+            } 
+            while (character == 'y');     
+        }
+    }
 }

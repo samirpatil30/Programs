@@ -1,17 +1,26 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Text;
-using ObjectOriented.Cards;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Utility.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
 namespace ObjectOriented.Cards
 {
-   public class Utility 
-    {
+    using System;
 
+    /// <summary>
+    /// Utility
+    /// </summary>
+    public class Utility 
+    {
+        /// <summary>
+        /// Cards Shuffleing
+        /// </summary>
+        /// <returns></returns>
         public string[] CardsShuffleing()
         {
+            //// create the instance of model class
             Model model = new Model();
-           
             int totalCards = model.suit.Length * model.rank.Length;
             string[,] deck = new string[4, 13];
             int lengthOfSuits = model.suit.Length;
@@ -87,8 +96,14 @@ namespace ObjectOriented.Cards
         /// Insert Into List
         /// </summary>
         Node Rear, Front;
-        public  void InsertIntoList(string data)
+
+        /// <summary>
+        /// Insert Into List
+        /// </summary>
+        /// <param name="data"></param>
+        public void InsertIntoList(string data)
         {    
+            ////Create instance of Node
             Node Newnode = new Node();
             Newnode.data = data;
             Newnode.next = null;
@@ -105,9 +120,14 @@ namespace ObjectOriented.Cards
             showList();
         }
 
-        public  void showList()
+        /// <summary>
+        /// show List
+        /// </summary>
+        public void showList()
         {
+            ////Create instance of Node
             Node node = Front;
+            ////iterate node
             while (node.next != null)
             {
                 Console.Write(node.data + " ==> ");

@@ -7,24 +7,40 @@
 namespace ObjectOriented.Stock
 {
     using System;
+
+    /// <summary>
+    /// Stock Details
+    /// </summary>
     public class StockDetails
     {
-        
-           
+        /// <summary>
+        /// StockName
+        /// </summary>
         public string StockName;
+
+        /// <summary>
+        /// NumberOfshares
+        /// </summary>       
         public int NumberOfshares;
+
+        /// <summary>
+        /// SharePrice
+        /// </summary>
         public int SharePrice;
 
+        /// <summary>
+        /// Details Of Stock
+        /// </summary>
         public void DetailsOfStock()
         {
             Console.WriteLine("Enter the name of Company");
-            StockName = Console.ReadLine();
+            this.StockName = Console.ReadLine();
 
             Console.WriteLine("Enter the total number of share");
-            NumberOfshares = Convert.ToInt32(Console.ReadLine());
+            this.NumberOfshares = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Enter the price of share");
-            SharePrice = Convert.ToInt32(Console.ReadLine());
+            this.SharePrice = Convert.ToInt32(Console.ReadLine());
         }
     }
 }

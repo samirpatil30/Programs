@@ -1,15 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="CompanyShares.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
 namespace ObjectOriented.Commericial_data
 {
-   public class CompanyShares
+    using System;
+
+    /// <summary>
+    /// Company Shares
+    /// </summary>
+    public class CompanyShares
     {
         public string nameOfCompany;
         public int sharesPrice;
         public int totalShares;
 
+        /// <summary>
+        /// Company Details
+        /// </summary>
         public void CompanyDetails()
         {
             Console.WriteLine("Enter the name of Company ::");
