@@ -1,37 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ComputerInterFace.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
 namespace DesignPattern
 {
+    /// <summary>
+    /// Computer InterFace
+    /// </summary>
     public interface ComputerInterFace
     {
-        string produce();
+        /// <summary>
+        ///produce
+        /// </summary>
+        /// <returns></returns>
+        string Produce();
     }
 
+    /// <summary>
+    /// Laptop
+    /// </summary>
     public class Laptop : ComputerInterFace
     {
-        string ComputerInterFace.produce()
+        //// implement the method of interface
+        /// <summary>
+        /// Produce
+        /// </summary>
+        /// <returns></returns>
+        string ComputerInterFace.Produce()
         {
             return "Factory produceses laptop";
         }
     }
+
+    /// <summary>
+    /// Computer
+    /// </summary>
     public class Computer : ComputerInterFace
     {
-        string ComputerInterFace.produce()
+        //// implement the method of interface
+        /// <summary>
+        /// Produce
+        /// </summary>
+        /// <returns></returns>
+        string ComputerInterFace.Produce()
         {
             return "Factory Produceses Computers";
-        }
+        }   
     }
 
+    /// <summary>
+    /// Server Pc
+    /// </summary>
     public class ServerPc : ComputerInterFace
     {
-        string ComputerInterFace.produce()
+        //// implement the method of interface
+        /// <summary>
+        /// Produce
+        /// </summary>
+        /// <returns></returns>
+        string ComputerInterFace.Produce()
         {
             return "Factory produces Server Pc";
         }
     }
-
-
 }
-

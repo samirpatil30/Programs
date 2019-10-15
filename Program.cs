@@ -1,24 +1,59 @@
-﻿using DesignPattern;
-using DesignPattern.FactoryPatternComputer;
-using DesignPattern.NewFolder;
-using System;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Program.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
 namespace ConsoleApp1
 {
-    class Program
+    using System;
+    using DesignPattern.FactoryPatternComputer;
+    using DesignPattern.NewFolder;
+    
+    /// <summary>
+    /// Program
+    /// </summary>
+   public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Main Method
+        /// </summary>
+        /// <param name="args"></param>
+       public static void Main(string[] args)
         {
-            // Console.WriteLine("Enter the Computer type");
-            // string type = Console.ReadLine();
+        label: try
+            {
+                string character;
+                do
+                {
+                    Console.WriteLine(" 1)Factory Pattern \n 2)Singleton Pattern");
 
-            // ComputerInterFace i1 = ComputerFactory.getType(type);
-            // Console.WriteLine(i1.produce());
-            Singleton a = Singleton.myMethod();
-            a.SingletonMethod("samir");
-            Singleton b = Singleton.myMethod();
-            b.SingletonMethod("Satish");
-          
-        }
+                     int choice = Convert.ToInt32(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1:
+                            //// Create instance of StoreComputer
+                            StoreOfComputer computer = new StoreOfComputer();
+                            computer.ComputerStore();
+                            break;
+
+                        case 2:
+                            //// Create instance of SingletonOperation
+                            SingletonOperation singletonOperation = new SingletonOperation();
+                            singletonOperation.Singleton();
+                            break;
+                    }
+
+                    Console.WriteLine("Do you want to continoue :: yes or no");
+                    character = Convert.ToString(Console.ReadLine());
+                }
+                while (character == "yes");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                goto label;
+            }
+        }   
     }
 }
