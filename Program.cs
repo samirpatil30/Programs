@@ -7,6 +7,7 @@
 namespace ConsoleApp1
 {
     using System;
+    using DesignPattern.Adapter;
     using DesignPattern.FactoryPatternComputer;
     using DesignPattern.NewFolder;
     using DesignPattern.PrototypePattern;
@@ -27,7 +28,7 @@ namespace ConsoleApp1
                 string character;
                 do
                 {
-                    Console.WriteLine(" 1)Factory Pattern \n 2)Singleton Pattern");
+                    Console.WriteLine(" 1)Factory Pattern \n 2)Singleton Pattern \n 3) prototype Pattern \n 4)Adapter Pattern");
 
                      int choice = Convert.ToInt32(Console.ReadLine());
                     switch (choice)
@@ -47,6 +48,11 @@ namespace ConsoleApp1
                         case 3:
                             EmployeeOperation emp = new EmployeeOperation();
                             emp.EmployeeDetails();
+                            break;
+
+                        case 4:
+                            Adapter adapter = new Adapter();
+                            adapter.GetWebSeries();
                             break;
                     }
 
