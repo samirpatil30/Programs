@@ -25,7 +25,7 @@ namespace DesignPattern.NewFolder
             Console.WriteLine("Counter :: " + this.count);
         }
 
-        public static Singleton myMethod()
+        public static Singleton MyMethod()
         {
             if (getInstanceOfObject == null)
             {

@@ -14,14 +14,18 @@ namespace DesignPattern.NewFolder
     public class LazyInitialization
     {
         /// <summary>
-        /// counter
+        /// LazyInitialization constructor
         /// </summary>
-        private int counter = 0;
         //// Create the instance of lazy function
         public static readonly Lazy<LazyInitialization> lazy = new Lazy<LazyInitialization>(() => new LazyInitialization());
 
         /// <summary>
-        /// LazyInitialization constructor
+        /// counter
+        /// </summary>
+        private int counter = 0;
+
+        /// <summary>
+        /// Lazy Initialization
         /// </summary>
         private LazyInitialization()
         {
@@ -29,6 +33,9 @@ namespace DesignPattern.NewFolder
             Console.WriteLine("Counter :: " + this.counter);
         }
 
+        /// <summary>
+        /// Get Instance Of Lazy Initialization
+        /// </summary>
         public static LazyInitialization GetInstanceOfLazyInitialization
         {
             get

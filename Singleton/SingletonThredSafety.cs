@@ -15,7 +15,7 @@ namespace DesignPattern.NewFolder
     {  
         public static SingletonThredSafety singletonThread = null;
         public static readonly object obj = new object();
-         int counter = 0;
+        private int counter = 0;
 
         /// <summary>
         /// Singleton Thread Safety

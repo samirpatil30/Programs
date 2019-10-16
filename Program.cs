@@ -9,11 +9,12 @@ namespace ConsoleApp1
     using System;
     using DesignPattern.FactoryPatternComputer;
     using DesignPattern.NewFolder;
-    
+    using DesignPattern.PrototypePattern;
+
     /// <summary>
     /// Program
     /// </summary>
-   public class Program
+    public class Program
     {
         /// <summary>
         /// Main Method
@@ -41,6 +42,11 @@ namespace ConsoleApp1
                             //// Create instance of SingletonOperation
                             SingletonOperation singletonOperation = new SingletonOperation();
                             singletonOperation.Singleton();
+                            break;
+
+                        case 3:
+                            EmployeeOperation emp = new EmployeeOperation();
+                            emp.EmployeeDetails();
                             break;
                     }
 
