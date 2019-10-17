@@ -12,6 +12,7 @@ namespace ConsoleApp1
     using DesignPattern.FactoryPatternComputer;
     using DesignPattern.NewFolder;
     using DesignPattern.PrototypePattern;
+    using DesignPattern.ProxyPattern;
 
     /// <summary>
     /// Program
@@ -59,6 +60,11 @@ namespace ConsoleApp1
                             FacadeClient client = new FacadeClient();
                             client.Client();
                             break;
+
+                        case 6:
+                            ProxyPattern proxyPattern = new ProxyPattern();
+                            proxyPattern.Proxy();
+                            break;       
                     }
 
                     Console.WriteLine("Do you want to continoue :: yes or no");
