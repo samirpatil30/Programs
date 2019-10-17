@@ -8,9 +8,11 @@ namespace ConsoleApp1
 {
     using System;
     using DesignPattern.Adapter;
+    using DesignPattern.D_InjectionConstructor;
     using DesignPattern.FacedePattern;
     using DesignPattern.FactoryPatternComputer;
     using DesignPattern.NewFolder;
+    using DesignPattern.ObserverPattern;
     using DesignPattern.PrototypePattern;
     using DesignPattern.ProxyPattern;
 
@@ -30,7 +32,8 @@ namespace ConsoleApp1
                 string character;
                 do
                 {
-                    Console.WriteLine(" 1)Factory Pattern \n 2)Singleton Pattern \n 3) prototype Pattern \n 4)Adapter Pattern");
+                    Console.WriteLine(" 1) Factory Pattern \n 2) Singleton Pattern \n 3) prototype Pattern \n 4) Adapter Pattern" +
+                        "\n 5) Facade Pattern \n 6) Proxy Pattern \n 7)Observer Pattern");
 
                      int choice = Convert.ToInt32(Console.ReadLine());
                     switch (choice)
@@ -64,7 +67,18 @@ namespace ConsoleApp1
                         case 6:
                             ProxyPattern proxyPattern = new ProxyPattern();
                             proxyPattern.Proxy();
-                            break;       
+                            break;
+
+                        case 7:
+
+                            OberverOperation operation = new OberverOperation();
+                            operation.Oberve();
+                            break;
+
+                        case 8:
+                            ConstructorOperation operation1 = new ConstructorOperation();
+                            operation1.Injection();
+                            break;
                     }
 
                     Console.WriteLine("Do you want to continoue :: yes or no");

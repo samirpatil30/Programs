@@ -28,7 +28,6 @@ namespace DesignPattern.FactoryPatternComputer
 
                 if (result == true)
                 {
-
                 }
                 else
                 {
@@ -37,7 +36,6 @@ namespace DesignPattern.FactoryPatternComputer
                 ////Create the instance of ComputerInterFace
                 ComputerInterFace i1 = ComputerFactory.GetType(type);
                 Console.WriteLine(i1.Produce());
-
             }
             catch(Exception exception)
             {
