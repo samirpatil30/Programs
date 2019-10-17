@@ -8,6 +8,7 @@ namespace ConsoleApp1
 {
     using System;
     using DesignPattern.Adapter;
+    using DesignPattern.FacedePattern;
     using DesignPattern.FactoryPatternComputer;
     using DesignPattern.NewFolder;
     using DesignPattern.PrototypePattern;
@@ -53,6 +54,10 @@ namespace ConsoleApp1
                         case 4:
                             Adapter adapter = new Adapter();
                             adapter.GetWebSeries();
+                            break;
+                        case 5:
+                            FacadeClient client = new FacadeClient();
+                            client.Client();
                             break;
                     }
 
