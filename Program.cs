@@ -8,6 +8,7 @@ namespace ConsoleApp1
 {
     using System;
     using DesignPattern.Adapter;
+    using DesignPattern.Annotation;
     using DesignPattern.D_InjectionConstructor;
     using DesignPattern.DInjectionMethod;
     using DesignPattern.DInjectionProperty;
@@ -17,6 +18,7 @@ namespace ConsoleApp1
     using DesignPattern.ObserverPattern;
     using DesignPattern.PrototypePattern;
     using DesignPattern.ProxyPattern;
+    using DesignPattern.Reflection;
 
     /// <summary>
     /// Program
@@ -90,6 +92,16 @@ namespace ConsoleApp1
                         case 10:
                             MethodInjectionOPeration method = new MethodInjectionOPeration();
                             method.OPeration();
+                            break;
+
+                        case 11:
+                            Coustmer coustmer = new Coustmer();                           
+                            coustmer.get();
+                            break;
+
+                        case 12:
+                            AnnotationChecker checker = new AnnotationChecker();
+                            checker.Checker();
                             break;
                     }
 
