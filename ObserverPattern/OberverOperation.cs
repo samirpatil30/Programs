@@ -27,6 +27,7 @@ namespace DesignPattern.ObserverPattern
             subject.Unsubscribe(observer1);
             subject.Subscribe(new Observer("Observer 3"));
             subject.Inventory++;
+
         }
     }
 }

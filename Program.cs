@@ -9,6 +9,8 @@ namespace ConsoleApp1
     using System;
     using DesignPattern.Adapter;
     using DesignPattern.D_InjectionConstructor;
+    using DesignPattern.DInjectionMethod;
+    using DesignPattern.DInjectionProperty;
     using DesignPattern.FacedePattern;
     using DesignPattern.FactoryPatternComputer;
     using DesignPattern.NewFolder;
@@ -79,6 +81,16 @@ namespace ConsoleApp1
                             ConstructorOperation operation1 = new ConstructorOperation();
                             operation1.Injection();
                             break;
+
+                        case 9:
+                            PropertyOperation propertyInjection = new PropertyOperation();
+                            propertyInjection.EmployeeProperties();
+                            break;
+
+                        case 10:
+                            MethodInjectionOPeration method = new MethodInjectionOPeration();
+                            method.OPeration();
+                            break;
                     }
 
                     Console.WriteLine("Do you want to continoue :: yes or no");
@@ -91,6 +103,7 @@ namespace ConsoleApp1
                 Console.WriteLine(e.Message);
                 goto label;
             }
-        }   
+            Console.ReadKey();
+        }  
     }
 }

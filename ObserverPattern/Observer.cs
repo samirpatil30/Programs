@@ -13,9 +13,6 @@ namespace DesignPattern.ObserverPattern
     /// </summary>
     public interface IObserver
     {
-        /// <summary>
-        /// Updates this instance.
-        /// </summary>
         public void Update();
     }
 
@@ -24,18 +21,7 @@ namespace DesignPattern.ObserverPattern
     /// </summary>
     public class Observer
     {
-        /// <summary>
-        /// Gets the name of the observer.
-        /// </summary>
-        /// <value>
-        /// The name of the observer.
-        /// </value>
         public string ObserverName { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Observer"/> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
         public Observer(string name)
         {
             this.ObserverName = name;
