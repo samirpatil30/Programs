@@ -13,7 +13,14 @@ namespace DesignPattern.NewFolder
     /// </summary>
     public class Singleton
     {
+        /// <summary>
+        /// The get instance of object
+        /// </summary>
         public static Singleton getInstanceOfObject = null;
+
+        /// <summary>
+        /// The count
+        /// </summary>
         int count = 1;
 
         /// <summary>
@@ -25,6 +32,10 @@ namespace DesignPattern.NewFolder
             Console.WriteLine("Counter :: " + this.count);
         }
 
+        /// <summary>
+        /// My method.
+        /// </summary>
+        /// <returns></returns>
         public static Singleton MyMethod()
         {
             if (getInstanceOfObject == null)
@@ -34,7 +45,11 @@ namespace DesignPattern.NewFolder
 
             return getInstanceOfObject;
         }
-      
+
+        /// <summary>
+        /// Singletons the method.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void SingletonMethod(string message)
         {
             Console.WriteLine(message);

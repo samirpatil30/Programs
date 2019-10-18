@@ -13,6 +13,9 @@ namespace DesignPattern.ObserverPattern
     /// </summary>
     public interface IObserver
     {
+        /// <summary>
+        /// Updates this instance.
+        /// </summary>
         public void Update();
     }
 

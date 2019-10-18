@@ -9,12 +9,23 @@ namespace DesignPattern.NewFolder
     using System;
 
     /// <summary>
-    /// Singleton Thred Safety
+    /// Singleton Thread Safety
     /// </summary>
     public class SingletonThredSafety
-    {  
+    {
+        /// <summary>
+        /// The singleton thread
+        /// </summary>
         public static SingletonThredSafety singletonThread = null;
+
+        /// <summary>
+        /// The object
+        /// </summary>
         public static readonly object obj = new object();
+
+        /// <summary>
+        /// The counter
+        /// </summary>
         private int counter = 0;
 
         /// <summary>
@@ -22,8 +33,8 @@ namespace DesignPattern.NewFolder
         /// </summary>
         private SingletonThredSafety()
         {    
-            counter++;
-            Console.WriteLine("Counter :: " + counter.ToString());
+            this.counter++;
+            Console.WriteLine("Counter :: " + this.counter.ToString());
         }
 
         /// <summary>
@@ -48,7 +59,7 @@ namespace DesignPattern.NewFolder
         /// <summary>
         /// Singleton Method
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">message</param>
         public void SingletonMethod(string message)
         {
             Console.WriteLine(message);

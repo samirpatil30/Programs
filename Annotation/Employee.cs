@@ -26,7 +26,6 @@ namespace DesignPattern.Annotation
         [DataType(DataType.Text)]
         public string Name { get; set; }
 
-
         /// <summary>
         /// Gets or sets the age.
         /// </summary>
@@ -36,18 +35,16 @@ namespace DesignPattern.Annotation
         [Range(18, 99, ErrorMessage = "Age should be between 18 and 99")]
         public int Age { get; set; }
 
-
         /// <summary>
-        /// Gets or sets the phonenumber.
+        /// Gets or sets the phone number.
         /// </summary>
         /// <value>
-        /// The phonenumber.
+        /// The phone number.
         /// </value>
         [DataType(DataType.PhoneNumber)]
         [StringLength(10, ErrorMessage = "Mobile number must be 10 digit")]
         [Phone]
         public string Phonenumber { get; set; }
-
 
         /// <summary>
         /// Gets or sets the email.

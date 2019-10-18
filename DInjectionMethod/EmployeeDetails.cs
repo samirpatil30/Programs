@@ -1,29 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="EmployeeDetails.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
 namespace DesignPattern.DInjectionMethod
 {
+    using System;
+
+    /// <summary>
+    /// Employee Details
+    /// </summary>
     public class EmployeeDetails
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
         public int id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
         public string name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the department.
+        /// </summary>
+        /// <value>
+        /// The department.
+        /// </value>
         public string department { get; set; }
+
+        /// <summary>
+        /// Gets or sets the salary.
+        /// </summary>
+        /// <value>
+        /// The salary.
+        /// </value>
         public int salary { get; set; }
 
-        public void EnterDetailsOfEmplloyee()
+        /// <summary>
+        /// Enters the details of employee.
+        /// </summary>
+        public void EnterDetailsOfEmployee()
         {
             Console.WriteLine("Enter id of employee ");
-            id = Convert.ToInt32(Console.ReadLine());
+            this.id = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Enter name of employee ");
-            name = Console.ReadLine();
+            this.name = Console.ReadLine();
 
             Console.WriteLine("Enter department of employee ");
-            department = Console.ReadLine();
+            this.department = Console.ReadLine();
 
             Console.WriteLine("Enter salary of employee ");
-            salary = Convert.ToInt32(Console.ReadLine());
+            this.salary = Convert.ToInt32(Console.ReadLine());
         }
     }
 }

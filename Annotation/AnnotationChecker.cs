@@ -1,4 +1,9 @@
-﻿
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AnnotationChecker.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// -------------------------------------------------------------------------------------------------------------------
 namespace DesignPattern.Annotation
 {
     using System;
@@ -27,12 +32,12 @@ namespace DesignPattern.Annotation
             Console.WriteLine("Enter phoneNumber");
             string number = Console.ReadLine();
             Console.WriteLine("Enter the email address");
-            string EmailAddress = Console.ReadLine();
+            string emailAddress = Console.ReadLine();
 
             objEmployee.Name = name1;
             objEmployee.Age = age;
             objEmployee.Phonenumber = number;
-            objEmployee.email = EmailAddress;
+            objEmployee.email = emailAddress;
 
             ValidationContext context = new ValidationContext(objEmployee, null, null);
             List<ValidationResult> results = new List<ValidationResult>();

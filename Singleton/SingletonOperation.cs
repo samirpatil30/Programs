@@ -13,15 +13,12 @@ namespace DesignPattern.NewFolder
             char character;
             do
             {
-                Console.WriteLine("1) Singleton class \n 2) Singleton class using Thread safety \n 3)Singleton class using lazy initialization");
+                Console.WriteLine("1) Singleton class using Thread safety \n 2)Singleton class using lazy initialization");
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 switch (choice)
-                {
+                {                
                     case 1:
-                        break;
-
-                    case 2:
                         Parallel.Invoke(
                        () => MethodOfSamir(),
                        () => MethodOfSathish()
@@ -40,7 +37,7 @@ namespace DesignPattern.NewFolder
                         }
                         break;
 
-                    case 3:
+                    case 2:
 
                         LazyInitialization lazy = LazyInitialization.GetInstanceOfLazyInitialization;
                         lazy.Lazy("samir");

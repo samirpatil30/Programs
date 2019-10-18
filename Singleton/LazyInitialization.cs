@@ -47,7 +47,7 @@ namespace DesignPattern.NewFolder
         /// <summary>
         /// Lazy
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">message</param>
         public void Lazy(string message)
         {
             Console.WriteLine("Lazy :: " + message);

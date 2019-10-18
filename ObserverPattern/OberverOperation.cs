@@ -7,7 +7,7 @@
 namespace DesignPattern.ObserverPattern
 {
     /// <summary>
-    /// OberverOperation
+    /// Oberver Operation
     /// </summary>
     public class OberverOperation
     {

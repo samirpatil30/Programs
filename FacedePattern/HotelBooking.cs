@@ -8,7 +8,10 @@ namespace DesignPattern.FacedePattern
 {
     using System;
 
-    interface HotelBooking
+    /// <summary>
+    /// Hotel Booking
+    /// </summary>
+   public interface HotelBooking
     {
         /// <summary>
         /// Books the specified hotel name.
@@ -19,13 +22,13 @@ namespace DesignPattern.FacedePattern
     }
 
     /// <summary>
-    /// HotelBooking
+    /// Hotel
     /// </summary>
     /// <seealso cref="DesignPattern.FacedePattern.HotelBooking" />
     public class Hotel : HotelBooking
     {
         /// <summary>
-        /// Books the specified hotel name.
+        /// Book the specified hotel name.
         /// </summary>
         /// <param name="hotelName">Name of the hotel.</param>
         /// <param name="roomType">Type of the room.</param>

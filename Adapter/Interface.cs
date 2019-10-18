@@ -28,32 +28,27 @@ namespace DesignPattern.Adapter
         /// <summary>
         /// get Series
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">data</param>
         public void GetSeries(string data)
         {
-            string[][] gameConsole = new string[4][];         
-            gameConsole[0] = new string[] { "1", "xbox", "300 GB", "15000" };
-            gameConsole[1] = new string[] { "2", "playstation", "300 GB", "15000" };
-            gameConsole[2] = new string[] { "3", "playstaion2", "800GB", "30000" };
-            gameConsole[3] = new string[] { "4", "XboxOne", "1TB", "50000" };
             List<string> list = new List<string>();
-            ////iterate GameConsole
-            for (int i = 0; i < gameConsole.Length; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    list.Add(gameConsole[i][j]);
-                }       
-            }
 
-            ////iterate list
-            foreach (string i in list)
+            list.Add("xbox 500-GB 15000");
+            list.Add("playstation 50-GB 17000");
+            list.Add("playstation2 100-GB 24000");
+            list.Add("xboxOne 1-TB 50000");
+
+            foreach (string detail in list)
             {
-              if (i.Contains(data))
+                if (detail.Contains(data))
                 {
-                    Console.WriteLine(data + " is avaiable");
+                    Console.WriteLine("Avaiable");
+                    Console.Write(detail);
+                    Console.WriteLine();
                 }
             }
+
+            Console.WriteLine("i dont have that console");
         }
     }
 
@@ -67,8 +62,10 @@ namespace DesignPattern.Adapter
         /// </summary>
         public void GetWebSeries()
         {
-            Console.WriteLine("What do you want");
+            Console.WriteLine("1)xbox 2)playstation 3)playstation2 4)XboxOne");          
+            Console.WriteLine("Which gameing console you want");
             string product = Console.ReadLine();
+            //// Create the instance of adaptee
             AdapteeOfSeries adaptee = new AdapteeOfSeries();
              adaptee.GetSeries(product);
         }

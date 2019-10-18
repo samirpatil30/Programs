@@ -13,6 +13,10 @@ namespace DesignPattern.FacedePattern
     /// </summary>
     interface Carbooking
     {
+        /// <summary>
+        /// Books the specified car name.
+        /// </summary>
+        /// <param name="carName">Name of the car.</param>
         public void book(string carName);
     }
 
@@ -22,6 +26,10 @@ namespace DesignPattern.FacedePattern
     /// <seealso cref="DesignPattern.FacedePattern.Carbooking" />
     public class Car : Carbooking
     {
+        /// <summary>
+        /// Books the specified car name.
+        /// </summary>
+        /// <param name="carName">Name of the car.</param>
         public void book(string carName)
         {
             Console.WriteLine("Car booking successful");

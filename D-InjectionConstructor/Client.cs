@@ -11,7 +11,7 @@ namespace DesignPattern.D_InjectionConstructor
     /// <summary>
     /// InjectionInterface
     /// </summary>
-    interface InjectionInterface
+    public interface InjectionInterface
     {
         /// <summary>
         /// Get Details
@@ -50,9 +50,17 @@ namespace DesignPattern.D_InjectionConstructor
     /// <summary>
     /// Client
     /// </summary>
-    class Client
+    public class Client
     {
-        InjectionInterface injection;
+        /// <summary>
+        /// The injection
+        /// </summary>
+       public InjectionInterface injection;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Client"/> class.
+        /// </summary>
+        /// <param name="injectionInterface">The injection interface.</param>
         public Client(InjectionInterface injectionInterface)
         {
             injection = injectionInterface;

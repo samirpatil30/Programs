@@ -9,19 +9,52 @@ namespace DesignPattern.ObserverPattern
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// InterFace
+    /// </summary>
     interface InterFace
     {
+        /// <summary>
+        /// Adds the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
         void Add(Observer name);
+
+        /// <summary>
+        /// Removes the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
         void Remove(Observer name);
 
+        /// <summary>
+        /// Notifies this instance.
+        /// </summary>
         void Notify();
     }
+
+    /// <summary>
+    /// Subject
+    /// </summary>
+    /// <seealso cref="DesignPattern.ObserverPattern.InterFace" />
     public class Subject : InterFace
     {
-
+        /// <summary>
+        /// The observers
+        /// </summary>
         public List<Observer> observers = new List<Observer>();
 
+        /// <summary>
+        /// The value
+        /// </summary>
         private int value = 0;
+
+        /// <summary>
+        /// Gets or sets the inventory.
+        /// </summary>
+        /// <value>
+        /// The inventory.
+        /// </value>
+
         public int Inventory
         {
             get
@@ -40,27 +73,50 @@ namespace DesignPattern.ObserverPattern
                 }
             }
         }
+
+        /// <summary>
+        /// Adds the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
         public void Add(Observer name)
         {
             observers.Add(name);
         }
+
+        /// <summary>
+        /// Subscribes the specified observer.
+        /// </summary>
+        /// <param name="observer">The observer.</param>
         public void Subscribe(Observer observer)
         {
             observers.Add(observer);
         }
+
+        /// <summary>
+        /// Unsubscribes the specified observer.
+        /// </summary>
+        /// <param name="observer">The observer.</param>
         public void Unsubscribe(Observer observer)
         {
             observers.Remove(observer);
         }
 
+        /// <summary>
+        /// Notifies this instance.
+        /// </summary>
         public void Notify()
         {
             observers.ForEach(x => x.Update());
         }
+
+        /// <summary>
+        /// Removes the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public void Remove(Observer name)
         {
             throw new NotImplementedException();
         }
-
     }
 }

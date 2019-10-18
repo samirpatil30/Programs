@@ -37,7 +37,8 @@ namespace ConsoleApp1
                 do
                 {
                     Console.WriteLine(" 1) Factory Pattern \n 2) Singleton Pattern \n 3) prototype Pattern \n 4) Adapter Pattern" +
-                        "\n 5) Facade Pattern \n 6) Proxy Pattern \n 7)Observer Pattern");
+                        "\n 5) Facade Pattern \n 6) Proxy Pattern \n 7) Observer Pattern \n 8) Depedency injection Constructors" +
+                        "\n 9) Depedency injection property \n 10) Depedency injection method \n 11) Reflection \n 12) Annotation  ");
 
                      int choice = Convert.ToInt32(Console.ReadLine());
                     switch (choice)
@@ -90,7 +91,7 @@ namespace ConsoleApp1
                             break;
 
                         case 10:
-                            MethodInjectionOPeration method = new MethodInjectionOPeration();
+                            MethodInjectionOperation method = new MethodInjectionOperation();
                             method.OPeration();
                             break;
 
@@ -115,6 +116,7 @@ namespace ConsoleApp1
                 Console.WriteLine(e.Message);
                 goto label;
             }
+
             Console.ReadKey();
         }  
     }
