@@ -7,11 +7,12 @@
 namespace DesignPattern.FacedePattern
 {
     using System;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Agent
     /// </summary>
-   public interface Agent
+    public interface Agent
     {
         /// <summary>
         /// Books
@@ -31,10 +32,21 @@ namespace DesignPattern.FacedePattern
         public void Book()
         {
             ////Create the instance of Flight
+            Regex regex = new Regex("[a-zA-z][a-zA-Z]");
             FlightBooking flight = new Flight();
             Console.WriteLine("1)Indigo 2)AirIndia 3)SpiceJet 4)QutarAirways");
-            Console.WriteLine("Please select your flight");
+            label: Console.WriteLine("Please select your flight");
             string flightname = Console.ReadLine();
+            bool result = true;
+            result = regex.IsMatch(flightname);
+            if(result == true)
+            {  
+            }
+            else
+            {
+                goto label;
+            }
+
             flight.Book(flightname, "A-12", "Buissness class");
             Console.WriteLine();
             ////Create the instance of Hotel
