@@ -10,6 +10,7 @@ namespace ConsoleApp1
     using DesignPattern.Adapter;
     using DesignPattern.Annotation;
     using DesignPattern.D_InjectionConstructor;
+    using DesignPattern.Decorator_Pattern;
     using DesignPattern.DInjectionMethod;
     using DesignPattern.DInjectionProperty;
     using DesignPattern.FacedePattern;
@@ -28,8 +29,8 @@ namespace ConsoleApp1
         /// <summary>
         /// Main Method
         /// </summary>
-        /// <param name="args"></param>
-       public static void Main(string[] args)
+        /// <param name="args">args</param>
+        public static void Main(string[] args)
         {
         label: try
             {
@@ -38,7 +39,8 @@ namespace ConsoleApp1
                 {
                     Console.WriteLine(" 1) Factory Pattern \n 2) Singleton Pattern \n 3) prototype Pattern \n 4) Adapter Pattern" +
                         "\n 5) Facade Pattern \n 6) Proxy Pattern \n 7) Observer Pattern \n 8) Depedency injection Constructors" +
-                        "\n 9) Depedency injection property \n 10) Depedency injection method \n 11) Reflection \n 12) Annotation  ");
+                        "\n 9) Depedency injection property \n 10) Depedency injection method \n 11) Reflection \n 12) Annotation " +
+                        "\n 13) Decorator Pattern ");
 
                      int choice = Convert.ToInt32(Console.ReadLine());
                     switch (choice)
@@ -104,6 +106,11 @@ namespace ConsoleApp1
                             AnnotationChecker checker = new AnnotationChecker();
                             checker.Checker();
                             break;
+
+                        case 13:
+                            RestaurantManagement restaurantManagement = new RestaurantManagement();
+                            restaurantManagement.Management();
+                            break;
                     }
 
                     Console.WriteLine("Do you want to continoue :: yes or no");
@@ -111,7 +118,7 @@ namespace ConsoleApp1
                 }
                 while (character == "yes");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 goto label;

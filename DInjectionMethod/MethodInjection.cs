@@ -76,7 +76,7 @@ namespace DesignPattern.DInjectionMethod
         {
             Console.WriteLine("********** Method Injection ************");
             employee = refEmployee;
-            return employee.SelectAllEmployees();
+            return this.employee.SelectAllEmployees();
         }
     }
 }

@@ -77,6 +77,7 @@ namespace DesignPattern.DInjectionProperty
             {
                 return employee;              
             }
+
             set
             {
                 employee = value;

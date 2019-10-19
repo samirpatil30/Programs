@@ -8,6 +8,7 @@ namespace DesignPattern.Adapter
 {
     using System;
     using System.Collections.Generic;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Interface
@@ -32,7 +33,6 @@ namespace DesignPattern.Adapter
         public void GetSeries(string data)
         {
             List<string> list = new List<string>();
-
             list.Add("xbox 500-GB 15000");
             list.Add("playstation 50-GB 17000");
             list.Add("playstation2 100-GB 24000");
@@ -43,7 +43,7 @@ namespace DesignPattern.Adapter
                 if (detail.Contains(data))
                 {
                     Console.WriteLine("Avaiable");
-                    Console.Write(detail);
+                    Console.Write(detail + " Rs");
                     Console.WriteLine();
                 }
             }
@@ -62,9 +62,19 @@ namespace DesignPattern.Adapter
         /// </summary>
         public void GetWebSeries()
         {
-            Console.WriteLine("1)xbox 2)playstation 3)playstation2 4)XboxOne");          
-            Console.WriteLine("Which gameing console you want");
+            Regex regex = new Regex("[a-zA-z][a-zA-Z]");
+            bool result = true;
+            Console.WriteLine("1)xbox 2)playstation 3)playstation2 4)xboxOne");
+            label: Console.WriteLine("Which gameing console you want");
             string product = Console.ReadLine();
+            result = regex.IsMatch(product);
+            if (result == true)
+            {
+            }
+            else
+            {
+                goto label;
+            }
             //// Create the instance of adaptee
             AdapteeOfSeries adaptee = new AdapteeOfSeries();
              adaptee.GetSeries(product);
