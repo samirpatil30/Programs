@@ -30,7 +30,7 @@ namespace DesignPattern.NewFolder
         private LazyInitialization()
         {
             this.counter++;
-            Console.WriteLine("Counter :: " + this.counter);
+            Console.WriteLine("Object " + this.counter + " created");
         }
 
         /// <summary>

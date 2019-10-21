@@ -20,20 +20,20 @@ namespace DesignPattern.NewFolder
                 {                
                     case 1:
                         Parallel.Invoke(
-                       () => MethodOfSamir(),
-                       () => MethodOfSathish()
+                       () => MethodOfTwo(),
+                       () => MethodOne()
                       );
 
-                        static void MethodOfSathish()
+                        static void MethodOne()
                         {
                             SingletonThredSafety b = SingletonThredSafety.GetInstance;
-                            b.SingletonMethod("Satish");
+                            b.SingletonMethod("Method One");
                         }
 
-                        static void MethodOfSamir()
+                        static void MethodOfTwo()
                         {
                             SingletonThredSafety a = SingletonThredSafety.GetInstance;
-                            a.SingletonMethod("samir");
+                            a.SingletonMethod("Method two");
                         }
                         break;
 
@@ -45,6 +45,7 @@ namespace DesignPattern.NewFolder
                         LazyInitialization lazyOne = LazyInitialization.GetInstanceOfLazyInitialization;
                         lazyOne.Lazy("Satish");
                         break;
+
                 }
 
                 Console.WriteLine("Do you want to Continoue Y or N");

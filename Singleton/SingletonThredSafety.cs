@@ -32,9 +32,9 @@ namespace DesignPattern.NewFolder
         /// Singleton Thread Safety
         /// </summary>
         private SingletonThredSafety()
-        {    
+        {
             this.counter++;
-            Console.WriteLine("Counter :: " + this.counter.ToString());
+            Console.WriteLine("Object created :: ");       
         }
 
         /// <summary>

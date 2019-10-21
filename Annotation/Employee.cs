@@ -20,7 +20,9 @@ namespace DesignPattern.Annotation
         /// <value>
         /// The name.
         /// </value>
-        [Required(ErrorMessage = "Employee {0} is required")]
+
+       
+        [RegularExpression(@"[a-zA-Z]+$", ErrorMessage = "Please enter correct name")]
         [StringLength(100, MinimumLength = 3,
        ErrorMessage = "Name Should be minimum 3 characters and a maximum of 100 characters")]
         [DataType(DataType.Text)]
@@ -41,9 +43,12 @@ namespace DesignPattern.Annotation
         /// <value>
         /// The phone number.
         /// </value>
+        
         [DataType(DataType.PhoneNumber)]
-        [StringLength(10, ErrorMessage = "Mobile number must be 10 digit")]
         [Phone]
+        [RegularExpression("^[7-9][0-9]{9}", ErrorMessage = "Enter valid mobile number")]
+      //  [StringLength(10, ErrorMessage = "Mobile number must be 10 digit")]
+       
         public string Phonenumber { get; set; }
 
         /// <summary>
