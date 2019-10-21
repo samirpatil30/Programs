@@ -18,7 +18,7 @@ namespace DesignPattern.Decorator_Pattern
         /// <summary>
         /// The dish
         /// </summary>
-        RestaurantDish dish;
+       public RestaurantDish dish;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Decorator"/> class.
@@ -26,7 +26,7 @@ namespace DesignPattern.Decorator_Pattern
         /// <param name="restaurantDish">The restaurant dish.</param>
         public Decorator(RestaurantDish restaurantDish)
         {
-            dish = restaurantDish;
+            this.dish = restaurantDish;
         }
 
         /// <summary>
@@ -34,17 +34,21 @@ namespace DesignPattern.Decorator_Pattern
         /// </summary>
         public override void Display()
         {
-            dish.Display();
+            this.dish.Display();
         }
     }
 
     /// <summary>
-    /// AvaiableDishes
+    /// Avaiable Dishes
     /// </summary>
     /// <seealso cref="DesignPattern.Decorator_Pattern.Decorator" />
     public class AvaiableDishes : Decorator
     {
+        /// <summary>
+        /// The number of dishes
+        /// </summary>
         int numberOfDishes;
+
         /// <summary>
         /// The list
         /// </summary>
@@ -66,10 +70,10 @@ namespace DesignPattern.Decorator_Pattern
         /// <param name="name">The name.</param>
         public void OrderItem(string name)
         {
-            if(numberOfDishes > 0)
+            if (this.numberOfDishes > 0)
             {
                 list.Add(name);
-                numberOfDishes--;
+                this.numberOfDishes--;
             }
             else
             {
@@ -84,11 +88,10 @@ namespace DesignPattern.Decorator_Pattern
         {
             base.Display();
 
-            foreach(var coustmerName in list)
+            foreach (var coustmerName in list)
             {
                 Console.WriteLine("Dish Order By :: " + coustmerName);
             }
         }
     }
 }
-

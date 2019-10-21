@@ -27,7 +27,7 @@ namespace DesignPattern.Decorator_Pattern
             AvaiableDishes saladAvaiable = new AvaiableDishes(salad, 3);
             AvaiableDishes vadapavAvaiable = new AvaiableDishes(vadapav, 3);
 
-            saladAvaiable.OrderItem("Samir");
+            saladAvaiable.OrderItem("Samir");     
             saladAvaiable.OrderItem("Sathish");
 
             vadapavAvaiable.OrderItem("Rahul");

@@ -23,7 +23,7 @@ namespace DesignPattern.FactoryPatternComputer
             {
                 //// Create the instance of Regex
                 Regex regex = new Regex("[a-zA-z]");
-                Console.WriteLine("1) Laptop 2) Pc 3) ServerPc");
+                Console.WriteLine("1) Laptop 2) computer 3) ServerPc");
             label: Console.WriteLine("Enter the Computer type");
                 string type = Console.ReadLine();
                 bool result = regex.IsMatch(type);

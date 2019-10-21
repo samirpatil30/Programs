@@ -38,11 +38,10 @@ namespace DesignPattern.Annotation
             objEmployee.Age = age;
             objEmployee.Phonenumber = number;
             objEmployee.email = emailAddress;
-
+            ////Create instance of ValidationContext
             ValidationContext context = new ValidationContext(objEmployee, null, null);
             List<ValidationResult> results = new List<ValidationResult>();
             bool valid = Validator.TryValidateObject(objEmployee, context, results, true);
-
             if (!valid)
             {
                 foreach (ValidationResult vr in results)
@@ -52,5 +51,5 @@ namespace DesignPattern.Annotation
                 }
             }
         }
-}
+    }
 }

@@ -22,7 +22,7 @@ namespace DesignPattern.ObserverPattern
     /// <summary>
     /// Observer
     /// </summary>
-    public class Observer
+    public class Observer : IObserver
     {
         public string ObserverName { get; private set; }
         public Observer(string name)
