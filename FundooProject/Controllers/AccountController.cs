@@ -50,8 +50,8 @@ namespace FundooProject.Controllers
         [HttpPost]
         [Route("login")]
         public async Task<string> Login(LoginModel details)
-        {
-            //// the variable result stores the result of method AddUserDetails
+        {  
+            //// the variable result stores the result of method Login
             var result = await _account.Login(details);
             return result;
         }

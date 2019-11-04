@@ -24,16 +24,16 @@ namespace RepositoryLayer.Services
         /// </summary>
         private UserManager<ApplicationUser> _userManager;
 
-        private IConfiguration _configuration;
+        //private IConfiguration _configuration;
 
         /// <summary>
         /// Create the parameterized Constructor of class and pass the UserManager
         /// </summary>
         /// <param name="userManager"></param>
-        public RegistrationRL(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public RegistrationRL(UserManager<ApplicationUser> userManager)
         {
-            this._userManager = userManager;
-            _configuration = configuration;
+           _userManager = userManager;
+            
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace RepositoryLayer.Services
         /// <returns></returns>
         public async Task<bool> AddUserDetails(UserDetails user)
         {
-            //// Create the instance of ApplicationUser and stroe the details
+            //// Create the instance of ApplicationUser and store the details
             var applicationUser = new ApplicationUser()
             {
                 FirstName = user.FirstName,
@@ -53,8 +53,7 @@ namespace RepositoryLayer.Services
 
             };
             try
-            {
-                //// 
+            {         
                 var result = await _userManager.CreateAsync(applicationUser, user.Password);
                 if (result != null)
                 {
@@ -72,37 +71,45 @@ namespace RepositoryLayer.Services
 
         }
 
+        /// <summary>
+        /// Logins the specified login model.
+        /// </summary>
+        /// <param name="loginModel">The login model.</param>
+        /// <returns></returns>
         public async Task<string> Login(LoginModel loginModel)
         {
-            //// the variable user stores the username
+            //// it confirms that user is avaiable in database or not
             var user = await _userManager.FindByNameAsync(loginModel.UserName);
+
+            //// check the username and password is matched in database or not
             if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.Password))
             {
-                var claim = new[]
-                {
-                        new Claim(JwtRegisteredClaimNames.Sub,user.UserName)
+                string key = "EF4ABEAB56153D93D0E97048FC50215C0264CFF";
+
+                ////Here generate encrypted key and result store in security key
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+
+                //// here using securitykey and algorithm(security) the creadintails is generate(SigningCredentials present in Token)
+                var creadintials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+                var claims = new[] {
+               new Claim("UserName",user.UserName),
                 };
 
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-                //// Here we Generate JWT roken and create the instance of JwtSecurityToken
-                var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
-                  _configuration["Jwt:Issuer"],
-                  null,
-                  expires: DateTime.Now.AddMinutes(120),
-                  signingCredentials: credentials);
+              
+                var token = new JwtSecurityToken("Security token", "https://Test.com",
+                    claims,
+                    DateTime.UtcNow,
+                    expires: DateTime.Now.AddDays(1),
+                    signingCredentials: creadintials);
 
                 return new JwtSecurityTokenHandler().WriteToken(token);
             }
             else
             {
+               
                 return "Invalid User";
             }
 
-
-            //// securityKey stores the result of SymmetricSecurityKey i.e securityKey
-           
         }
     }
 }

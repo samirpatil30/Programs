@@ -39,6 +39,7 @@ namespace BusinessLayer.Services
         {
             try
             {
+                //// If user the user details is empty or not 
                 if(user != null)
                 {
                    return await _registration.AddUserDetails(user);
@@ -65,6 +66,7 @@ namespace BusinessLayer.Services
         {
             try
             {
+                //// If login details is empty or not 
                 if (loginModel != null)
                 {
                     return await _registration.Login(loginModel);
