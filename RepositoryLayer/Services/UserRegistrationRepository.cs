@@ -1,4 +1,5 @@
 ﻿using CommanLayer.Model;
+using CommanLayer.MSMQ;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -17,7 +18,7 @@ namespace RepositoryLayer.Services
     /// <summary>
     /// RegistrationRL
     /// </summary>
-    public class RegistrationRL : IRegistraionRl
+    public class UserRegistrationRepository : IUserRegistraionRepositpry
     {
         /// <summary>
         /// User Manager
@@ -30,7 +31,7 @@ namespace RepositoryLayer.Services
         /// Create the parameterized Constructor of class and pass the UserManager
         /// </summary>
         /// <param name="userManager"></param>
-        public RegistrationRL(UserManager<ApplicationUser> userManager)
+        public UserRegistrationRepository(UserManager<ApplicationUser> userManager)
         {
            _userManager = userManager;
             
@@ -68,7 +69,6 @@ namespace RepositoryLayer.Services
             {
                 throw exception;
             }
-
         }
 
         /// <summary>
@@ -95,7 +95,6 @@ namespace RepositoryLayer.Services
                new Claim("UserName",user.UserName),
                 };
 
-              
                 var token = new JwtSecurityToken("Security token", "https://Test.com",
                     claims,
                     DateTime.UtcNow,
@@ -109,7 +108,57 @@ namespace RepositoryLayer.Services
                
                 return "Invalid User";
             }
-
         }
+
+        public async Task<string> ForgotPassword(ForgotPasswordModel passwordModel)
+        {
+           
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(passwordModel.Email);
+                if (user != null)
+                {
+                    ////here we create object of MsmqTokenSender which is present in Common-Layer
+                    MsmqTokenSender msmq = new MsmqTokenSender();
+
+                    ////it creates the SecurityTokenDescriptor
+                    var tokenDescripter = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(new Claim[]
+                        {
+                        new Claim("Email", user.Email.ToString())
+                        }),
+                        Expires = DateTime.UtcNow.AddDays(1),
+
+                    };
+
+                    var tokenHandler = new JwtSecurityTokenHandler();
+
+                    ////it creates the security token
+                    var securityToken = tokenHandler.CreateToken(tokenDescripter);
+
+                    ////it writes security token to the token variable.
+                    var token = tokenHandler.WriteToken(securityToken);
+                    msmq.SendMsmqToken(passwordModel.Email, token);
+
+                    return token;
+                }
+                else
+                {
+                    return "Invalid user";
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+       
+       // public async Task<string> ResetPassword(ResetPasswordModel resetPasswordModel)
+       // {
+            //// Here Decode JWT token
+
+           // var userResult = await _userManager.GeneratePasswordResetTokenAsync()
+       // }
     }
 }

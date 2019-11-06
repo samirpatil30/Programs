@@ -22,13 +22,13 @@ namespace FundooProject.Controllers
         /// <summary>
         /// Create the instance variable of Business LayerInterface i.e IAccountBL
         /// </summary>
-        private IAccountBL _account;
+        private IUserRegistrationBusiness _account;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountController"/> class.
         /// </summary>
         /// <param name="account">The account.</param>
-        public AccountController(IAccountBL account)
+        public AccountController(IUserRegistrationBusiness account)
         {
             _account = account;
         }
@@ -42,9 +42,8 @@ namespace FundooProject.Controllers
         [Route("Add")]
         public async Task<bool> AddUserDetail(UserDetails details)
         {
-            //// the variable result stores the result of method AddUserDetails
-            var result = await _account.AddUserDetails(details);
-            return result;
+            //// the variable result stores the result of method AddUserDetails          
+            return await _account.AddUserDetails(details); ;
         }
 
         [HttpPost]
@@ -52,8 +51,15 @@ namespace FundooProject.Controllers
         public async Task<string> Login(LoginModel details)
         {  
             //// the variable result stores the result of method Login
-            var result = await _account.Login(details);
-            return result;
+            return await _account.Login(details); ;
+        }
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public async Task<string> ForgotPasword(ForgotPasswordModel passwordModel)
+        {
+            //// the variable result stores the result of method Login
+            return await _account.ForgotPassword(passwordModel); 
         }
     }
 }

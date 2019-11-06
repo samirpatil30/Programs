@@ -4,12 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Interface
+namespace RepositoryLayer.Interface
 {
-    /// <summary>
-    /// IAccountBL
-    /// </summary>
-    public interface IAccountBL
+   public interface IUserRegistraionRepositpry
     {
         /// <summary>
         /// Adds the user details.
@@ -24,5 +21,7 @@ namespace BusinessLayer.Interface
         /// <param name="loginModel">The login model.</param>
         /// <returns></returns>
         Task<string> Login(LoginModel loginModel);
+
+        Task<string> ForgotPassword(ForgotPasswordModel passwordModel);
     }
 }

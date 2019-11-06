@@ -1,10 +1,7 @@
 ﻿using BusinessLayer.Interface;
 using CommanLayer.Model;
 using RepositoryLayer.Interface;
-using RepositoryLayer.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLayer.Services
@@ -12,19 +9,19 @@ namespace BusinessLayer.Services
     /// <summary>
     /// AccountBL
     /// </summary>
-    /// <seealso cref="BusinessLayer.Interface.IAccountBL" />
-    public class AccountBL : IAccountBL
+    /// <seealso cref="BusinessLayer.Interface.IUserRegistrationBusiness" />
+    public class UserRegistrationService : IUserRegistrationBusiness
     {
         /// <summary>
         /// Create the reference variable of Repository layer interface i.e IRegistrationRl
         /// </summary>
-        private IRegistraionRl _registration;
+        private IUserRegistraionRepositpry _registration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountBL"/> class.
+        /// Initializes a new instance of the <see cref="UserRegistrationService"/> class.
         /// </summary>
         /// <param name="registration">The registration.</param>
-        public AccountBL(IRegistraionRl registration)
+        public UserRegistrationService(IUserRegistraionRepositpry registration)
         {
             _registration = registration;
         }
@@ -74,6 +71,26 @@ namespace BusinessLayer.Services
                 else
                 {
                     throw new Exception("User is empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+       public async Task<string> ForgotPassword(ForgotPasswordModel passwordModel)
+        {
+            try
+            {
+                //// If login details is empty or not 
+                if (passwordModel != null)
+                {
+                    return await _registration.ForgotPassword(passwordModel);
+                }
+                else
+                {
+                    throw new Exception("User Email is not valid");
                 }
             }
             catch (Exception exception)
