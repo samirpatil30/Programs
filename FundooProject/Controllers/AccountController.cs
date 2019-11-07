@@ -40,18 +40,21 @@ namespace FundooProject.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("Add")]
-        public async Task<bool> AddUserDetail(UserDetails details)
+        public async Task<IActionResult> AddUserDetail(UserDetails details)
+         
         {
             //// the variable result stores the result of method AddUserDetails          
-            return await _account.AddUserDetails(details); ;
+             var result = await _account.AddUserDetails(details);
+            return Ok(new { result.Item1, result.Item2 });
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<string> Login(LoginModel details)
+        public async Task<Tuple<string, string>> Login(LoginModel details)
         {  
             //// the variable result stores the result of method Login
-            return await _account.Login(details); ;
+            var ResultOfLogin = await _account.Login(details);
+            return Tuple.Create(ResultOfLogin.Item1, "Login Successful");
         }
 
         [HttpPost]
@@ -61,5 +64,13 @@ namespace FundooProject.Controllers
             //// the variable result stores the result of method Login
             return await _account.ForgotPassword(passwordModel); 
         }
+
+        [HttpPost]
+        [Route("Reset/{tokenString}")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString)
+        {            
+            var result = await _account.ResetPassword(resetPasswordModel, tokenString);
+            return Ok(new { result });
+        }
     }
-}
+}  

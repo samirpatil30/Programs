@@ -8,6 +8,7 @@ using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<bool> AddUserDetails(UserDetails user)
+        public async Task<Tuple<bool, string>> AddUserDetails(UserDetails user)
         {
             //// Create the instance of ApplicationUser and store the details
             var applicationUser = new ApplicationUser()
@@ -58,11 +59,12 @@ namespace RepositoryLayer.Services
                 var result = await _userManager.CreateAsync(applicationUser, user.Password);
                 if (result != null)
                 {
-                    return true;
+                    return Tuple.Create(true, "User registration Successful");
+
                 }
                 else
                 {
-                    return false;
+                    return Tuple.Create(false, "User registration is not Successful");
                 }
             }
             catch (Exception exception)
@@ -76,7 +78,7 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="loginModel">The login model.</param>
         /// <returns></returns>
-        public async Task<string> Login(LoginModel loginModel)
+        public async Task<Tuple<string, string>> Login(LoginModel loginModel)
         {
             //// it confirms that user is avaiable in database or not
             var user = await _userManager.FindByNameAsync(loginModel.UserName);
@@ -101,21 +103,29 @@ namespace RepositoryLayer.Services
                     expires: DateTime.Now.AddDays(1),
                     signingCredentials: creadintials);
 
-                return new JwtSecurityTokenHandler().WriteToken(token);
+                var NewToken = new JwtSecurityTokenHandler().WriteToken(token);
+                return Tuple.Create(NewToken, "User Login Successful");
             }
             else
             {
-               
-                return "Invalid User";
+                return Tuple.Create("Token is not generated", "Invalid User");
             }
         }
 
+        /// <summary>
+        /// Forgots password.
+        /// </summary>
+        /// <param name="passwordModel">The password model.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<string> ForgotPassword(ForgotPasswordModel passwordModel)
-        {
-           
+        {          
             try
             {
+                //// variable user stores email of user
                 var user = await _userManager.FindByEmailAsync(passwordModel.Email);
+
+                //// If checks the Email is null or not
                 if (user != null)
                 {
                     ////here we create object of MsmqTokenSender which is present in Common-Layer
@@ -126,19 +136,23 @@ namespace RepositoryLayer.Services
                     {
                         Subject = new ClaimsIdentity(new Claim[]
                         {
-                        new Claim("Email", user.Email.ToString())
+                            //// Claims the identity
+                            new Claim("Email", user.Email.ToString())
                         }),
                         Expires = DateTime.UtcNow.AddDays(1),
 
                     };
 
-                    var tokenHandler = new JwtSecurityTokenHandler();
+                    //// This object is used to decode JWTs
+                         var tokenHandler = new JwtSecurityTokenHandler();
 
                     ////it creates the security token
                     var securityToken = tokenHandler.CreateToken(tokenDescripter);
 
                     ////it writes security token to the token variable.
                     var token = tokenHandler.WriteToken(securityToken);
+
+                    //// Send the email and password to Method in MsmqTokenSender
                     msmq.SendMsmqToken(passwordModel.Email, token);
 
                     return token;
@@ -147,18 +161,49 @@ namespace RepositoryLayer.Services
                 {
                     return "Invalid user";
                 }
+                
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-       
-       // public async Task<string> ResetPassword(ResetPasswordModel resetPasswordModel)
-       // {
-            //// Here Decode JWT token
 
-           // var userResult = await _userManager.GeneratePasswordResetTokenAsync()
-       // }
+        /// <summary>
+        /// Reset Password
+        /// </summary>
+        /// <param name="resetPasswordModel"></param>
+        /// <param name="tokenString"></param>
+        /// <returns></returns>
+       public async Task<Tuple<bool, string>> ResetPassword(ResetPasswordModel resetPasswordModel,string tokenString)
+        {
+            var token = new JwtSecurityToken(tokenString);
+
+            //// Claims the email from token
+            var Email =  (token.Claims.First(c => c.Type == "Email").Value);
+          
+            //// Find the Email in Database and return the result
+            var user = await _userManager.FindByEmailAsync(Email);
+            if (user != null)
+            {
+                //// this method generate the password reset token
+                var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                //// Here ResetPasswordAsync() Specifies the new password after validating given password reset token
+                var result = await _userManager.ResetPasswordAsync(user, resetToken, resetPasswordModel.Password);
+               if(result != null)
+                {
+                    return Tuple.Create(true, "Password has been change");
+                }
+               else
+                {
+                    return Tuple.Create(false, "Password has not been change");
+                }
+            }
+            else
+            {
+                return Tuple.Create(false, "User is not Exist ");
+            }
+        }
     }
 }

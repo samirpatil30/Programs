@@ -13,15 +13,17 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns></returns>
-        Task<bool> AddUserDetails(UserDetails user);
+        Task<Tuple<bool, string>> AddUserDetails(UserDetails user);
 
         /// <summary>
         /// Logins the specified login model.
         /// </summary>
         /// <param name="loginModel">The login model.</param>
         /// <returns></returns>
-        Task<string> Login(LoginModel loginModel);
+        Task<Tuple<string, string>> Login(LoginModel loginModel);
 
         Task<string> ForgotPassword(ForgotPasswordModel passwordModel);
+
+        Task<Tuple<bool,string>> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString);
     }
 }
