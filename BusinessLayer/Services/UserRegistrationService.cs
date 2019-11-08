@@ -37,10 +37,10 @@ namespace BusinessLayer.Services
             try
             {
                 //// If user the user details is empty or not 
-                if(user != null)
+                if (user != null)
                 {
                     var result = await _registration.AddUserDetails(user);
-                    if(result != null)
+                    if (result != null)
                     {
                         return Tuple.Create(true, "User registration Successful");
                     }
@@ -48,14 +48,14 @@ namespace BusinessLayer.Services
                     {
                         return Tuple.Create(false, "User registration is not Successful");
                     }
-                    
+
                 }
                 else
                 {
                     throw new Exception("User is empty");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception;
             }

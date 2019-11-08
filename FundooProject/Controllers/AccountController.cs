@@ -45,7 +45,8 @@ namespace FundooProject.Controllers
         {
             //// the variable result stores the result of method AddUserDetails          
              var result = await _account.AddUserDetails(details);
-            return Ok(new { result.Item1, result.Item2 });
+             bool RegistrationStatus = true;
+             return Ok(new { result, RegistrationStatus });   
         }
 
         [HttpPost]
@@ -72,5 +73,7 @@ namespace FundooProject.Controllers
             var result = await _account.ResetPassword(resetPasswordModel, tokenString);
             return Ok(new { result });
         }
+
+
     }
 }  

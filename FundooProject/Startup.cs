@@ -42,6 +42,9 @@ namespace FundooProject
         {
             services.AddTransient<IUserRegistrationBusiness, UserRegistrationService>();
             services.AddTransient<IUserRegistraionRepositpry, UserRegistrationRepository>();
+
+            services.AddTransient<IUserNotesBL, UserNotesBL>();
+            services.AddTransient<INotesRepository, UserNotesRepository>();
             
             services.AddDbContext<AuthenticationContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("connectionDb")));
@@ -57,8 +60,11 @@ namespace FundooProject
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 4;
             });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
 
-           
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -74,6 +80,12 @@ namespace FundooProject
                 app.UseHsts();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+
+            });
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();

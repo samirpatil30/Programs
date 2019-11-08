@@ -55,7 +55,7 @@ namespace RepositoryLayer.Services
 
             };
             try
-            {         
+            {
                 var result = await _userManager.CreateAsync(applicationUser, user.Password);
                 if (result != null)
                 {

@@ -15,5 +15,7 @@ namespace RepositoryLayer.Context
         }
 
         public DbSet<ApplicationUser> User { get; set; }
+
+        public DbSet<NotesModel> notesModels { get; set; }
     }
 }
