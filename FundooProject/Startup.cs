@@ -40,12 +40,16 @@ namespace FundooProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddTransient<IUserRegistrationBusiness, UserRegistrationService>();
             services.AddTransient<IUserRegistraionRepositpry, UserRegistrationRepository>();
 
             services.AddTransient<IUserNotesBL, UserNotesBL>();
             services.AddTransient<INotesRepository, UserNotesRepository>();
-            
+
+            services.AddTransient<ILabelBussinessManager, LabelBussinessManager>();
+            services.AddTransient<ILabelRepositoryManager, LabelRepositoryManager>();
+
             services.AddDbContext<AuthenticationContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("connectionDb")));
 
