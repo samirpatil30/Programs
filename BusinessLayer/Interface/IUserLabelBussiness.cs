@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Interface
 {
-   public interface ILabelBussinessManager
+   public interface IUserLabelBussiness
     {
         Task<bool> AddLabel(LabelModel labelModel);
-        Task<bool> UpdateLabel(LabelModel labelModelDetails, string labelName);
+        Task<bool> UpdateLabel(LabelModel labelModelDetails, int id);
         IList<LabelModel> GetLabel(string userId);
 
         Task<bool> DeleteLabel(LabelModel labelModel, int id);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Interface;
 using CommanLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,12 @@ namespace FundooProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LabelController : ControllerBase
     {
-        private readonly ILabelBussinessManager _bussinessManager;
+        private readonly IUserLabelBussiness _bussinessManager;
 
-        public LabelController(ILabelBussinessManager bussinessManager)
+        public LabelController(IUserLabelBussiness bussinessManager)
         {
             _bussinessManager = bussinessManager;
         }
@@ -31,9 +33,9 @@ namespace FundooProject.Controllers
         [HttpPost]
         [Route("UpdateLabel")]
 
-        public async Task<bool> UpdateLabel(LabelModel labelModel, string labelName)
+        public async Task<bool> UpdateLabel(LabelModel labelModel, int id)
         {
-            return await _bussinessManager.UpdateLabel(labelModel, labelName);
+            return await _bussinessManager.UpdateLabel(labelModel, id);
         }
 
         [HttpGet]

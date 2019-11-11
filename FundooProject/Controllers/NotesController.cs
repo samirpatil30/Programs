@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Interface;
 using CommanLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,12 @@ namespace FundooProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class NotesController : ControllerBase
     {
-        private readonly IUserNotesBL _userNotes;
+        private readonly IUserNotesBusiness _userNotes;
 
-        public NotesController(IUserNotesBL userNotes)
+        public NotesController(IUserNotesBusiness userNotes)
         {
             _userNotes = userNotes;
         }

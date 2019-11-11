@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Interface
 {
-   public interface IUserNotesBL
+   public interface IUserNotesBusiness
     {
          Task<bool> AddNotes(NotesModel model);
 

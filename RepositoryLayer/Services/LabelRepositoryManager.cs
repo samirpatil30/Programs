@@ -43,11 +43,11 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public async Task<bool> UpdateLabel(LabelModel labelModelDetails, string labelName)
+        public async Task<bool> UpdateLabel(LabelModel labelModelDetails, int id)
         {
             //// variable updateLabel store the Information of user like labelName
             var Updatelabel = from label in _authenticationContext.labelModels
-                             where label.Label == labelName
+                             where label.Id== id
                               select label;
 
             ////if notes data have records then it will update the records
