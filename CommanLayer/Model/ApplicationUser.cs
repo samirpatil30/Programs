@@ -1,11 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ApplicationUser.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace CommanLayer.Model
 {
-   public class ApplicationUser : IdentityUser
+    using Microsoft.AspNetCore.Identity;
+
+    /// <summary>
+    /// ApplicationUser
+    /// </summary>
+    public class ApplicationUser : IdentityUser
     {
         /// <summary>
         /// Gets or sets the first name.

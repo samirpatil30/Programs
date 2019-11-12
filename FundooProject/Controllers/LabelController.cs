@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLayer.Interface;
-using CommanLayer.Model;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LabelController.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace FundooProject.Controllers
 {
+    using System.Threading.Tasks;
+    using BusinessLayer.Interface;
+    using CommanLayer.Model;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LabelController : ControllerBase
     {
         private readonly ILabelBussinessManager _bussinessManager;

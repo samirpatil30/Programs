@@ -1,11 +1,17 @@
-﻿using BusinessLayer.Interface;
-using CommanLayer.Model;
-using RepositoryLayer.Interface;
-using System;
-using System.Threading.Tasks;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UserRegistrationService.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace BusinessLayer.Services
 {
+    using BusinessLayer.Interface;
+    using CommanLayer.Model;
+    using RepositoryLayer.Interface;
+    using System;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// AccountBL
     /// </summary>
@@ -72,7 +78,7 @@ namespace BusinessLayer.Services
         {
             try
             {
-                //// If login details is empty or not 
+                //// If checks login details is empty or not 
                 if (loginModel != null)
                 {
                     var LoginResult = await _registration.Login(loginModel);
@@ -99,7 +105,7 @@ namespace BusinessLayer.Services
         {
             try
             {
-                //// If login details is empty or not 
+                //// If checks passwordModel details is empty or not 
                 if (passwordModel != null)
                 {
                     return await _registration.ForgotPassword(passwordModel);
@@ -126,9 +132,13 @@ namespace BusinessLayer.Services
         {
             try
             {
-                if(resetPasswordModel != null)
+                //// If checks resetPasswordModel details is empty or not 
+                if (resetPasswordModel != null)
                 {
+                    //// variable result stores the result of ResetPassword()
                    var result = await  _registration.ResetPassword(resetPasswordModel,tokenString);
+
+                    //// If checks result is null or not
                     if(result != null)
                     {
                         return Tuple.Create(true, "Password Has Been change");
@@ -150,4 +160,3 @@ namespace BusinessLayer.Services
         }
     }
 }
-

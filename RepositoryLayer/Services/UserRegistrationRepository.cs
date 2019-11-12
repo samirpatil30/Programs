@@ -1,21 +1,24 @@
-﻿using CommanLayer.Model;
-using CommanLayer.MSMQ;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.JsonWebTokens;
-using Microsoft.IdentityModel.Tokens;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UserRegistrationRepository.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace RepositoryLayer.Services
 {
+    using CommanLayer.Model;
+    using CommanLayer.MSMQ;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.IdentityModel.Tokens;
+    using RepositoryLayer.Interface;
+    using System;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Text;
+    using System.Threading.Tasks;
+
+
     /// <summary>
     /// RegistrationRL
     /// </summary>
@@ -86,7 +89,7 @@ namespace RepositoryLayer.Services
             //// check the username and password is matched in database or not
             if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.Password))
             {
-                string key = "EF4ABEAB56153D93D0E97048FC50215C0264CFF";
+                string key = "This is my SecretKey which is used for security purpose";
 
                 ////Here generate encrypted key and result store in security key
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
@@ -191,14 +194,15 @@ namespace RepositoryLayer.Services
 
                 //// Here ResetPasswordAsync() Specifies the new password after validating given password reset token
                 var result = await _userManager.ResetPasswordAsync(user, resetToken, resetPasswordModel.Password);
+
                if(result != null)
-                {
+               {
                     return Tuple.Create(true, "Password has been change");
-                }
+               }
                else
-                {
+               {
                     return Tuple.Create(false, "Password has not been change");
-                }
+               }
             }
             else
             {

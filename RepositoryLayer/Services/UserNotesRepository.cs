@@ -1,24 +1,43 @@
-﻿using CommanLayer.Model;
-using Microsoft.AspNetCore.Mvc;
-using RepositoryLayer.Context;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UserNotesRepository.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace RepositoryLayer.Services
 {
-   public class UserNotesRepository : INotesRepository
+    using CommanLayer.Model;
+    using RepositoryLayer.Context;
+    using RepositoryLayer.Interface;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    public class UserNotesRepository : INotesRepository
     {
+        /// <summary>
+        /// Create the Instance variable of AuthenticationContext
+        /// </summary>
         private readonly AuthenticationContext _authenticationContext;
+
+        /// <summary>
+        /// UserNotesRepository
+        /// </summary>
+        /// <param name="authenticationContext"></param>
         public UserNotesRepository(AuthenticationContext authenticationContext)
         {
             _authenticationContext = authenticationContext;
         }
+
+        /// <summary>
+        /// Add Notes
+        /// </summary>
+        /// <param name="notesModel"></param>
+        /// <returns></returns>
         public async Task<bool> AddNotes(NotesModel notesModel)
         {
+            //// addNotes stores the below data
             var addNotes = new NotesModel()
             { 
                 Id = notesModel.Id,
@@ -47,6 +66,11 @@ namespace RepositoryLayer.Services
             }            
         }
 
+        /// <summary>
+        /// Get Notes
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public IList<NotesModel> GetNotes(NotesModel model)
         {
             //// Here the Linq querey return the Record match in Database
@@ -54,6 +78,12 @@ namespace RepositoryLayer.Services
             return list.ToList();
         }
 
+        /// <summary>
+        /// Update Notes
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> UpdateNotes(NotesModel model,int id)
         {
             //// Here we retrive the id of user from db
@@ -82,6 +112,12 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Delete Notes
+        /// </summary>
+        /// <param name="notesModel"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> DeleteNotes(NotesModel notesModel , int id)
         {
             var deleteOrderDetails =
@@ -96,8 +132,7 @@ namespace RepositoryLayer.Services
 
             ////save changes to the database
             var result = await this._authenticationContext.SaveChangesAsync();
-                return true;                
-           
+                return true;                          
         }
     } 
 }

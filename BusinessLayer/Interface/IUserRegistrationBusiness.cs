@@ -1,11 +1,15 @@
-﻿using CommanLayer.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IUserRegistrationBusiness.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace BusinessLayer.Interface
 {
+    using CommanLayer.Model;
+    using System;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// IAccountBL
     /// </summary>

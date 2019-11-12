@@ -1,18 +1,49 @@
-﻿using CommanLayer.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IUserNotesBL.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace BusinessLayer.Interface
 {
-   public interface IUserNotesBL
+    using CommanLayer.Model;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// IUserNotesBL
+    /// </summary>
+    public interface IUserNotesBL
     {
-         Task<bool> AddNotes(NotesModel model);
+        /// <summary>
+        /// Add Notes
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<bool> AddNotes(NotesModel model);
 
+        /// <summary>
+        /// Get Notes
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         IList<NotesModel> GetNotes(NotesModel model);
-       Task<bool> UpdateNotes(NotesModel model,int id);
 
+        /// <summary>
+        /// Update Notes
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<bool> UpdateNotes(NotesModel model,int id);
+
+        /// <summary>
+        /// Delete Notes
+        /// </summary>
+        /// <param name="notesModel"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         Task<bool> DeleteNotes(NotesModel notesModel, int id);
     }
 }

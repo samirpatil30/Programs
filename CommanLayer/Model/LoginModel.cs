@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LoginModel.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace CommanLayer.Model
 {
    public class LoginModel

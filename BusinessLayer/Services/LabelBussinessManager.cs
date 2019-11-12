@@ -1,15 +1,26 @@
-﻿using BusinessLayer.Interface;
-using CommanLayer.Model;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LabelBussinessManager.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace BusinessLayer.Services
 {
-   public class LabelBussinessManager : ILabelBussinessManager
+    using BusinessLayer.Interface;
+    using CommanLayer.Model;
+    using RepositoryLayer.Interface;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// LabelBussinessManager
+    /// </summary>
+    public class LabelBussinessManager : ILabelBussinessManager
     {
+        /// <summary>
+        /// create the instance variable of ILabelRepositoryManager 
+        /// </summary>
         private readonly ILabelRepositoryManager _repositoryManager;
 
         /// <summary>
@@ -21,6 +32,11 @@ namespace BusinessLayer.Services
             _repositoryManager = repositoryManager;
         }
 
+        /// <summary>
+        /// Add Label
+        /// </summary>
+        /// <param name="labelModel"></param>
+        /// <returns></returns>
         public async Task<bool> AddLabel(LabelModel labelModel)
         {
             try
@@ -67,6 +83,11 @@ namespace BusinessLayer.Services
             }           
         }
 
+        /// <summary>
+        /// Get Label
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public IList<LabelModel> GetLabel(string userId)
         {
             try
@@ -89,6 +110,12 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Delete Label
+        /// </summary>
+        /// <param name="labelModel"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> DeleteLabel(LabelModel labelModel, int id)
         {
             try

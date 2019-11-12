@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLayer.Interface;
-using CommanLayer.Model;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="NotesController.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace FundooProject.Controllers
 {
+    using System.Threading.Tasks;
+    using BusinessLayer.Interface;
+    using CommanLayer.Model;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -49,9 +52,11 @@ namespace FundooProject.Controllers
 
         [HttpDelete]
         [Route("DeleteNotes")]
-        public async Task<bool> DeleteNotes(NotesModel notesModel,int id)
+        public async Task<IActionResult> DeleteNotes(NotesModel notesModel,int id)
         {
-            return await _userNotes.DeleteNotes(notesModel, id);
+            var result = await _userNotes.DeleteNotes(notesModel, id);
+            var noteResult = "Note is Deleted";
+            return Ok(new { result, noteResult });
         }
     }
 }
