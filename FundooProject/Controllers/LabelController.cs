@@ -27,17 +27,19 @@ namespace FundooProject.Controllers
         [HttpPost]
         [Route("Addlabel")]
 
-        public async Task<bool> AddLabel(LabelModel labelModel)
+        public async Task<IActionResult> AddLabel(LabelModel labelModel)
         {
-            return await _bussinessManager.AddLabel(labelModel);
+            var result = await _bussinessManager.AddLabel(labelModel);
+            return Ok(new { result });
         }
 
         [HttpPost]
         [Route("UpdateLabel")]
 
-        public async Task<bool> UpdateLabel(LabelModel labelModel, string labelName)
+        public async Task<IActionResult> UpdateLabel(LabelModel labelModel, string labelName)
         {
-            return await _bussinessManager.UpdateLabel(labelModel, labelName);
+            var result = await _bussinessManager.UpdateLabel(labelModel, labelName);
+            return Ok(new { result });
         }
 
         [HttpGet]
@@ -52,9 +54,10 @@ namespace FundooProject.Controllers
         [HttpDelete]
         [Route("DeleteLabel")]
 
-        public async Task<bool> DeleteLabel(LabelModel labelModel, int id)
+        public async Task<IActionResult> DeleteLabel(LabelModel labelModel, int id)
         {
-            return await _bussinessManager.DeleteLabel(labelModel, id);
+            var result = await _bussinessManager.DeleteLabel(labelModel, id);
+            return Ok(new { result });
         }
     }
 }

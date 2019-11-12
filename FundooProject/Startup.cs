@@ -88,7 +88,7 @@ namespace FundooProject
 
             });
 
-
+            // Register the Swagger 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -111,7 +111,11 @@ namespace FundooProject
                 app.UseHsts();
             }
 
+            // Enable or used middleware to serve Swagger 
             app.UseSwagger();
+
+            // Enable swagger-ui
+            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
@@ -133,6 +137,7 @@ namespace FundooProject
 
                     swaggerDocument.Parameters.Add(new NonBodyParameter
                     {
+                        
                         Name = "Authorization",
                         In = "header",
                         Type = "string",

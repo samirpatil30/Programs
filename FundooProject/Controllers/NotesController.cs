@@ -15,6 +15,7 @@ namespace FundooProject.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    // Authorize attribute to the controller class, then any action methods on the controller will be only available to authenticated users. 
     [Authorize]
     public class NotesController : ControllerBase
     {
@@ -25,12 +26,14 @@ namespace FundooProject.Controllers
             _userNotes = userNotes;
         }
 
+     
         [HttpPost]
         [Route("AddNotes")]
 
-        public async Task<bool> AddNotes(NotesModel notesModel)
+        public async Task<IActionResult> AddNotes(NotesModel notesModel)
         {
-            return await _userNotes.AddNotes(notesModel);
+            var result = await _userNotes.AddNotes(notesModel);
+            return Ok(new { result });
         }
 
         [HttpPost]
@@ -44,10 +47,10 @@ namespace FundooProject.Controllers
 
         [HttpPost]
         [Route("updateNotes")]
-        public async Task<bool> UpdateNotes(NotesModel notesModel,int id)
+        public async Task<IActionResult> UpdateNotes(NotesModel notesModel,int id)
         {
             var result = await _userNotes.UpdateNotes(notesModel, id);
-            return result;
+            return Ok(new { result });
         }
 
         [HttpDelete]
