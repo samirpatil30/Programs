@@ -80,5 +80,9 @@ namespace CommanLayer.Model
         /// The NotesTyoe of the notes.
         /// </value>
         public EnumNoteType NotesType { get; set; }
+
+        public DateTime Reminder { get; set;}
+
+        public string Image { get; set; }
     }
 }

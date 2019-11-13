@@ -32,5 +32,6 @@ namespace CommanLayer.Model
         [Required]
         [StringLength(10, MinimumLength = 5)]
         public string Password { get; set; }
+
     }
 }

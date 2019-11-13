@@ -7,7 +7,12 @@
 
 namespace RepositoryLayer.Services
 {
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using CommanLayer.Model;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Http.Internal;
+    using Microsoft.AspNetCore.Mvc;
     using RepositoryLayer.Context;
     using RepositoryLayer.Interface;
     using System;
@@ -47,7 +52,10 @@ namespace RepositoryLayer.Services
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now,
                 color = notesModel.color,
-                NotesType = notesModel.NotesType
+                NotesType = notesModel.NotesType,
+                Reminder = notesModel.Reminder,
+                Image = notesModel.Image
+                
             };
 
             //// Add the details of user in db
@@ -132,7 +140,29 @@ namespace RepositoryLayer.Services
 
             ////save changes to the database
             var result = await this._authenticationContext.SaveChangesAsync();
-                return true;                          
+                return true;
+            
+        }
+
+        public string AddImage(string url,string userid,int id,IFormFile file)
+        {
+            
+            var image = (from notes in _authenticationContext.notesModels 
+                        where notes.Id == id 
+                        select notes).FirstOrDefault();
+
+            image.Image = url;
+            var result = _authenticationContext.SaveChanges();
+            
+
+            if(result > 0)
+            {
+                return url;
+            }
+            else
+            {
+                return "Image not uploaded";
+            }
         }
     } 
 }

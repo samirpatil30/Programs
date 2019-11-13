@@ -13,7 +13,7 @@ namespace FundooProject.Controllers
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
-    [ApiController]
+   // [ApiController]
     [Authorize]
     public class LabelController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace FundooProject.Controllers
         }
 
         [HttpPost]
-        [Route("Addlabel")]
+       // [Route("Addlabel")]
 
         public async Task<IActionResult> AddLabel(LabelModel labelModel)
         {
@@ -33,8 +33,8 @@ namespace FundooProject.Controllers
             return Ok(new { result });
         }
 
-        [HttpPost]
-        [Route("UpdateLabel")]
+        [HttpPut]
+       // [Route("UpdateLabel")]
 
         public async Task<IActionResult> UpdateLabel(LabelModel labelModel, string labelName)
         {
@@ -43,7 +43,7 @@ namespace FundooProject.Controllers
         }
 
         [HttpGet]
-        [Route("getLabel")]
+      //  [Route("getLabel")]
 
         public IActionResult GetLabel(string userId)
         {
@@ -52,7 +52,7 @@ namespace FundooProject.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteLabel")]
+       // [Route("DeleteLabel")]
 
         public async Task<IActionResult> DeleteLabel(LabelModel labelModel, int id)
         {

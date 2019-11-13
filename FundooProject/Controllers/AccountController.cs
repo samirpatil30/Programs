@@ -44,9 +44,8 @@ namespace FundooProject.Controllers
          
         {
             //// the variable result stores the result of method AddUserDetails          
-             var result = await _account.AddUserDetails(details);
-             bool RegistrationStatus = true;
-             return Ok(new { result, RegistrationStatus });   
+             var result = await _account.AddUserDetails(details);     
+             return Ok(new { result});   
         }
 
         [HttpPost]

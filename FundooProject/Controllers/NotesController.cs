@@ -10,6 +10,7 @@ namespace FundooProject.Controllers
     using BusinessLayer.Interface;
     using CommanLayer.Model;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
 
@@ -28,7 +29,7 @@ namespace FundooProject.Controllers
 
      
         [HttpPost]
-        [Route("AddNotes")]
+       // [//Route("AddNotes")]
 
         public async Task<IActionResult> AddNotes(NotesModel notesModel)
         {
@@ -36,8 +37,8 @@ namespace FundooProject.Controllers
             return Ok(new { result });
         }
 
-        [HttpPost]
-        [Route("getNotes")]
+        [HttpGet]
+       // [Route("getNotes")]
         public IActionResult getNotes(NotesModel model)
         {
 
@@ -45,8 +46,8 @@ namespace FundooProject.Controllers
             return Ok(new { result });
         }
 
-        [HttpPost]
-        [Route("updateNotes")]
+        [HttpPut]
+       // [Route("updateNotes")]
         public async Task<IActionResult> UpdateNotes(NotesModel notesModel,int id)
         {
             var result = await _userNotes.UpdateNotes(notesModel, id);
@@ -54,12 +55,20 @@ namespace FundooProject.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteNotes")]
+        //[Route("DeleteNotes")]
         public async Task<IActionResult> DeleteNotes(NotesModel notesModel,int id)
         {
             var result = await _userNotes.DeleteNotes(notesModel, id);
             var noteResult = "Note is Deleted";
             return Ok(new { result, noteResult });
+        }
+
+        [HttpPost]
+        [Route("Image")]
+        public string AddImage(string userId,int id,IFormFile file)
+        {
+            var urlOfImage = _userNotes.AddImage(userId, id, file);
+            return urlOfImage;
         }
     }
 }

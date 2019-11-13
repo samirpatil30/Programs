@@ -8,6 +8,7 @@ namespace BusinessLayer.Services
 {
     using BusinessLayer.Interface;
     using CommanLayer.Model;
+    using Microsoft.AspNetCore.Http;
     using RepositoryLayer.Interface;
     using System;
     using System.Collections.Generic;
@@ -133,6 +134,27 @@ namespace BusinessLayer.Services
                 }
             }
             catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public string AddImage( string userid, int id, IFormFile file)
+        {
+            try
+            {
+                CloudinaryImageUpload cloudinary = new CloudinaryImageUpload();
+                var url = cloudinary.UploadImageOnCloud(file);
+                if(userid != null)
+                {
+                    return _notesRepository.AddImage(url, userid, id, file); ;
+                }
+                else
+                {
+                    throw new Exception("Image is not uploaded");
+                }
+            }
+            catch(Exception exception)
             {
                 throw exception;
             }

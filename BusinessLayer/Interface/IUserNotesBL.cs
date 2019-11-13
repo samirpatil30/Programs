@@ -8,6 +8,7 @@
 namespace BusinessLayer.Interface
 {
     using CommanLayer.Model;
+    using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -45,5 +46,7 @@ namespace BusinessLayer.Interface
         /// <param name="id"></param>
         /// <returns></returns>
         Task<bool> DeleteNotes(NotesModel notesModel, int id);
+
+        string AddImage( string userid, int id, IFormFile file);
     }
 }
