@@ -109,7 +109,7 @@ namespace FundooProject.Controllers
         public async Task<IActionResult> Pin(int id)
         {
             var result = await _userNotes.Pin(id);
-            return Ok(new { result });
+            return Ok(new { result }); 
         }
 
         [HttpPost]

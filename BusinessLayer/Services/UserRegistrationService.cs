@@ -173,6 +173,7 @@ namespace BusinessLayer.Services
                 else
                 {
                     return "Profile Picture is not uploaded";
+                    
                 }
             }
             catch(Exception exception)

@@ -40,6 +40,7 @@ namespace FundooProject.Controllers
         {
             var result = await _bussinessManager.UpdateLabel(labelModel, labelName);
             return Ok(new { result });
+            
         }
 
         [HttpGet]

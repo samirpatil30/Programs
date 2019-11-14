@@ -8,6 +8,7 @@ namespace CommanLayer.Model
 {
     using CommanLayer.Enum;
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -71,24 +72,30 @@ namespace CommanLayer.Model
         /// <value>
         /// The Color of the Notes.
         /// </value>
+        
+            [Required]
+            [RegularExpression("^#(?:[0-9a-fA-F]{3}){1,2}$")]
         public string color { get; set; }
 
         /// <summary>
         /// Gets or sets the NotesType.
-        /// </summary>
+        /// </summary>  
         /// <value>
         /// The NotesTyoe of the notes.
         /// </value>
         public EnumNoteType NotesType { get; set; }
 
-        public DateTime Reminder { get; set;}
+        public DateTime Reminder { get; set; }
 
         public string Image { get; set; }
 
-         public bool Trash { get; set; }
+        public bool Trash { get; set; }
 
         public bool Archive { get; set; }
 
         public bool Pin { get; set; }
+
+
+
     }
 }
