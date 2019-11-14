@@ -84,5 +84,11 @@ namespace CommanLayer.Model
         public DateTime Reminder { get; set;}
 
         public string Image { get; set; }
+
+         public bool Trash { get; set; }
+
+        public bool Archive { get; set; }
+
+        public bool Pin { get; set; }
     }
 }

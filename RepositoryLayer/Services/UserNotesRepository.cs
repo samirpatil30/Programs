@@ -55,7 +55,10 @@ namespace RepositoryLayer.Services
                 color = notesModel.color,
                 NotesType = notesModel.NotesType,
                 Reminder = notesModel.Reminder,
-                Image = notesModel.Image
+                Image = notesModel.Image,
+                Archive = notesModel.Archive,
+                Trash = notesModel.Trash,
+                Pin = notesModel.Pin
 
             };
 
@@ -83,7 +86,7 @@ namespace RepositoryLayer.Services
         public IList<NotesModel> GetNotes(string UserId)
         {
             //// Here the Linq querey return the Record match in Database
-            var list = from notes in _authenticationContext.notesModels.Where(g => g.UserId == UserId) select notes;
+            var list = from notes in _authenticationContext.notesModels.Where(g => g.UserId == UserId && g.Trash == false && g.Archive == false) select notes;
             return list.ToList();
         }
 
@@ -147,14 +150,16 @@ namespace RepositoryLayer.Services
 
         public string AddImage(string url, string userid, int id, IFormFile file)
         {
-
+            //// Linq Query to select note id to set the image to notes
             var image = (from notes in _authenticationContext.notesModels
                          where notes.Id == id
                          select notes).FirstOrDefault();
 
+            //// Here the image column store the url of image
             image.Image = url;
-            var result = _authenticationContext.SaveChanges();
 
+            //// save the changes in Database
+            var result = _authenticationContext.SaveChanges();
 
             if (result > 0)
             {
@@ -168,6 +173,7 @@ namespace RepositoryLayer.Services
 
         public async Task<bool> Archive(int id)
         {
+            //// Linq Query to select note id to Archive the note
             var ArchiveNote = (from note in _authenticationContext.notesModels
                                where note.Id == id
                                select note).FirstOrDefault();
@@ -175,9 +181,10 @@ namespace RepositoryLayer.Services
 
             if (ArchiveNote != null)
             {
-                if (ArchiveNote.NotesType == 0)
+                //// Here we check the status of Archive i.e true or false if false then change the status to Archive note
+                if (ArchiveNote.Archive == false)
                 {
-                    ArchiveNote.NotesType = (EnumNoteType)1;
+                    ArchiveNote.Archive = true;
                 }
 
                 await _authenticationContext.SaveChangesAsync();
@@ -191,15 +198,16 @@ namespace RepositoryLayer.Services
 
         public async Task<bool> UnArchive(int id)
         {
+            //// Linq Query to select note id to UnArchive the note
             var UnarchiveNote = (from note in _authenticationContext.notesModels
                                  where note.Id == id
                                  select note).FirstOrDefault();
 
             if (UnarchiveNote != null)
             {
-                if (UnarchiveNote.NotesType == (EnumNoteType)1)
+                if (UnarchiveNote.Archive == true)
                 {
-                    UnarchiveNote.NotesType = 0;
+                    UnarchiveNote.Archive = false;
                 }
                 await _authenticationContext.SaveChangesAsync();
                 return true;
@@ -209,5 +217,93 @@ namespace RepositoryLayer.Services
                 return false;
             }
         }
-    }           
+
+        public async Task<bool> Trash(int id)
+        {
+            var TrashNotes = (from note in _authenticationContext.notesModels
+                              where note.Id == id
+                              select note).FirstOrDefault();
+
+            if(TrashNotes != null)
+            {
+                if(TrashNotes.Trash == false)
+                {
+                    TrashNotes.Trash = true;
+                }
+
+                await _authenticationContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UnTrash(int id)
+        {
+            var TrashNotes = (from note in _authenticationContext.notesModels
+                              where note.Id == id
+                              select note).FirstOrDefault();
+
+            if (TrashNotes != null)
+            {
+                if (TrashNotes.Trash == true)
+                {
+                    TrashNotes.Trash = false;
+                }
+
+                await _authenticationContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> Pin(int id)
+        {
+            var PinNotes = (from note in _authenticationContext.notesModels
+                              where note.Id == id
+                              select note).FirstOrDefault();
+
+            if (PinNotes != null)
+            {
+                if (PinNotes.Pin == false)
+                {
+                    PinNotes.Pin = true;
+                }
+
+                await _authenticationContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UnPin(int id)
+        {
+            var UnPinNotes = (from note in _authenticationContext.notesModels
+                              where note.Id == id
+                              select note).FirstOrDefault();
+
+            if (UnPinNotes != null)
+            {
+                if (UnPinNotes.Pin == true)
+                {
+                    UnPinNotes.Pin = false;
+                }
+
+                await _authenticationContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 }

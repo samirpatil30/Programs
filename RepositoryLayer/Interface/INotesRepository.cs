@@ -21,5 +21,12 @@ namespace RepositoryLayer.Interface
         Task<bool> Archive(int id);
 
         Task<bool> UnArchive(int id);
+
+        Task<bool> Trash(int id);
+        Task<bool> UnTrash(int id);
+
+        Task<bool> Pin(int id);
+        Task<bool> UnPin(int id);
+
     }
 }

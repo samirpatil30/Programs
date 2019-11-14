@@ -87,5 +87,37 @@ namespace FundooProject.Controllers
             var result = await _userNotes.UnArchive(id);
             return Ok(new { result });
         }
+
+        [HttpPost]
+        [Route("Trash")]
+        public async Task<IActionResult> Trash(int id)
+        {
+            var result = await _userNotes.Trash(id);
+            return Ok(new { result });
+        }
+
+        [HttpPost]
+        [Route("RestoreNotes")]
+        public async Task<IActionResult> UnTrash(int id)
+        {
+            var result = await _userNotes.UnTrash(id);
+            return Ok(new { result });
+        }
+
+        [HttpPost]
+        [Route("Pin")]
+        public async Task<IActionResult> Pin(int id)
+        {
+            var result = await _userNotes.Pin(id);
+            return Ok(new { result });
+        }
+
+        [HttpPost]
+        [Route("Unpin")]
+        public async Task<IActionResult> Unpin(int id)
+        {
+            var result = await _userNotes.UnPin(id);
+            return Ok(new { result });
+        }
     }
 }

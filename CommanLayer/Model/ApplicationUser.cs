@@ -29,6 +29,9 @@ namespace CommanLayer.Model
         /// </value>
         public string LastName { get; set; }
 
+        /// <summary>
+        /// ProfilePicture
+        /// </summary>
         public string ProfilePicture { get; set; }
     }
 }

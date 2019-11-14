@@ -46,14 +46,14 @@ namespace BusinessLayer.Services
                 //// if checks the model is Null or not
                 if (model != null)
                 {
-                  return  _notesRepository.AddNotes(model);
+                    return _notesRepository.AddNotes(model);
                 }
                 else
                 {
                     throw new Exception("Empty notes");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception;
             }
@@ -71,7 +71,7 @@ namespace BusinessLayer.Services
                 //// if checks the model is Null or not
                 if (UserId != null)
                 {
-                    var result=  _notesRepository.GetNotes(UserId);
+                    var result = _notesRepository.GetNotes(UserId);
                     return result;
                 }
                 else
@@ -79,7 +79,7 @@ namespace BusinessLayer.Services
                     throw new Exception("Invalid User id");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception;
             }
@@ -98,7 +98,7 @@ namespace BusinessLayer.Services
                 //// if checks the notesModel is Null or not
                 if (notesModel != null)
                 {
-                    var result = await _notesRepository.UpdateNotes(notesModel,id);
+                    var result = await _notesRepository.UpdateNotes(notesModel, id);
                     return result;
                 }
                 else
@@ -139,13 +139,13 @@ namespace BusinessLayer.Services
             }
         }
 
-        public string AddImage( string userid, int id, IFormFile file)
+        public string AddImage(string userid, int id, IFormFile file)
         {
             try
             {
                 CloudinaryImageUpload cloudinary = new CloudinaryImageUpload();
                 var url = cloudinary.UploadImageOnCloud(file);
-                if(userid != null)
+                if (userid != null)
                 {
                     return _notesRepository.AddImage(url, userid, id, file); ;
                 }
@@ -154,18 +154,18 @@ namespace BusinessLayer.Services
                     throw new Exception("Image is not uploaded");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception;
             }
         }
 
-       public async Task<bool> Archive(int id)
+        public async Task<bool> Archive(int id)
         {
             var result = await _notesRepository.Archive(id);
             try
             {
-                if(id != 0)
+                if (id != 0)
                 {
                     return result;
                 }
@@ -174,7 +174,7 @@ namespace BusinessLayer.Services
                     throw new Exception("Note is not found select the correct note");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception;
             }
@@ -185,8 +185,8 @@ namespace BusinessLayer.Services
             try
             {
                 var result = await _notesRepository.UnArchive(id);
-               
-                if(id != 0)
+
+                if (id != 0)
                 {
                     return result;
                 }
@@ -195,11 +195,90 @@ namespace BusinessLayer.Services
                     throw new Exception("Unable to Urachive note");
                 }
             }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public async Task<bool> Trash(int id)
+        {
+            try
+            {
+                var result = await _notesRepository.Trash(id);
+                if (id != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Unable to trash note");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public async Task<bool> UnTrash(int id)
+        {
+            try
+            {
+                var result = await _notesRepository.UnTrash(id);
+                if (id != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Unable to restore note");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public async Task<bool> Pin(int id)
+        {
+            try
+            {
+                var result = await _notesRepository.Pin(id);
+                if(id != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Unable to pin note");
+                }
+            }
             catch(Exception exception)
             {
                 throw exception;
             }
+        }
 
+        public async Task<bool> UnPin(int id)
+        {
+            try
+            {
+                var result = await _notesRepository.UnPin(id);
+                if (id != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Unable to pin note");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
     }
 }
