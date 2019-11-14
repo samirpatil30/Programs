@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BusinessLayer.Interface;
 using CommanLayer.Model;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Context;
@@ -73,6 +74,13 @@ namespace FundooProject.Controllers
             return Ok(new { result });
         }
 
+        [HttpPost]
+        [Route("ProfilePicture")]
+        public IActionResult ProfilePicture(string userId,IFormFile file)
+        {
+            var UrlOfProfilePicture = _account.ProfilePicture(userId, file);
+            return Ok(new { UrlOfProfilePicture });
+        }
 
     }
 }  

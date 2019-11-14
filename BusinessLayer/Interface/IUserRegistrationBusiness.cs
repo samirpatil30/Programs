@@ -7,6 +7,7 @@
 namespace BusinessLayer.Interface
 {
     using CommanLayer.Model;
+    using Microsoft.AspNetCore.Http;
     using System;
     using System.Threading.Tasks;
 
@@ -43,5 +44,7 @@ namespace BusinessLayer.Interface
         /// <param name="tokenString">The token string.</param>
         /// <returns></returns>
         Task<Tuple<bool, string>> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString);
+
+        string ProfilePicture( string userid, IFormFile file);
     }
 }

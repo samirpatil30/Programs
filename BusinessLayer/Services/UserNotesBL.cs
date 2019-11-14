@@ -64,14 +64,14 @@ namespace BusinessLayer.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public IList<NotesModel> GetNotes(NotesModel model)
+        public IList<NotesModel> GetNotes(string UserId)
         {
             try
             {
                 //// if checks the model is Null or not
-                if (model != null)
+                if (UserId != null)
                 {
-                    var result=  _notesRepository.GetNotes(model);
+                    var result=  _notesRepository.GetNotes(UserId);
                     return result;
                 }
                 else
@@ -158,6 +158,48 @@ namespace BusinessLayer.Services
             {
                 throw exception;
             }
+        }
+
+       public async Task<bool> Archive(int id)
+        {
+            var result = await _notesRepository.Archive(id);
+            try
+            {
+                if(id != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Note is not found select the correct note");
+                }
+            }
+            catch(Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public async Task<bool> UnArchive(int id)
+        {
+            try
+            {
+                var result = await _notesRepository.UnArchive(id);
+               
+                if(id != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Unable to Urachive note");
+                }
+            }
+            catch(Exception exception)
+            {
+                throw exception;
+            }
+
         }
     }
 }

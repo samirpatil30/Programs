@@ -9,6 +9,7 @@ namespace RepositoryLayer.Services
 {
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
+    using CommanLayer.Enum;
     using CommanLayer.Model;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Http.Internal;
@@ -44,7 +45,7 @@ namespace RepositoryLayer.Services
         {
             //// addNotes stores the below data
             var addNotes = new NotesModel()
-            { 
+            {
                 Id = notesModel.Id,
                 UserId = notesModel.UserId,
                 NotesTitle = notesModel.NotesTitle,
@@ -55,23 +56,23 @@ namespace RepositoryLayer.Services
                 NotesType = notesModel.NotesType,
                 Reminder = notesModel.Reminder,
                 Image = notesModel.Image
-                
+
             };
 
             //// Add the details of user in db
             this._authenticationContext.Add(addNotes);
 
             //// save the the details in db and return a result
-            var result =await _authenticationContext.SaveChangesAsync();
-              
-            if(result != null)
+            var result = await _authenticationContext.SaveChangesAsync();
+
+            if (result != null)
             {
                 return true;
             }
             else
             {
                 return false;
-            }            
+            }
         }
 
         /// <summary>
@@ -79,10 +80,10 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public IList<NotesModel> GetNotes(NotesModel model)
+        public IList<NotesModel> GetNotes(string UserId)
         {
             //// Here the Linq querey return the Record match in Database
-            var list = from notes in _authenticationContext.notesModels.Where(g => g.UserId == model.UserId) select notes;
+            var list = from notes in _authenticationContext.notesModels.Where(g => g.UserId == UserId) select notes;
             return list.ToList();
         }
 
@@ -92,7 +93,7 @@ namespace RepositoryLayer.Services
         /// <param name="model"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<bool> UpdateNotes(NotesModel model,int id)
+        public async Task<bool> UpdateNotes(NotesModel model, int id)
         {
             //// Here we retrive the id of user from db
             var query = from notes in _authenticationContext.notesModels
@@ -100,17 +101,17 @@ namespace RepositoryLayer.Services
                         select notes;
 
             ////if notes data have records then it will update the records
-           foreach(var updateNote in query)
+            foreach (var updateNote in query)
             {
 
                 updateNote.NotesTitle = model.NotesTitle;
                 updateNote.NotesDescription = model.NotesDescription;
                 updateNote.color = model.color;
             }
-                ////save changes to the database
-               var result = await this._authenticationContext.SaveChangesAsync();
-               
-            if(result > 0)
+            ////save changes to the database
+            var result = await this._authenticationContext.SaveChangesAsync();
+
+            if (result > 0)
             {
                 return true;
             }
@@ -126,13 +127,13 @@ namespace RepositoryLayer.Services
         /// <param name="notesModel"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<bool> DeleteNotes(NotesModel notesModel , int id)
+        public async Task<bool> DeleteNotes(NotesModel notesModel, int id)
         {
             var deleteOrderDetails =
                 from details in _authenticationContext.notesModels
                 where details.Id == id && details.UserId == notesModel.UserId
                 select details;
-            foreach(var deleteNote in deleteOrderDetails)
+            foreach (var deleteNote in deleteOrderDetails)
             {
                 //// remove the record from database
                 _authenticationContext.Remove(deleteNote);
@@ -140,22 +141,22 @@ namespace RepositoryLayer.Services
 
             ////save changes to the database
             var result = await this._authenticationContext.SaveChangesAsync();
-                return true;
-            
+            return true;
+
         }
 
-        public string AddImage(string url,string userid,int id,IFormFile file)
+        public string AddImage(string url, string userid, int id, IFormFile file)
         {
-            
-            var image = (from notes in _authenticationContext.notesModels 
-                        where notes.Id == id 
-                        select notes).FirstOrDefault();
+
+            var image = (from notes in _authenticationContext.notesModels
+                         where notes.Id == id
+                         select notes).FirstOrDefault();
 
             image.Image = url;
             var result = _authenticationContext.SaveChanges();
-            
 
-            if(result > 0)
+
+            if (result > 0)
             {
                 return url;
             }
@@ -164,5 +165,49 @@ namespace RepositoryLayer.Services
                 return "Image not uploaded";
             }
         }
-    } 
+
+        public async Task<bool> Archive(int id)
+        {
+            var ArchiveNote = (from note in _authenticationContext.notesModels
+                               where note.Id == id
+                               select note).FirstOrDefault();
+
+
+            if (ArchiveNote != null)
+            {
+                if (ArchiveNote.NotesType == 0)
+                {
+                    ArchiveNote.NotesType = (EnumNoteType)1;
+                }
+
+                await _authenticationContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UnArchive(int id)
+        {
+            var UnarchiveNote = (from note in _authenticationContext.notesModels
+                                 where note.Id == id
+                                 select note).FirstOrDefault();
+
+            if (UnarchiveNote != null)
+            {
+                if (UnarchiveNote.NotesType == (EnumNoteType)1)
+                {
+                    UnarchiveNote.NotesType = 0;
+                }
+                await _authenticationContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }           
 }

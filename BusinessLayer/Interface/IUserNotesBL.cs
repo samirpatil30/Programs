@@ -29,7 +29,7 @@ namespace BusinessLayer.Interface
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        IList<NotesModel> GetNotes(NotesModel model);
+        IList<NotesModel> GetNotes(string UserId);
 
         /// <summary>
         /// Update Notes
@@ -48,5 +48,8 @@ namespace BusinessLayer.Interface
         Task<bool> DeleteNotes(NotesModel notesModel, int id);
 
         string AddImage( string userid, int id, IFormFile file);
+
+         Task<bool> Archive(int id);
+        Task<bool> UnArchive(int id);
     }
 }

@@ -8,8 +8,10 @@ namespace RepositoryLayer.Services
 {
     using CommanLayer.Model;
     using CommanLayer.MSMQ;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.IdentityModel.Tokens;
+    using RepositoryLayer.Context;
     using RepositoryLayer.Interface;
     using System;
     using System.IdentityModel.Tokens.Jwt;
@@ -29,16 +31,21 @@ namespace RepositoryLayer.Services
         /// </summary>
         private UserManager<ApplicationUser> _userManager;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        AuthenticationContext _authenticationContext;
+
         //private IConfiguration _configuration;
 
         /// <summary>
         /// Create the parameterized Constructor of class and pass the UserManager
         /// </summary>
         /// <param name="userManager"></param>
-        public UserRegistrationRepository(UserManager<ApplicationUser> userManager)
+        public UserRegistrationRepository(UserManager<ApplicationUser> userManager,AuthenticationContext authenticationContext)
         {
            _userManager = userManager;
-            
+           _authenticationContext = authenticationContext;
         }
 
         /// <summary>
@@ -54,7 +61,8 @@ namespace RepositoryLayer.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 UserName = user.UserName,
-                Email = user.Email,
+                Email = user.Email,  
+                ProfilePicture = user.ProfilePicuture
 
             };
             try
@@ -207,6 +215,27 @@ namespace RepositoryLayer.Services
             else
             {
                 return Tuple.Create(false, "User is not Exist ");
+            }
+        }
+
+        public string ProfilePicture(string url, string userid, IFormFile file)
+        {
+
+            var image = (from user in _authenticationContext.User
+                         where user.Id == userid
+                         select user).FirstOrDefault();
+
+            image.ProfilePicture = url;
+            var result = _authenticationContext.SaveChanges();
+
+
+            if (result > 0)
+            {
+                return url;
+            }
+            else
+            {
+                return "Image not uploaded";
             }
         }
     }

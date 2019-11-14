@@ -27,9 +27,9 @@ namespace FundooProject.Controllers
             _userNotes = userNotes;
         }
 
-     
+
         [HttpPost]
-       // [//Route("AddNotes")]
+        // [//Route("AddNotes")]
 
         public async Task<IActionResult> AddNotes(NotesModel notesModel)
         {
@@ -38,17 +38,17 @@ namespace FundooProject.Controllers
         }
 
         [HttpGet]
-       // [Route("getNotes")]
-        public IActionResult getNotes(NotesModel model)
+        [Route("Get/{userId}")]
+        public IActionResult getNotes(string userId)
         {
 
-            var result =  _userNotes.GetNotes(model);
+            var result = _userNotes.GetNotes(userId);
             return Ok(new { result });
         }
 
         [HttpPut]
-       // [Route("updateNotes")]
-        public async Task<IActionResult> UpdateNotes(NotesModel notesModel,int id)
+        // [Route("updateNotes")]
+        public async Task<IActionResult> UpdateNotes(NotesModel notesModel, int id)
         {
             var result = await _userNotes.UpdateNotes(notesModel, id);
             return Ok(new { result });
@@ -56,7 +56,7 @@ namespace FundooProject.Controllers
 
         [HttpDelete]
         //[Route("DeleteNotes")]
-        public async Task<IActionResult> DeleteNotes(NotesModel notesModel,int id)
+        public async Task<IActionResult> DeleteNotes(NotesModel notesModel, int id)
         {
             var result = await _userNotes.DeleteNotes(notesModel, id);
             var noteResult = "Note is Deleted";
@@ -65,10 +65,27 @@ namespace FundooProject.Controllers
 
         [HttpPost]
         [Route("Image")]
-        public string AddImage(string userId,int id,IFormFile file)
+        public IActionResult AddImage(string userId, int id, IFormFile file)
         {
             var urlOfImage = _userNotes.AddImage(userId, id, file);
-            return urlOfImage;
+            // return urlOfImage;
+            return Ok(new { urlOfImage });
+        }
+
+        [HttpPost]
+        [Route("Archive")]
+        public Task<bool> Archive(int id)
+        {
+            return _userNotes.Archive(id);
+        }
+
+        [HttpPost]
+        [Route("UnArchive")]
+
+        public async Task<IActionResult> UnArchive(int id)
+        {
+            var result = await _userNotes.UnArchive(id);
+            return Ok(new { result });
         }
     }
 }

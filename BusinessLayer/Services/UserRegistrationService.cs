@@ -8,6 +8,7 @@ namespace BusinessLayer.Services
 {
     using BusinessLayer.Interface;
     using CommanLayer.Model;
+    using Microsoft.AspNetCore.Http;
     using RepositoryLayer.Interface;
     using System;
     using System.Threading.Tasks;
@@ -156,6 +157,27 @@ namespace BusinessLayer.Services
             catch(Exception ex)
             {
                 throw ex;
+            }
+        }
+
+       public string ProfilePicture( string userid, IFormFile file)
+        {
+            try
+            {
+                CloudinaryImageUpload cloudinary = new CloudinaryImageUpload();
+                var profilePicUrl = cloudinary.UploadImageOnCloud(file);
+                if(userid != null)
+                {
+                    return _registration.ProfilePicture(profilePicUrl, userid, file);
+                }
+                else
+                {
+                    return "Profile Picture is not uploaded";
+                }
+            }
+            catch(Exception exception)
+            {
+                throw exception;
             }
         }
     }

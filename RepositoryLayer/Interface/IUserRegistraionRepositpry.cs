@@ -1,4 +1,5 @@
 ﻿using CommanLayer.Model;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,5 +26,7 @@ namespace RepositoryLayer.Interface
         Task<string> ForgotPassword(ForgotPasswordModel passwordModel);
 
         Task<Tuple<bool,string>> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString);
+
+        string ProfilePicture(string url, string userid, IFormFile file);
     }
 }
