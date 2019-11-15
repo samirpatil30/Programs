@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommanLayer", "CommanLayer\CommanLayer.csproj", "{C8C97B0B-2CC3-4AB3-85C1-19E24AC3FA90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryLayer", "RepositoryLayer\RepositoryLayer.csproj", "{018C5673-2DDC-448C-9AE3-A19F9D914F66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryLayer", "RepositoryLayer\RepositoryLayer.csproj", "{018C5673-2DDC-448C-9AE3-A19F9D914F66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundoTestProject", "FundoTestProject\FundoTestProject.csproj", "{C6190B16-97D6-45A9-AFE5-23F1707EB962}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{018C5673-2DDC-448C-9AE3-A19F9D914F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{018C5673-2DDC-448C-9AE3-A19F9D914F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{018C5673-2DDC-448C-9AE3-A19F9D914F66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6190B16-97D6-45A9-AFE5-23F1707EB962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6190B16-97D6-45A9-AFE5-23F1707EB962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6190B16-97D6-45A9-AFE5-23F1707EB962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6190B16-97D6-45A9-AFE5-23F1707EB962}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
