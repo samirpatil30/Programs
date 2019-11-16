@@ -27,6 +27,7 @@ namespace RepositoryLayer.Interface
 
         Task<bool> Pin(int id);
         Task<bool> UnPin(int id);
-
+        Task<bool> AddReminder(int id, DateTime time);
+        Task<bool> DeleteReminder(int id);
     }
 }

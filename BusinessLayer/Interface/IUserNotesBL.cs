@@ -9,6 +9,7 @@ namespace BusinessLayer.Interface
 {
     using CommanLayer.Model;
     using Microsoft.AspNetCore.Http;
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -56,5 +57,7 @@ namespace BusinessLayer.Interface
 
         Task<bool> Pin(int id);
         Task<bool> UnPin(int id);
+        Task<bool> AddReminder(int id, DateTime time);
+        Task<bool> DeleteReminder(int id);
     }
 }

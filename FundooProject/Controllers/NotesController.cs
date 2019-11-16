@@ -6,6 +6,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace FundooProject.Controllers
 {
+    using System;
     using System.Threading.Tasks;
     using BusinessLayer.Interface;
     using CommanLayer.Model;
@@ -117,6 +118,23 @@ namespace FundooProject.Controllers
         public async Task<IActionResult> Unpin(int id)
         {
             var result = await _userNotes.UnPin(id);
+            return Ok(new { result });
+        }
+
+        [HttpPost]
+        [Route("Reminder")]
+        public async Task<IActionResult> AddReminder(int id,  DateTime time)
+        {
+            var result = await _userNotes.AddReminder(id, time);
+            return Ok(new { result });
+        }
+
+        [HttpDelete]
+        [Route("Reminder")]
+
+        public async Task<IActionResult> DeleteReminder(int id)
+        {
+            var result = await _userNotes.DeleteReminder(id);
             return Ok(new { result });
         }
     }

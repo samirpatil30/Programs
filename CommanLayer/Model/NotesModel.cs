@@ -94,5 +94,7 @@ namespace CommanLayer.Model
         public bool Archive { get; set; }
 
         public bool Pin { get; set; }
+
+      
     }
 }

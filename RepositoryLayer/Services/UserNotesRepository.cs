@@ -224,9 +224,9 @@ namespace RepositoryLayer.Services
                               where note.Id == id
                               select note).FirstOrDefault();
 
-            if(TrashNotes != null)
+            if (TrashNotes != null)
             {
-                if(TrashNotes.Trash == false)
+                if (TrashNotes.Trash == false)
                 {
                     TrashNotes.Trash = true;
                 }
@@ -265,8 +265,8 @@ namespace RepositoryLayer.Services
         public async Task<bool> Pin(int id)
         {
             var PinNotes = (from note in _authenticationContext.notesModels
-                              where note.Id == id
-                              select note).FirstOrDefault();
+                            where note.Id == id
+                            select note).FirstOrDefault();
 
             if (PinNotes != null)
             {
@@ -298,6 +298,44 @@ namespace RepositoryLayer.Services
                 }
 
                 await _authenticationContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddReminder(int id, DateTime time)
+        {
+            var Reminder = (from note in _authenticationContext.notesModels
+                            where note.Id == id
+                            select note).FirstOrDefault();
+
+            Reminder.Reminder = time;
+            var result = await _authenticationContext.SaveChangesAsync();
+
+            if (result != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteReminder(int id)
+        {
+            var DeleteReminder = (from note in _authenticationContext.notesModels
+                            where note.Id == id
+                            select note).FirstOrDefault();
+
+            DeleteReminder.Reminder = DateTime.MinValue;
+            var result = await _authenticationContext.SaveChangesAsync();
+
+            if(result != 0)
+            {
                 return true;
             }
             else

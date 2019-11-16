@@ -160,6 +160,11 @@ namespace BusinessLayer.Services
             }
         }
 
+        public object AddReminder(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> Archive(int id)
         {
             var result = await _notesRepository.Archive(id);
@@ -276,6 +281,47 @@ namespace BusinessLayer.Services
                 }
             }
             catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+       public async Task<bool> AddReminder(int id, DateTime time)
+        {
+            try
+            {
+                var result =await _notesRepository.AddReminder(id, time);
+                if(result != false)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("add reminder failed");
+                }
+            }
+            catch(Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public async Task<bool> DeleteReminder(int id)
+        {
+            try
+            {
+                var result =await _notesRepository.DeleteReminder(id);
+
+                if(result != false)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Unable to remove reminder");
+                }
+            }
+            catch(Exception exception)
             {
                 throw exception;
             }
