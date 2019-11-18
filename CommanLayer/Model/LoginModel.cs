@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LoginModel.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
@@ -9,7 +6,10 @@ using System.Text;
 // --------------------------------------------------------------------------------------------------------------------
 namespace CommanLayer.Model
 {
-   public class LoginModel
+    /// <summary>
+    /// Login Model
+    /// </summary>
+    public class LoginModel
     {
         /// <summary>
         /// Gets or sets the name of the user.

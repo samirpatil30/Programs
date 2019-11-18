@@ -18,5 +18,7 @@ namespace RepositoryLayer.Context
 
         public DbSet<NotesModel> notesModels { get; set; }
         public DbSet<LabelModel> labelModels { get; set; }
+
+        public DbSet<CollabrationModel> Collabrations { get; set; }
     }
 }

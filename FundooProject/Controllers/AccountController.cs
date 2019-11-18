@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessLayer.Interface;
-using CommanLayer.Model;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using RepositoryLayer.Context;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AccountController.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace FundooProject.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+    using BusinessLayer.Interface;
+    using CommanLayer.Model;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+
     /// <summary>
-    /// AccountController
+    /// Account Controller
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Route("api/[controller]")]
@@ -21,7 +22,7 @@ namespace FundooProject.Controllers
     public class AccountController : ControllerBase
     {
         /// <summary>
-        /// Create the instance variable of Business LayerInterface i.e IAccountBL
+        /// The account
         /// </summary>
         private IUserRegistrationBusiness _account;
 
@@ -31,56 +32,76 @@ namespace FundooProject.Controllers
         /// <param name="account">The account.</param>
         public AccountController(IUserRegistrationBusiness account)
         {
-            _account = account;
+            this._account = account;
         }
 
         /// <summary>
         /// Adds the user detail.
         /// </summary>
         /// <param name="details">The details.</param>
-        /// <returns></returns>
+        /// <returns>result</returns>
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddUserDetail(UserDetails details)
-         
+        public async Task<IActionResult> AddUserDetail(UserDetails details)        
         {
             //// the variable result stores the result of method AddUserDetails          
-             var result = await _account.AddUserDetails(details);     
-             return Ok(new { result});   
+             var result = await this._account.AddUserDetails(details);     
+             return this.Ok(new { result });   
         }
 
+        /// <summary>
+        /// Logins the specified details.
+        /// </summary>
+        /// <param name="details">The details.</param>
+        /// <returns>ResultOfLogin</returns>
         [HttpPost]
         [Route("login")]
         public async Task<Tuple<string, string>> Login(LoginModel details)
         {  
             //// the variable result stores the result of method Login
-            var ResultOfLogin = await _account.Login(details);
+            var ResultOfLogin = await this._account.Login(details);
             return Tuple.Create(ResultOfLogin.Item1, "Login Successful");
         }
 
+        /// <summary>
+        /// Forgot the password.
+        /// </summary>
+        /// <param name="passwordModel">The password model.</param>
+        /// <returns>passwordModel</returns>
         [HttpPost]
         [Route("ForgotPassword")]
         public async Task<string> ForgotPasword(ForgotPasswordModel passwordModel)
         {
             //// the variable result stores the result of method Login
-            return await _account.ForgotPassword(passwordModel); 
+            return await this._account.ForgotPassword(passwordModel); 
         }
 
+        /// <summary>
+        /// Resets the password.
+        /// </summary>
+        /// <param name="resetPasswordModel">The reset password model.</param>
+        /// <param name="tokenString">The token string.</param>
+        /// <returns>result</returns>
         [HttpPost]
         [Route("Reset/{tokenString}")]
         public async Task<IActionResult> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString)
         {            
-            var result = await _account.ResetPassword(resetPasswordModel, tokenString);
-            return Ok(new { result });
+            var result = await this._account.ResetPassword(resetPasswordModel, tokenString);
+            return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Profiles the picture.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="file">The file.</param>
+        /// <returns>UrlOfProfilePicture</returns>
         [HttpPost]
         [Route("ProfilePicture")]
-        public IActionResult ProfilePicture(string userId,IFormFile file)
+        public IActionResult ProfilePicture(string userId, IFormFile file)
         {
-            var UrlOfProfilePicture = _account.ProfilePicture(userId, file);
-            return Ok(new { UrlOfProfilePicture });
+            var UrlOfProfilePicture = this._account.ProfilePicture(userId, file);
+            return this.Ok(new { UrlOfProfilePicture });
         }
-
     }
 }  

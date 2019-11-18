@@ -10,8 +10,8 @@ using RepositoryLayer.Context;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    [Migration("20191109041127_LabelDeatils")]
-    partial class LabelDeatils
+    [Migration("20191118123157_Test2")]
+    partial class Test2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,23 @@ namespace RepositoryLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CommanLayer.Model.CollabrationModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("NoteId");
+
+                    b.Property<string>("SenderId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Collabrations");
+                });
+
             modelBuilder.Entity("CommanLayer.Model.LabelModel", b =>
                 {
                     b.Property<int>("Id")
@@ -29,11 +46,13 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<DateTime?>("CreatedDate");
 
-                    b.Property<string>("Label");
+                    b.Property<string>("Label")
+                        .IsRequired();
 
                     b.Property<DateTime?>("ModifiedDate");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -46,7 +65,11 @@ namespace RepositoryLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Archive");
+
                     b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<string>("Image");
 
                     b.Property<DateTime?>("ModifiedDate");
 
@@ -56,9 +79,16 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<int>("NotesType");
 
+                    b.Property<bool>("Pin");
+
+                    b.Property<DateTime>("Reminder");
+
+                    b.Property<bool>("Trash");
+
                     b.Property<string>("UserId");
 
-                    b.Property<string>("color");
+                    b.Property<string>("color")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -242,6 +272,8 @@ namespace RepositoryLayer.Migrations
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
+
+                    b.Property<string>("ProfilePicture");
 
                     b.ToTable("ApplicationUser");
 

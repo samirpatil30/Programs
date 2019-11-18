@@ -14,7 +14,7 @@ namespace BusinessLayer.Services
     using System.Threading.Tasks;
 
     /// <summary>
-    /// LabelBussinessManager
+    /// LabelBusinessManager
     /// </summary>
     public class LabelBussinessManager : ILabelBussinessManager
     {
@@ -26,16 +26,16 @@ namespace BusinessLayer.Services
         /// <summary>
         /// Create the constructor of class with parameter 
         /// </summary>
-        /// <param name="repositoryManager"></param>
+        /// <param name="repositoryManager">repository Manager</param>
         public LabelBussinessManager(ILabelRepositoryManager repositoryManager)
         {
-            _repositoryManager = repositoryManager;
+            this._repositoryManager = repositoryManager;
         }
 
         /// <summary>
         /// Add Label
         /// </summary>
-        /// <param name="labelModel"></param>
+        /// <param name="labelModel">label Model</param>
         /// <returns></returns>
         public async Task<bool> AddLabel(LabelModel labelModel)
         {
@@ -44,14 +44,14 @@ namespace BusinessLayer.Services
                 //// Here checked labelModel contains information or not 
                 if (labelModel != null)
                 {
-                    return await _repositoryManager.AddLabel(labelModel);
+                    return await this._repositoryManager.AddLabel(labelModel);
                 }
                 else
                 {
-                    throw new Exception ("Label not added");
+                    throw new Exception("Label not added");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception;
             }
@@ -60,9 +60,9 @@ namespace BusinessLayer.Services
         /// <summary>
         /// Update Label 
         /// </summary>
-        /// <param name="labelModelDetails"></param>
-        /// <param name="labelName"></param>
-        /// <returns></returns>
+        /// <param name="labelModelDetails">label Model Details</param>
+        /// <param name="labelName">label Name</param>
+        /// <returns> this._repositoryManager.UpdateLabel(labelModelDetails, labelName);</returns>
         public async Task<bool> UpdateLabel(LabelModel labelModelDetails, string labelName)
         {
             try
@@ -70,14 +70,14 @@ namespace BusinessLayer.Services
                 //// Here checked labelModelDetails contains information or not 
                 if (labelModelDetails != null)
                 {
-                    return await _repositoryManager.UpdateLabel(labelModelDetails, labelName);
+                    return await this._repositoryManager.UpdateLabel(labelModelDetails, labelName);
                 }
                 else
                 {
                     throw new Exception("Label is not updated");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception;
             }           
@@ -95,7 +95,7 @@ namespace BusinessLayer.Services
                 //// Here checked userId contains information or not 
                 if (userId != null)
                 {
-                   var result = _repositoryManager.GetLabel(userId);
+                   var result = this._repositoryManager.GetLabel(userId);
                     return result;
                    
                 }
@@ -113,9 +113,9 @@ namespace BusinessLayer.Services
         /// <summary>
         /// Delete Label
         /// </summary>
-        /// <param name="labelModel"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="labelModel">labelModel</param>
+        /// <param name="id">id</param>
+        /// <returns>result</returns>
         public async Task<bool> DeleteLabel(LabelModel labelModel, int id)
         {
             try
@@ -124,14 +124,13 @@ namespace BusinessLayer.Services
                 if (labelModel != null)
                 {
                     //// variable result store the result of DeleteLabel()  
-                    var result = await _repositoryManager.DeleteLabel(labelModel, id);
+                    var result = await this._repositoryManager.DeleteLabel(labelModel, id);
                     return result;
                 }
                 else
                 {
                     throw new Exception("label are not deleted");
                 }
-
             }
             catch (Exception exception)
             {

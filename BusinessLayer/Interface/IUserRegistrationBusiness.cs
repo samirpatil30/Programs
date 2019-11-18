@@ -20,7 +20,7 @@ namespace BusinessLayer.Interface
         /// Adds the user details.
         /// </summary>
         /// <param name="user">The user.</param>
-        /// <returns></returns>
+        /// <returns>result</returns>
         Task<Tuple<bool, string>> AddUserDetails(UserDetails user);
 
         /// <summary>
@@ -31,20 +31,26 @@ namespace BusinessLayer.Interface
         Task<Tuple<string, string>> Login(LoginModel loginModel);
 
         /// <summary>
-        /// Forgots the password.
+        /// Forgot password.
         /// </summary>
         /// <param name="passwordModel">The password model.</param>
-        /// <returns></returns>
+        /// <returns>passwordModel</returns>
         Task<string> ForgotPassword(ForgotPasswordModel passwordModel);
 
         /// <summary>
-        /// Resets the password.
+        /// Reset password.
         /// </summary>
         /// <param name="resetPasswordModel">The reset password model.</param>
         /// <param name="tokenString">The token string.</param>
-        /// <returns></returns>
+        /// <returns>resetPasswordModel,tokenString </returns>
         Task<Tuple<bool, string>> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString);
 
-        string ProfilePicture( string userid, IFormFile file);
+        /// <summary>
+        /// Profiles the picture.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <param name="file">The file.</param>
+        /// <returns>User id, file</returns>
+        string ProfilePicture(string userid, IFormFile file);
     }
 }

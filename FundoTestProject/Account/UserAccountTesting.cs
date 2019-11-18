@@ -1,20 +1,23 @@
-﻿using BusinessLayer.Services;
-using CommanLayer.Model;
-using Moq;
-using RepositoryLayer.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿
 
 namespace FundoTestProject.Account
 {
+    using BusinessLayer.Services;
+    using CommanLayer.Model;
+    using Moq;
+    using RepositoryLayer.Interface;
+    using Xunit;
+
+    /// <summary>
+    /// UserAccountTesting
+    /// </summary>
     public class UserAccountTesting
     {
         [Fact]
         public void RegistrationTesting()
         {
-            var repositoryLayer = new Mock<IUserRegistraionRepositpry>();
+            //// Using Mock create the instance of IUserRegistrationRepository
+            var repositoryLayer = new Mock<IUserRegistraionRepository>();
             var businessLayer = new UserRegistrationService(repositoryLayer.Object);
             var model = new UserDetails()
             {
@@ -31,12 +34,16 @@ namespace FundoTestProject.Account
 
             //// Assert
             Assert.NotNull(data);
+            
         }
 
+        /// <summary>
+        /// Logins this instance.
+        /// </summary>
         [Fact]
         public void Login()
         {
-            var Repository = new Mock<IUserRegistraionRepositpry>();
+            var Repository = new Mock<IUserRegistraionRepository>();
             var businessLayer = new UserRegistrationService(Repository.Object);
             var model = new LoginModel()
             {
@@ -49,10 +56,13 @@ namespace FundoTestProject.Account
             Assert.NotNull(data);
         }
 
+        /// <summary>
+        /// Forgots the password.
+        /// </summary>
         [Fact]
         public void ForgotPassword()
         {
-            var Repository = new Mock<IUserRegistraionRepositpry>();
+            var Repository = new Mock<IUserRegistraionRepository>();
             var businessLayer = new UserRegistrationService(Repository.Object);
             var model = new ForgotPasswordModel()
             {
@@ -63,17 +73,20 @@ namespace FundoTestProject.Account
             Assert.NotNull(data);
         }
 
+        /// <summary>
+        /// Resets the password.
+        /// </summary>
         [Fact]
         public void ResetPassword()
         {
-            var Repository = new Mock<IUserRegistraionRepositpry>();
+            var Repository = new Mock<IUserRegistraionRepository>();
             var Business = new UserRegistrationService(Repository.Object);
             var model = new ResetPasswordModel()
             {
                 Password = "Password"
             };
 
-            var data = Business.ResetPassword(model,"Reset Password");
+            var data = Business.ResetPassword(model, "Reset Password");
             Assert.NotNull(data);
         }
     }

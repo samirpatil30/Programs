@@ -1,14 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
-using Experimental.System.Messaging;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MsmqTokenSender.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace CommanLayer.MSMQ
 {
-   public class MsmqTokenSender
+    using System;
+    using Experimental.System.Messaging;
+
+    /// <summary>
+    /// Msmq Token Sender
+    /// </summary>
+    public class MsmqTokenSender
     {
-        public void SendMsmqToken(string Email, string Token)
+        /// <summary>
+        /// Sends the MSMQ token.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <param name="token">The token.</param>
+        public void SendMsmqToken(string email, string token)
         {
             //// Create the instance of MessageQueue
             MessageQueue MyQueue;
@@ -27,7 +38,7 @@ namespace CommanLayer.MSMQ
             try
             {
                 //// Here send() send the data into queue 
-                MyQueue.Send(Email, Token);
+                MyQueue.Send(email, token);
             }
             catch (MessageQueueException mqe)
             {
@@ -41,9 +52,6 @@ namespace CommanLayer.MSMQ
             {
                 MyQueue.Close();
             }
-
-            
-           // Console.WriteLine("message Sent");
         }
     }
 }

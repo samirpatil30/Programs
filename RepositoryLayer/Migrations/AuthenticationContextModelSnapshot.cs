@@ -19,6 +19,23 @@ namespace RepositoryLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CommanLayer.Model.CollabrationModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("NoteId");
+
+                    b.Property<string>("SenderId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Collabrations");
+                });
+
             modelBuilder.Entity("CommanLayer.Model.LabelModel", b =>
                 {
                     b.Property<int>("Id")
@@ -68,7 +85,8 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Property<string>("color");
+                    b.Property<string>("color")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

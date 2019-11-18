@@ -12,53 +12,77 @@ namespace FundooProject.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    /// LabelController
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Route("api/[controller]")]
-   // [ApiController]
+   ////[ApiController]
     [Authorize]
     public class LabelController : ControllerBase
     {
+        /// <summary>
+        /// The bussiness manager
+        /// </summary>
         private readonly ILabelBussinessManager _bussinessManager;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LabelController"/> class.
+        /// </summary>
+        /// <param name="bussinessManager">The bussiness manager.</param>
         public LabelController(ILabelBussinessManager bussinessManager)
         {
-            _bussinessManager = bussinessManager;
+            this._bussinessManager = bussinessManager;
         }
 
+        /// <summary>
+        /// Adds the label.
+        /// </summary>
+        /// <param name="labelModel">The label model.</param>
+        /// <returns>result</returns>
         [HttpPost]
-       // [Route("Addlabel")]
-
         public async Task<IActionResult> AddLabel(LabelModel labelModel)
         {
-            var result = await _bussinessManager.AddLabel(labelModel);
-            return Ok(new { result });
+            var result = await this._bussinessManager.AddLabel(labelModel);
+            return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Updates the label.
+        /// </summary>
+        /// <param name="labelModel">The label model.</param>
+        /// <param name="labelName">Name of the label.</param>
+        /// <returns>result</returns>
         [HttpPut]
-       // [Route("UpdateLabel")]
-
         public async Task<IActionResult> UpdateLabel(LabelModel labelModel, string labelName)
         {
-            var result = await _bussinessManager.UpdateLabel(labelModel, labelName);
-            return Ok(new { result });
-            
+            var result = await this._bussinessManager.UpdateLabel(labelModel, labelName);
+            return this.Ok(new { result });          
         }
 
+        /// <summary>
+        /// Gets the label.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>result</returns>
         [HttpGet]
-      //  [Route("getLabel")]
-
         public IActionResult GetLabel(string userId)
         {
-            var result = _bussinessManager.GetLabel(userId);
-            return Ok(new { result });
+            var result = this._bussinessManager.GetLabel(userId);
+            return this.Ok(new { result });
         }
 
+        /// <summary>
+        /// Deletes the label.
+        /// </summary>
+        /// <param name="labelModel">The label model.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>result</returns>
         [HttpDelete]
-       // [Route("DeleteLabel")]
-
         public async Task<IActionResult> DeleteLabel(LabelModel labelModel, int id)
         {
-            var result = await _bussinessManager.DeleteLabel(labelModel, id);
-            return Ok(new { result });
+            var result = await this._bussinessManager.DeleteLabel(labelModel, id);
+            return this.Ok(new { result });
         }
     }
 }

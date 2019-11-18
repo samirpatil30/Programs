@@ -1,24 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UserNotesBL.cs" company="Bridgelabz">
+// <copyright file="UserNotesBusiness.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Samir Patil"/>
 // --------------------------------------------------------------------------------------------------------------------
 namespace BusinessLayer.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using BusinessLayer.Interface;
     using CommanLayer.Model;
     using Microsoft.AspNetCore.Http;
     using RepositoryLayer.Interface;
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
-    /// UserNotesBL
+    /// User Notes Business
     /// </summary>
-    public class UserNotesBL : IUserNotesBL
+    public class UserNotesBusiness : IUserNotesBusiness
     {
         /// <summary>
         /// Create the instance variable of interface INotesRepository
@@ -29,9 +28,9 @@ namespace BusinessLayer.Services
         /// User NotesBL
         /// </summary>
         /// <param name="notesRepository"></param>
-        public UserNotesBL(INotesRepository notesRepository)
+        public UserNotesBusiness(INotesRepository notesRepository)
         {
-            _notesRepository = notesRepository;
+            this._notesRepository = notesRepository;
         }
 
         /// <summary>
@@ -46,7 +45,7 @@ namespace BusinessLayer.Services
                 //// if checks the model is Null or not
                 if (model != null)
                 {
-                    return _notesRepository.AddNotes(model);
+                    return this._notesRepository.AddNotes(model);
                 }
                 else
                 {
@@ -63,7 +62,7 @@ namespace BusinessLayer.Services
         /// Get Notes
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>User id</returns>
         public IList<NotesModel> GetNotes(string UserId)
         {
             try
@@ -71,7 +70,7 @@ namespace BusinessLayer.Services
                 //// if checks the model is Null or not
                 if (UserId != null)
                 {
-                    var result = _notesRepository.GetNotes(UserId);
+                    var result = this._notesRepository.GetNotes(UserId);
                     return result;
                 }
                 else
@@ -98,7 +97,7 @@ namespace BusinessLayer.Services
                 //// if checks the notesModel is Null or not
                 if (notesModel != null)
                 {
-                    var result = await _notesRepository.UpdateNotes(notesModel, id);
+                    var result = await this._notesRepository.UpdateNotes(notesModel, id);
                     return result;
                 }
                 else
@@ -125,7 +124,7 @@ namespace BusinessLayer.Services
                 //// if checks the notesModel is Null or not
                 if (notesModel != null)
                 {
-                    var result = await _notesRepository.DeleteNotes(notesModel, id);
+                    var result = await this._notesRepository.DeleteNotes(notesModel, id);
                     return result;
                 }
                 else
@@ -139,6 +138,14 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Add image.
+        /// </summary>
+        /// <param name="userid">The user id.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception">Image is not uploaded</exception>
         public string AddImage(string userid, int id, IFormFile file)
         {
             try
@@ -147,7 +154,7 @@ namespace BusinessLayer.Services
                 var url = cloudinary.UploadImageOnCloud(file);
                 if (userid != null)
                 {
-                    return _notesRepository.AddImage(url, userid, id, file); ;
+                    return this._notesRepository.AddImage(url, userid, id, file);
                 }
                 else
                 {
@@ -160,14 +167,26 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Adds the reminder.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>id</returns>
+        /// <exception cref="NotImplementedException"></exception>
         public object AddReminder(int id)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Archives the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>result</returns>
+        /// <exception cref="Exception">Note is not found select the correct note</exception>
         public async Task<bool> Archive(int id)
         {
-            var result = await _notesRepository.Archive(id);
+            var result = await this._notesRepository.Archive(id);
             try
             {
                 if (id != 0)
@@ -185,11 +204,19 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Un archive.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// id
+        /// </returns>
+        /// <exception cref="Exception">Unable to Urachive note</exception>
         public async Task<bool> UnArchive(int id)
         {
             try
             {
-                var result = await _notesRepository.UnArchive(id);
+                var result = await this._notesRepository.UnArchive(id);
 
                 if (id != 0)
                 {
@@ -206,11 +233,17 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Trashes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>result</returns>
+        /// <exception cref="Exception">Unable to trash note</exception>
         public async Task<bool> Trash(int id)
         {
             try
             {
-                var result = await _notesRepository.Trash(id);
+                var result = await this._notesRepository.Trash(id);
                 if (id != 0)
                 {
                     return result;
@@ -226,11 +259,17 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Un trash.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>result</returns>
+        /// <exception cref="Exception">Unable to restore note</exception>
         public async Task<bool> UnTrash(int id)
         {
             try
             {
-                var result = await _notesRepository.UnTrash(id);
+                var result = await this._notesRepository.UnTrash(id);
                 if (id != 0)
                 {
                     return result;
@@ -246,31 +285,17 @@ namespace BusinessLayer.Services
             }
         }
 
+        /// <summary>
+        /// Pins the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>result</returns>
+        /// <exception cref="Exception">Unable to pin note</exception>
         public async Task<bool> Pin(int id)
         {
             try
             {
-                var result = await _notesRepository.Pin(id);
-                if(id != 0)
-                {
-                    return result;
-                }
-                else
-                {
-                    throw new Exception("Unable to pin note");
-                }
-            }
-            catch(Exception exception)
-            {
-                throw exception;
-            }
-        }
-
-        public async Task<bool> UnPin(int id)
-        {
-            try
-            {
-                var result = await _notesRepository.UnPin(id);
+                var result = await this._notesRepository.Pin(id);
                 if (id != 0)
                 {
                     return result;
@@ -286,12 +311,45 @@ namespace BusinessLayer.Services
             }
         }
 
-       public async Task<bool> AddReminder(int id, DateTime time)
+        /// <summary>
+        /// Un pin.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>result</returns>
+        /// <exception cref="Exception">Unable to pin note</exception>
+        public async Task<bool> UnPin(int id)
         {
             try
             {
-                var result =await _notesRepository.AddReminder(id, time);
-                if(result != false)
+                var result = await this._notesRepository.UnPin(id);
+                if (id != 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Unable to pin note");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        /// <summary>
+        /// Adds the reminder.
+        /// </summary>
+        /// <param name="id">identifier.</param>
+        /// <param name="time">time.</param>
+        /// <returns>result</returns>
+        /// <exception cref="Exception">add reminder failed</exception>
+        public async Task<bool> AddReminder(int id, DateTime time)
+        {
+            try
+            {
+                var result = await this._notesRepository.AddReminder(id, time);
+                if (result != false)
                 {
                     return result;
                 }
@@ -300,19 +358,25 @@ namespace BusinessLayer.Services
                     throw new Exception("add reminder failed");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception;
             }
         }
 
+        /// <summary>
+        /// Deletes the reminder.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>result</returns>
+        /// <exception cref="Exception">Unable to remove reminder</exception>
         public async Task<bool> DeleteReminder(int id)
         {
             try
             {
-                var result =await _notesRepository.DeleteReminder(id);
+                var result = await this._notesRepository.DeleteReminder(id);
 
-                if(result != false)
+                if (result != false)
                 {
                     return result;
                 }
@@ -321,7 +385,34 @@ namespace BusinessLayer.Services
                     throw new Exception("Unable to remove reminder");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        /// <summary>
+        /// Collabrations the notes.
+        /// </summary>
+        /// <param name="collabrationModel">The collabration model.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception">Unable to collabreate</exception>
+        public async Task<bool> CollabrationNotes(CollabrationModel collabrationModel)
+        {
+            try
+            {
+                var result = await this._notesRepository.CollabrationNotes(collabrationModel);
+                
+                if (result != false)
+                {
+                    return true;
+                }
+                else
+                {
+                    throw new Exception("Unable to collabreate");
+                }
+            }
+            catch (Exception exception)
             {
                 throw exception;
             }

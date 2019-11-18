@@ -20,11 +20,10 @@ namespace RepositoryLayer.Services
     using System.Text;
     using System.Threading.Tasks;
 
-
     /// <summary>
     /// RegistrationRL
     /// </summary>
-    public class UserRegistrationRepository : IUserRegistraionRepositpry
+    public class UserRegistrationRepository : IUserRegistraionRepository
     {
         /// <summary>
         /// User Manager
@@ -32,11 +31,9 @@ namespace RepositoryLayer.Services
         private UserManager<ApplicationUser> _userManager;
 
         /// <summary>
-        /// 
+        /// AuthenticationContext
         /// </summary>
         AuthenticationContext _authenticationContext;
-
-        //private IConfiguration _configuration;
 
         /// <summary>
         /// Create the parameterized Constructor of class and pass the UserManager
@@ -44,14 +41,14 @@ namespace RepositoryLayer.Services
         /// <param name="userManager"></param>
         public UserRegistrationRepository(UserManager<ApplicationUser> userManager,AuthenticationContext authenticationContext)
         {
-           _userManager = userManager;
-           _authenticationContext = authenticationContext;
+           this._userManager = userManager;
+           this._authenticationContext = authenticationContext;
         }
 
         /// <summary>
         /// AddUser Details 
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">user</param>
         /// <returns></returns>
         public async Task<Tuple<bool, string>> AddUserDetails(UserDetails user)
         {
@@ -63,15 +60,14 @@ namespace RepositoryLayer.Services
                 UserName = user.UserName,
                 Email = user.Email,  
                 ProfilePicture = user.ProfilePicuture
-
             };
+
             try
-            {
-                var result = await _userManager.CreateAsync(applicationUser, user.Password);
+            {              
+                var result = await this._userManager.CreateAsync(applicationUser, user.Password);
                 if (result != null)
                 {
                     return Tuple.Create(true, "User registration Successful");
-
                 }
                 else
                 {
@@ -95,17 +91,15 @@ namespace RepositoryLayer.Services
             var user = await _userManager.FindByNameAsync(loginModel.UserName);
 
             //// check the username and password is matched in database or not
-            if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.Password))
+            if (user != null && await this._userManager.CheckPasswordAsync(user, loginModel.Password))
             {
                 string key = "This is my SecretKey which is used for security purpose";
-
                 ////Here generate encrypted key and result store in security key
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
-
                 //// here using securitykey and algorithm(security) the creadintails is generate(SigningCredentials present in Token)
                 var creadintials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
                 var claims = new[] {
-               new Claim("UserName",user.UserName),
+               new Claim("UserName", user.UserName),
                 };
 
                 var token = new JwtSecurityToken("Security token", "https://Test.com",
@@ -124,7 +118,7 @@ namespace RepositoryLayer.Services
         }
 
         /// <summary>
-        /// Forgots password.
+        /// Forgot password.
         /// </summary>
         /// <param name="passwordModel">The password model.</param>
         /// <returns></returns>
@@ -135,13 +129,11 @@ namespace RepositoryLayer.Services
             {
                 //// variable user stores email of user
                 var user = await _userManager.FindByEmailAsync(passwordModel.Email);
-
                 //// If checks the Email is null or not
                 if (user != null)
                 {
                     ////here we create object of MsmqTokenSender which is present in Common-Layer
                     MsmqTokenSender msmq = new MsmqTokenSender();
-
                     ////it creates the SecurityTokenDescriptor
                     var tokenDescripter = new SecurityTokenDescriptor
                     {
@@ -151,28 +143,22 @@ namespace RepositoryLayer.Services
                             new Claim("Email", user.Email.ToString())
                         }),
                         Expires = DateTime.UtcNow.AddDays(1),
-
                     };
 
                     //// This object is used to decode JWTs
                          var tokenHandler = new JwtSecurityTokenHandler();
-
                     ////it creates the security token
                     var securityToken = tokenHandler.CreateToken(tokenDescripter);
-
                     ////it writes security token to the token variable.
                     var token = tokenHandler.WriteToken(securityToken);
-
                     //// Send the email and password to Method in MsmqTokenSender
                     msmq.SendMsmqToken(passwordModel.Email, token);
-
                     return token;
                 }
                 else
                 {
                     return "Invalid user";
-                }
-                
+                }              
             }
             catch (Exception e)
             {
@@ -189,21 +175,18 @@ namespace RepositoryLayer.Services
        public async Task<Tuple<bool, string>> ResetPassword(ResetPasswordModel resetPasswordModel,string tokenString)
         {
             var token = new JwtSecurityToken(tokenString);
-
             //// Claims the email from token
-            var Email =  (token.Claims.First(c => c.Type == "Email").Value);
-          
+            var Email =  (token.Claims.First(c => c.Type == "Email").Value);         
             //// Find the Email in Database and return the result
-            var user = await _userManager.FindByEmailAsync(Email);
+            var user = await this._userManager.FindByEmailAsync(Email);
             if (user != null)
             {
                 //// this method generate the password reset token
-                var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-
+                var resetToken = await this._userManager.GeneratePasswordResetTokenAsync(user);
                 //// Here ResetPasswordAsync() Specifies the new password after validating given password reset token
-                var result = await _userManager.ResetPasswordAsync(user, resetToken, resetPasswordModel.Password);
+                var result = await this._userManager.ResetPasswordAsync(user, resetToken, resetPasswordModel.Password);
 
-               if(result != null)
+               if (result != null)
                {
                     return Tuple.Create(true, "Password has been change");
                }
@@ -218,17 +201,23 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Profiles the picture.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="userid">The userid.</param>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
         public string ProfilePicture(string url, string userid, IFormFile file)
         {
-
-            var image = (from user in _authenticationContext.User
+            var image = (from user in this._authenticationContext.User
                          where user.Id == userid
                          select user).FirstOrDefault();
 
             image.ProfilePicture = url;
-            var result = _authenticationContext.SaveChanges();
-
-
+            //// save the result in database and return the response
+            var result = this._authenticationContext.SaveChanges();
+            //// If we get the result greater than zero then it will return Url
             if (result > 0)
             {
                 return url;

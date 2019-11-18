@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RepositoryLayer.Migrations
 {
-    public partial class test : Migration
+    public partial class Test2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
+
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -43,11 +44,67 @@ namespace RepositoryLayer.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true),
+                    ProfilePicture = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Collabrations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    SenderId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    NoteId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Collabrations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "labelModels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: false),
+                    Label = table.Column<string>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_labelModels", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "notesModels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true),
+                    NotesTitle = table.Column<string>(nullable: true),
+                    NotesDescription = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: true),
+                    color = table.Column<string>(nullable: false),
+                    NotesType = table.Column<int>(nullable: false),
+                    Reminder = table.Column<DateTime>(nullable: false),
+                    Image = table.Column<string>(nullable: true),
+                    Trash = table.Column<bool>(nullable: false),
+                    Archive = table.Column<bool>(nullable: false),
+                    Pin = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_notesModels", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,6 +269,15 @@ namespace RepositoryLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Collabrations");
+
+            migrationBuilder.DropTable(
+                name: "labelModels");
+
+            migrationBuilder.DropTable(
+                name: "notesModels");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

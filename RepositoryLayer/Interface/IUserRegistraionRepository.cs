@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Interface
 {
-   public interface IUserRegistraionRepositpry
+   public interface IUserRegistraionRepository
     {
         /// <summary>
         /// Adds the user details.

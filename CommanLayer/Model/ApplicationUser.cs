@@ -4,6 +4,7 @@
 // </copyright>
 // <creator name="Samir Patil"/>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace CommanLayer.Model
 {
     using Microsoft.AspNetCore.Identity;
@@ -30,8 +31,11 @@ namespace CommanLayer.Model
         public string LastName { get; set; }
 
         /// <summary>
-        /// ProfilePicture
+        /// Gets or sets the profile picture.
         /// </summary>
+        /// <value>
+        /// The profile picture.
+        /// </value>
         public string ProfilePicture { get; set; }
     }
 }

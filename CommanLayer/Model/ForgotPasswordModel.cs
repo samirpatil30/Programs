@@ -12,8 +12,11 @@ namespace CommanLayer.Model
     public class ForgotPasswordModel
     {
         /// <summary>
-        /// Email
+        /// Gets or sets the email.
         /// </summary>
+        /// <value>
+        /// The email.
+        /// </value>
         public string Email { get; set; }
     }
 }

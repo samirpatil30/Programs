@@ -39,8 +39,8 @@ namespace RepositoryLayer.Services
         /// <summary>
         /// Add Notes
         /// </summary>
-        /// <param name="notesModel"></param>
-        /// <returns></returns>
+        /// <param name="notesModel">notesModel</param>
+        /// <returns>result</returns>
         public async Task<bool> AddNotes(NotesModel notesModel)
         {
             //// addNotes stores the below data
@@ -59,15 +59,13 @@ namespace RepositoryLayer.Services
                 Archive = notesModel.Archive,
                 Trash = notesModel.Trash,
                 Pin = notesModel.Pin
-
             };
 
             //// Add the details of user in db
             this._authenticationContext.Add(addNotes);
 
             //// save the the details in db and return a result
-            var result = await _authenticationContext.SaveChangesAsync();
-
+            var result = await this._authenticationContext.SaveChangesAsync();
             if (result != null)
             {
                 return true;
@@ -86,7 +84,7 @@ namespace RepositoryLayer.Services
         public IList<NotesModel> GetNotes(string UserId)
         {
             //// Here the Linq querey return the Record match in Database
-            var list = from notes in _authenticationContext.notesModels.Where(g => g.UserId == UserId && g.Trash == false && g.Archive == false) select notes;
+            var list = from notes in  this._authenticationContext.notesModels.Where(g => g.UserId == UserId && g.Trash == false && g.Archive == false) select notes;
             return list.ToList();
         }
 
@@ -95,11 +93,11 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="model"></param>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>result</returns>
         public async Task<bool> UpdateNotes(NotesModel model, int id)
         {
             //// Here we retrive the id of user from db
-            var query = from notes in _authenticationContext.notesModels
+            var query = from notes in this._authenticationContext.notesModels
                         where notes.Id == id
                         select notes;
 
@@ -133,7 +131,7 @@ namespace RepositoryLayer.Services
         public async Task<bool> DeleteNotes(NotesModel notesModel, int id)
         {
             var deleteOrderDetails =
-                from details in _authenticationContext.notesModels
+                from details in this._authenticationContext.notesModels
                 where details.Id == id && details.UserId == notesModel.UserId
                 select details;
             foreach (var deleteNote in deleteOrderDetails)
@@ -145,21 +143,27 @@ namespace RepositoryLayer.Services
             ////save changes to the database
             var result = await this._authenticationContext.SaveChangesAsync();
             return true;
-
         }
 
+        /// <summary>
+        /// Adds the image.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="userid">The userid.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="file">The file.</param>
+        /// <returns></returns>
         public string AddImage(string url, string userid, int id, IFormFile file)
         {
             //// Linq Query to select note id to set the image to notes
-            var image = (from notes in _authenticationContext.notesModels
+            var image = (from notes in this._authenticationContext.notesModels
                          where notes.Id == id
                          select notes).FirstOrDefault();
 
             //// Here the image column store the url of image
             image.Image = url;
-
             //// save the changes in Database
-            var result = _authenticationContext.SaveChanges();
+            var result = this._authenticationContext.SaveChanges();
 
             if (result > 0)
             {
@@ -171,13 +175,17 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Archives the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<bool> Archive(int id)
         {
             //// Linq Query to select note id to Archive the note
-            var ArchiveNote = (from note in _authenticationContext.notesModels
+            var ArchiveNote = (from note in this._authenticationContext.notesModels
                                where note.Id == id
                                select note).FirstOrDefault();
-
 
             if (ArchiveNote != null)
             {
@@ -187,7 +195,7 @@ namespace RepositoryLayer.Services
                     ArchiveNote.Archive = true;
                 }
 
-                await _authenticationContext.SaveChangesAsync();
+                await this._authenticationContext.SaveChangesAsync();
                 return true;
             }
             else
@@ -196,10 +204,15 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Un archive.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<bool> UnArchive(int id)
         {
             //// Linq Query to select note id to UnArchive the note
-            var UnarchiveNote = (from note in _authenticationContext.notesModels
+            var UnarchiveNote = (from note in this._authenticationContext.notesModels
                                  where note.Id == id
                                  select note).FirstOrDefault();
 
@@ -209,7 +222,8 @@ namespace RepositoryLayer.Services
                 {
                     UnarchiveNote.Archive = false;
                 }
-                await _authenticationContext.SaveChangesAsync();
+
+                await this._authenticationContext.SaveChangesAsync();
                 return true;
             }
             else
@@ -218,9 +232,15 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Trashes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<bool> Trash(int id)
         {
-            var TrashNotes = (from note in _authenticationContext.notesModels
+            //// Linq Query to select note id to Trash the note
+            var TrashNotes = (from note in this._authenticationContext.notesModels
                               where note.Id == id
                               select note).FirstOrDefault();
 
@@ -231,7 +251,7 @@ namespace RepositoryLayer.Services
                     TrashNotes.Trash = true;
                 }
 
-                await _authenticationContext.SaveChangesAsync();
+                await this._authenticationContext.SaveChangesAsync();
                 return true;
             }
             else
@@ -240,9 +260,15 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Un trash.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<bool> UnTrash(int id)
         {
-            var TrashNotes = (from note in _authenticationContext.notesModels
+            //// Linq Query to select note id to Untrash the note
+            var TrashNotes = (from note in this._authenticationContext.notesModels
                               where note.Id == id
                               select note).FirstOrDefault();
 
@@ -253,7 +279,7 @@ namespace RepositoryLayer.Services
                     TrashNotes.Trash = false;
                 }
 
-                await _authenticationContext.SaveChangesAsync();
+                await this._authenticationContext.SaveChangesAsync();
                 return true;
             }
             else
@@ -262,9 +288,15 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Pins the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<bool> Pin(int id)
         {
-            var PinNotes = (from note in _authenticationContext.notesModels
+            //// Linq Query to select note id to Pin the note
+            var PinNotes = (from note in this._authenticationContext.notesModels
                             where note.Id == id
                             select note).FirstOrDefault();
 
@@ -275,7 +307,7 @@ namespace RepositoryLayer.Services
                     PinNotes.Pin = true;
                 }
 
-                await _authenticationContext.SaveChangesAsync();
+                await this._authenticationContext.SaveChangesAsync();
                 return true;
             }
             else
@@ -284,9 +316,15 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Uns the pin.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<bool> UnPin(int id)
         {
-            var UnPinNotes = (from note in _authenticationContext.notesModels
+            //// Linq Query to select note id to Unpin the note
+            var UnPinNotes = (from note in this._authenticationContext.notesModels
                               where note.Id == id
                               select note).FirstOrDefault();
 
@@ -297,7 +335,7 @@ namespace RepositoryLayer.Services
                     UnPinNotes.Pin = false;
                 }
 
-                await _authenticationContext.SaveChangesAsync();
+                await this._authenticationContext.SaveChangesAsync();
                 return true;
             }
             else
@@ -306,14 +344,21 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Adds the reminder.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="time">The time.</param>
+        /// <returns></returns>
         public async Task<bool> AddReminder(int id, DateTime time)
         {
-            var Reminder = (from note in _authenticationContext.notesModels
+            //// Linq Query to select note id and time to Add reminder for note
+            var Reminder = (from note in this._authenticationContext.notesModels
                             where note.Id == id
                             select note).FirstOrDefault();
 
             Reminder.Reminder = time;
-            var result = await _authenticationContext.SaveChangesAsync();
+            var result = await this._authenticationContext.SaveChangesAsync();
 
             if (result != 0)
             {
@@ -325,16 +370,51 @@ namespace RepositoryLayer.Services
             }
         }
 
+        /// <summary>
+        /// Deletes the reminder.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<bool> DeleteReminder(int id)
         {
-            var DeleteReminder = (from note in _authenticationContext.notesModels
+            //// Linq Query to select note id and time to Delete reminder for note
+            var DeleteReminder = (from note in this._authenticationContext.notesModels
                             where note.Id == id
                             select note).FirstOrDefault();
 
             DeleteReminder.Reminder = DateTime.MinValue;
-            var result = await _authenticationContext.SaveChangesAsync();
+            var result = await this._authenticationContext.SaveChangesAsync();
 
-            if(result != 0)
+            if (result != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Collabrations the notes.
+        /// </summary>
+        /// <param name="collabrationModel">The collabration model.</param>
+        /// <returns>result</returns>
+        public async Task<bool> CollabrationNotes(CollabrationModel collabrationModel)
+        {
+            CollabrationModel NotesCollabration = new CollabrationModel()
+            {
+                Id = collabrationModel.Id,
+                SenderId = collabrationModel.SenderId,
+                UserId = collabrationModel.UserId,
+                NoteId = collabrationModel.NoteId
+            };
+
+            this._authenticationContext.Add(NotesCollabration);
+
+            //// save the the details in db and return a result
+            var result = await this._authenticationContext.SaveChangesAsync();
+            if (result != 0)
             {
                 return true;
             }

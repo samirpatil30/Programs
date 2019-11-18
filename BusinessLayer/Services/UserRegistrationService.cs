@@ -6,12 +6,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace BusinessLayer.Services
 {
+    using System;
+    using System.Threading.Tasks;
     using BusinessLayer.Interface;
     using CommanLayer.Model;
     using Microsoft.AspNetCore.Http;
     using RepositoryLayer.Interface;
-    using System;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// AccountBL
@@ -20,24 +20,24 @@ namespace BusinessLayer.Services
     public class UserRegistrationService : IUserRegistrationBusiness
     {
         /// <summary>
-        /// Create the reference variable of Repository layer interface i.e IRegistrationRl
+        /// Create the reference variable of Repository layer interface i.e IRegistration
         /// </summary>
-        private IUserRegistraionRepositpry _registration;
+        private IUserRegistraionRepository _registration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserRegistrationService"/> class.
         /// </summary>
         /// <param name="registration">The registration.</param>
-        public UserRegistrationService(IUserRegistraionRepositpry registration)
+        public UserRegistrationService(IUserRegistraionRepository registration)
         {
-            _registration = registration;
+            this._registration = registration;
         }
 
         /// <summary>
         /// Adds the user details.
         /// </summary>
         /// <param name="user">The user.</param>
-        /// <returns></returns>
+        /// <returns>result</returns>
         /// <exception cref="Exception">User is empty</exception>
         public async Task<Tuple<bool, string>> AddUserDetails(UserDetails user)
         {
@@ -46,7 +46,7 @@ namespace BusinessLayer.Services
                 //// If user the user details is empty or not 
                 if (user != null)
                 {
-                    var result = await _registration.AddUserDetails(user);
+                    var result = await this._registration.AddUserDetails(user);
                     if (result != null)
                     {
                         return Tuple.Create(true, "User registration Successful");
@@ -55,7 +55,6 @@ namespace BusinessLayer.Services
                     {
                         return Tuple.Create(false, "User registration is not Successful");
                     }
-
                 }
                 else
                 {
@@ -68,13 +67,12 @@ namespace BusinessLayer.Services
             }
         }
 
-
         /// <summary>
         /// Logins the specified login model.
         /// </summary>
-        /// <param name="loginModel">The login model.</param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <param name="loginModel">login model.</param>
+        /// <returns>LoginResult</returns>
+        /// <exception cref="NotImplementedException">exception</exception>
         public async Task<Tuple<string, string>> Login(LoginModel loginModel)
         {
             try
@@ -82,8 +80,8 @@ namespace BusinessLayer.Services
                 //// If checks login details is empty or not 
                 if (loginModel != null)
                 {
-                    var LoginResult = await _registration.Login(loginModel);
-                    return Tuple.Create(LoginResult.Item1, "Login Successful");
+                    var loginResult = await this._registration.Login(loginModel);
+                    return Tuple.Create(loginResult.Item1, "Login Successful");
                 }
                 else
                 {
@@ -97,10 +95,10 @@ namespace BusinessLayer.Services
         }
 
         /// <summary>
-        /// Forgots the password.
+        /// Forgot the password.
         /// </summary>
         /// <param name="passwordModel">The password model.</param>
-        /// <returns></returns>
+        /// <returns>this._registration.ForgotPassword(passwordModel);</returns>
         /// <exception cref="Exception">User Email is not valid</exception>
         public async Task<string> ForgotPassword(ForgotPasswordModel passwordModel)
         {
@@ -109,7 +107,7 @@ namespace BusinessLayer.Services
                 //// If checks passwordModel details is empty or not 
                 if (passwordModel != null)
                 {
-                    return await _registration.ForgotPassword(passwordModel);
+                    return await this._registration.ForgotPassword(passwordModel);
                 }
                 else
                 {
@@ -126,8 +124,8 @@ namespace BusinessLayer.Services
         /// Resets the password.
         /// </summary>
         /// <param name="resetPasswordModel">The reset password model.</param>
-        /// <param name="tokenString">The token string.</param>
-        /// <returns></returns>
+        /// <param name="tokenString">token string.</param>
+        /// <returns>result</returns>
         /// <exception cref="Exception">User Email is not valid</exception>
         public async Task<Tuple<bool, string>> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString)
         {
@@ -137,10 +135,10 @@ namespace BusinessLayer.Services
                 if (resetPasswordModel != null)
                 {
                     //// variable result stores the result of ResetPassword()
-                   var result = await  _registration.ResetPassword(resetPasswordModel,tokenString);
+                   var result = await this._registration.ResetPassword(resetPasswordModel, tokenString);
 
                     //// If checks result is null or not
-                    if(result != null)
+                    if (result != null)
                     {
                         return Tuple.Create(true, "Password Has Been change");
                     }
@@ -154,29 +152,34 @@ namespace BusinessLayer.Services
                     throw new Exception("User Email is not valid");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
 
-       public string ProfilePicture( string userid, IFormFile file)
+        /// <summary>
+        /// Profiles the picture.
+        /// </summary>
+        /// <param name="user id">user id.</param>
+        /// <param name="file">file.</param>
+        /// <returns> this._registration.ProfilePicture(profilePicUrl, user id, file);</returns>
+        public string ProfilePicture(string userid, IFormFile file)
         {
             try
             {
                 CloudinaryImageUpload cloudinary = new CloudinaryImageUpload();
                 var profilePicUrl = cloudinary.UploadImageOnCloud(file);
-                if(userid != null)
+                if (userid != null)
                 {
-                    return _registration.ProfilePicture(profilePicUrl, userid, file);
+                    return this._registration.ProfilePicture(profilePicUrl, userid, file);
                 }
                 else
                 {
-                    return "Profile Picture is not uploaded";
-                    
+                    return "Profile Picture is not uploaded";                   
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception;
             }

@@ -14,6 +14,11 @@ namespace RepositoryLayer.Services
     using System.Text;
     using System.Threading.Tasks;
     using System.Linq;
+
+    /// <summary>
+    /// LabelRepositoryManager
+    /// </summary>
+    /// <seealso cref="RepositoryLayer.Interface.ILabelRepositoryManager" />
     public class LabelRepositoryManager  : ILabelRepositoryManager
     {
         /// <summary>
@@ -34,7 +39,7 @@ namespace RepositoryLayer.Services
         /// Add Label
         /// </summary>
         /// <param name="labelModel"></param>
-        /// <returns></returns>
+        /// <returns>result</returns>
         public async Task<bool> AddLabel(LabelModel labelModel)
         {
             //// variable addLabel stores the below data
@@ -49,7 +54,6 @@ namespace RepositoryLayer.Services
            
             //// Add the details of user in db
             this._authenticationContext.Add(addLabel);
-
             //// save the the details in db and return a result
             var result = await _authenticationContext.SaveChangesAsync();
 
@@ -68,7 +72,7 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="labelModelDetails"></param>
         /// <param name="labelName"></param>
-        /// <returns></returns>
+        /// <returns>result</returns>
         public async Task<bool> UpdateLabel(LabelModel labelModelDetails, string labelName)
         {
             //// variable updateLabel store the Information of user like labelName
@@ -98,7 +102,7 @@ namespace RepositoryLayer.Services
         /// Get Label
         /// </summary>
         /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <returns>list</returns>
         public IList<LabelModel> GetLabel(string userId)
         {
             //// Here the Linq querey return the Record match in Database
@@ -128,7 +132,6 @@ namespace RepositoryLayer.Services
             ////save changes to the database
             var result = await this._authenticationContext.SaveChangesAsync();
             return true;
-
         }
     }
 }
