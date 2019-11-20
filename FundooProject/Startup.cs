@@ -64,7 +64,7 @@ namespace FundooProject
             services.AddTransient<ILabelBussinessManager, LabelBussinessManager>();
             services.AddTransient<ILabelRepositoryManager, LabelRepositoryManager>();
 
-            services.AddDbContext<AuthenticationContext>(options => 
+            services.AddDbContext<AuthenticationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("connectionDb")));
 
             services.AddDefaultIdentity<ApplicationUser>()
@@ -145,28 +145,27 @@ namespace FundooProject
         /// </summary>
         /// <seealso cref="Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter" />
         public class FileUploadedOperation : IOperationFilter
-            {
-
+        {
             /// <summary>
             /// Applies the specified swagger document.
             /// </summary>
             /// <param name="swaggerDocument">The swagger document.</param>
             /// <param name="documentFilter">The document filter.</param>
             public void Apply(Operation swaggerDocument, OperationFilterContext documentFilter)
+            {
+                if (swaggerDocument.Parameters == null)
                 {
-                    if (swaggerDocument.Parameters == null)
-                    {
-                        swaggerDocument.Parameters = new List<IParameter>();
-                    }
-
-                    swaggerDocument.Parameters.Add(new NonBodyParameter
-                    {                      
-                        Name = "Authorization",
-                        In = "header",
-                        Type = "string",
-                        Required = true
-                    });
+                    swaggerDocument.Parameters = new List<IParameter>();
                 }
+
+                swaggerDocument.Parameters.Add(new NonBodyParameter
+                {
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "string",
+                    Required = true
+                });
             }
+        }   
     }
 }

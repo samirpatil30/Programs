@@ -28,5 +28,9 @@ namespace RepositoryLayer.Interface
         Task<Tuple<bool,string>> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString);
 
         string ProfilePicture(string url, string userid, IFormFile file);
+        Task<bool> AdminRegistration(UserDetails adminDetails);
+        Task<string> AdminLogin(LoginModel loginModel);
+        Dictionary<string, int> UserStaticstics();
+        IList<UserDetails> ListOfUsers();
     }
 }

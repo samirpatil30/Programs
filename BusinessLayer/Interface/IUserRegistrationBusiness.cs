@@ -9,6 +9,7 @@ namespace BusinessLayer.Interface
     using CommanLayer.Model;
     using Microsoft.AspNetCore.Http;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -52,5 +53,9 @@ namespace BusinessLayer.Interface
         /// <param name="file">The file.</param>
         /// <returns>User id, file</returns>
         string ProfilePicture(string userid, IFormFile file);
+        Task<bool> AdminRegistration(UserDetails adminDetails);
+        Task<string> AdminLogin(LoginModel loginModel);
+        Dictionary<string, int> UserStaticstics();
+        IList<UserDetails> ListOfUsers();
     }
 }

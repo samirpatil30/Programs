@@ -14,6 +14,7 @@ namespace RepositoryLayer.Services
     using RepositoryLayer.Context;
     using RepositoryLayer.Interface;
     using System;
+    using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Security.Claims;
@@ -39,10 +40,10 @@ namespace RepositoryLayer.Services
         /// Create the parameterized Constructor of class and pass the UserManager
         /// </summary>
         /// <param name="userManager"></param>
-        public UserRegistrationRepository(UserManager<ApplicationUser> userManager,AuthenticationContext authenticationContext)
+        public UserRegistrationRepository(UserManager<ApplicationUser> userManager, AuthenticationContext authenticationContext)
         {
-           this._userManager = userManager;
-           this._authenticationContext = authenticationContext;
+            this._userManager = userManager;
+            this._authenticationContext = authenticationContext;
         }
 
         /// <summary>
@@ -58,12 +59,14 @@ namespace RepositoryLayer.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 UserName = user.UserName,
-                Email = user.Email,  
-                ProfilePicture = user.ProfilePicuture
+                Email = user.Email,
+                ProfilePicture = user.ProfilePicuture,
+                UserType = user.UserType,
+                ServiceId = user.ServiceId
             };
 
             try
-            {              
+            {
                 var result = await this._userManager.CreateAsync(applicationUser, user.Password);
                 if (result != null)
                 {
@@ -88,18 +91,22 @@ namespace RepositoryLayer.Services
         public async Task<Tuple<string, string>> Login(LoginModel loginModel)
         {
             //// it confirms that user is avaiable in database or not
-            var user = await _userManager.FindByNameAsync(loginModel.UserName);
+            var user = await this._userManager.FindByNameAsync(loginModel.UserName);
 
             //// check the username and password is matched in database or not
             if (user != null && await this._userManager.CheckPasswordAsync(user, loginModel.Password))
             {
                 string key = "This is my SecretKey which is used for security purpose";
+
                 ////Here generate encrypted key and result store in security key
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+
                 //// here using securitykey and algorithm(security) the creadintails is generate(SigningCredentials present in Token)
                 var creadintials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-                var claims = new[] {
-               new Claim("UserName", user.UserName),
+
+                var claims = new[]
+                {
+                    new Claim("UserName", user.UserName),
                 };
 
                 var token = new JwtSecurityToken("Security token", "https://Test.com",
@@ -124,7 +131,7 @@ namespace RepositoryLayer.Services
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         public async Task<string> ForgotPassword(ForgotPasswordModel passwordModel)
-        {          
+        {
             try
             {
                 //// variable user stores email of user
@@ -146,7 +153,7 @@ namespace RepositoryLayer.Services
                     };
 
                     //// This object is used to decode JWTs
-                         var tokenHandler = new JwtSecurityTokenHandler();
+                    var tokenHandler = new JwtSecurityTokenHandler();
                     ////it creates the security token
                     var securityToken = tokenHandler.CreateToken(tokenDescripter);
                     ////it writes security token to the token variable.
@@ -158,7 +165,7 @@ namespace RepositoryLayer.Services
                 else
                 {
                     return "Invalid user";
-                }              
+                }
             }
             catch (Exception e)
             {
@@ -172,11 +179,11 @@ namespace RepositoryLayer.Services
         /// <param name="resetPasswordModel"></param>
         /// <param name="tokenString"></param>
         /// <returns></returns>
-       public async Task<Tuple<bool, string>> ResetPassword(ResetPasswordModel resetPasswordModel,string tokenString)
+        public async Task<Tuple<bool, string>> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString)
         {
             var token = new JwtSecurityToken(tokenString);
             //// Claims the email from token
-            var Email =  (token.Claims.First(c => c.Type == "Email").Value);         
+            var Email = (token.Claims.First(c => c.Type == "Email").Value);
             //// Find the Email in Database and return the result
             var user = await this._userManager.FindByEmailAsync(Email);
             if (user != null)
@@ -186,14 +193,14 @@ namespace RepositoryLayer.Services
                 //// Here ResetPasswordAsync() Specifies the new password after validating given password reset token
                 var result = await this._userManager.ResetPasswordAsync(user, resetToken, resetPasswordModel.Password);
 
-               if (result != null)
-               {
+                if (result != null)
+                {
                     return Tuple.Create(true, "Password has been change");
-               }
-               else
-               {
+                }
+                else
+                {
                     return Tuple.Create(false, "Password has not been change");
-               }
+                }
             }
             else
             {
@@ -226,6 +233,124 @@ namespace RepositoryLayer.Services
             {
                 return "Image not uploaded";
             }
+        }
+
+        public async Task<bool> AdminRegistration(UserDetails adminDetails)
+        {
+            var admin = new ApplicationUser()
+            {
+                FirstName = adminDetails.FirstName,
+                LastName = adminDetails.LastName,
+                UserName = adminDetails.UserName,
+                Email = adminDetails.Email,
+                ProfilePicture = adminDetails.ProfilePicuture,
+                UserType = "Admin",
+                ServiceId = null
+            };
+            try
+            {
+                var result = await this._userManager.CreateAsync(admin, adminDetails.Password);
+                if (result != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public async Task<string> AdminLogin(LoginModel loginModel)
+        {
+            var user = await this._userManager.FindByNameAsync(loginModel.UserName);
+
+            //// check the username and password is matched in database or not
+            if (user.UserType == "Admin" && await this._userManager.CheckPasswordAsync(user, loginModel.Password))
+            {
+                string key = "This is my SecretKey which is used for security purpose";
+
+                ////Here generate encrypted key and result store in security key
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+
+                //// here using securitykey and algorithm(security) the creadintails is generate(SigningCredentials present in Token)
+                var creadintials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+                var claims = new[]
+                {
+                    new Claim("UserName", user.UserName),
+                };
+
+                var token = new JwtSecurityToken("Security token", "https://Test.com",
+                    claims,
+                    DateTime.UtcNow,
+                    expires: DateTime.Now.AddDays(1),
+                    signingCredentials: creadintials);
+
+                var NewToken = new JwtSecurityTokenHandler().WriteToken(token);
+                return NewToken;
+            }
+            else
+            {
+                return "Token is not generated";
+            }
+        }
+
+        public  Dictionary<string,int> UserStaticstics()
+        {
+            Dictionary<string, int> map = new Dictionary<string, int>();
+
+            var count = from users in _authenticationContext.User
+                        select users;
+
+            int advance = 0, basic = 0;
+            foreach (var user in count)
+            {
+                if (user.ServiceId == "Advance")
+                {
+                 
+                    advance++;
+                }
+                else if (user.ServiceId == "Basic")
+                {
+                  
+                    basic++;
+                }
+            }
+            map.Add("Advance", advance);
+            map.Add("Basic", basic);
+            return map;
+        }
+
+        public IList<UserDetails> ListOfUsers()
+        {
+            var listOfUsers = from users in _authenticationContext.User
+                              where users.ServiceId.Equals("Advance") || users.ServiceId.Equals("Basic")
+                              select users;
+
+            IList<UserDetails> list = new List<UserDetails>();
+
+           foreach (var Newlist in listOfUsers)
+            {
+                var users = new UserDetails()
+                {
+                    FirstName = Newlist.FirstName,
+                    LastName = Newlist.LastName,
+                    UserName = Newlist.UserName,
+                    Email = Newlist.Email,
+                    UserType = Newlist.UserType,
+                    ServiceId = Newlist.ServiceId
+                };
+
+                list.Add(users);
+            }
+
+            return list.ToList();
         }
     }
 }

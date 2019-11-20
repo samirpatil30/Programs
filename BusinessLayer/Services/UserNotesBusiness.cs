@@ -9,6 +9,7 @@ namespace BusinessLayer.Services
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Web.Http;
     using BusinessLayer.Interface;
     using CommanLayer.Model;
     using Microsoft.AspNetCore.Http;
@@ -391,30 +392,58 @@ namespace BusinessLayer.Services
             }
         }
 
-        /// <summary>
-        /// Collabrations the notes.
-        /// </summary>
-        /// <param name="collabrationModel">The collabration model.</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Unable to collabreate</exception>
-        public async Task<bool> CollabrationNotes(CollabrationModel collabrationModel)
+        public async Task<bool> Collabrate(int Noteid, IList<string> senderId)
         {
             try
             {
-                var result = await this._notesRepository.CollabrationNotes(collabrationModel);
-                
-                if (result != false)
+               
+
+                if(senderId != null)
+                {
+                    return await _notesRepository.Collabrate(Noteid, senderId);
+                }
+                else
+                {
+                    throw new Exception("Unable to collabrate note");
+                }
+            }
+            catch(Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public async Task<bool> BulkTrash(IList<int> id)
+        {
+            try
+            {
+                var result = await _notesRepository.BulkTrash(id);
+
+                if(result != false)
                 {
                     return true;
                 }
                 else
                 {
-                    throw new Exception("Unable to collabreate");
+                    throw new Exception("Unable to delete bulk notes");
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw exception;
+            }
+        }
+
+        public IList<NotesModel> Search(string note)
+        {
+            try
+            {
+               return _notesRepository.Search(note);
+             
+            }
+            catch(Exception exception)
+            {
+                throw new Exception(exception.Message);
             }
         }
     }

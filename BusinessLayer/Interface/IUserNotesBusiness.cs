@@ -113,12 +113,15 @@ namespace BusinessLayer.Interface
         /// <param name="id">The identifier.</param>
         /// <returns>id</returns>
         Task<bool> DeleteReminder(int id);
-        
+
         /// <summary>
         /// Collabrations the notes.
         /// </summary>
         /// <param name="collabrationModel">The collabration model.</param>
         /// <returns></returns>
-        Task<bool> CollabrationNotes(CollabrationModel collabrationModel);
+        Task<bool> Collabrate(int Noteid, IList<string> senderId);
+
+        Task<bool> BulkTrash(IList<int> id);
+        IList<NotesModel> Search(string anything);
     }
 }

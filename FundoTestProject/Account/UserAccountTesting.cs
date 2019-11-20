@@ -1,5 +1,9 @@
-﻿
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UserAccountTesting.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Samir Patil"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace FundoTestProject.Account
 {
     using BusinessLayer.Services;
@@ -33,8 +37,7 @@ namespace FundoTestProject.Account
             var data = businessLayer.AddUserDetails(model);
 
             //// Assert
-            Assert.NotNull(data);
-            
+            Assert.NotNull(data);           
         }
 
         /// <summary>

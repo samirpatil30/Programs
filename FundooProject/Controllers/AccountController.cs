@@ -7,6 +7,7 @@
 namespace FundooProject.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using BusinessLayer.Interface;
     using CommanLayer.Model;
@@ -18,7 +19,7 @@ namespace FundooProject.Controllers
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Route("api/[controller]")]
-    [ApiController]
+    //[ApiController]
     public class AccountController : ControllerBase
     {
         /// <summary>
@@ -42,11 +43,11 @@ namespace FundooProject.Controllers
         /// <returns>result</returns>
         [HttpPost]
         [Route("Add")]
-        public async Task<IActionResult> AddUserDetail(UserDetails details)        
+        public async Task<IActionResult> AddUserDetail(UserDetails details)
         {
             //// the variable result stores the result of method AddUserDetails          
-             var result = await this._account.AddUserDetails(details);     
-             return this.Ok(new { result });   
+            var result = await this._account.AddUserDetails(details);
+            return this.Ok(new { result });
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace FundooProject.Controllers
         [HttpPost]
         [Route("login")]
         public async Task<Tuple<string, string>> Login(LoginModel details)
-        {  
+        {
             //// the variable result stores the result of method Login
             var ResultOfLogin = await this._account.Login(details);
             return Tuple.Create(ResultOfLogin.Item1, "Login Successful");
@@ -73,7 +74,7 @@ namespace FundooProject.Controllers
         public async Task<string> ForgotPasword(ForgotPasswordModel passwordModel)
         {
             //// the variable result stores the result of method Login
-            return await this._account.ForgotPassword(passwordModel); 
+            return await this._account.ForgotPassword(passwordModel);
         }
 
         /// <summary>
@@ -85,7 +86,7 @@ namespace FundooProject.Controllers
         [HttpPost]
         [Route("Reset/{tokenString}")]
         public async Task<IActionResult> ResetPassword(ResetPasswordModel resetPasswordModel, string tokenString)
-        {            
+        {
             var result = await this._account.ResetPassword(resetPasswordModel, tokenString);
             return this.Ok(new { result });
         }
@@ -102,6 +103,39 @@ namespace FundooProject.Controllers
         {
             var UrlOfProfilePicture = this._account.ProfilePicture(userId, file);
             return this.Ok(new { UrlOfProfilePicture });
+        }
+
+        [HttpPost]
+        [Route("adminRegistration")]
+
+        public async Task<IActionResult> AdminRegistration(UserDetails adminDetails)
+        {
+            var result = await _account.AdminRegistration(adminDetails);
+            return Ok(new { result });
+        }
+
+        [HttpPost]
+        [Route("adminLogin")]
+
+        public async Task<IActionResult> AdminLogin(LoginModel loginModel)
+        {
+            var AdminToken = await _account.AdminLogin(loginModel);
+            return Ok(new { AdminToken });
+        }
+
+        [HttpGet]
+        [Route("statitics")]
+        public Dictionary<string, int> UserStaticstics()
+        {
+            return _account.UserStaticstics();
+        }
+
+        [HttpGet]
+        [Route("list of Users")]
+
+        public IList<UserDetails> ListOfUsers()
+        {
+           return _account.ListOfUsers();        
         }
     }
 }  

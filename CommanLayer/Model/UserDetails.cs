@@ -72,5 +72,21 @@ namespace CommanLayer.Model
         /// The profile picture.
         /// </value>
         public string ProfilePicuture { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of the user.
+        /// </summary>
+        /// <value>
+        /// The type of the user.
+        /// </value>
+        public string UserType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the service identifier.
+        /// </summary>
+        /// <value>
+        /// The service identifier.
+        /// </value>
+        public string ServiceId { get; set; }
     }
 }

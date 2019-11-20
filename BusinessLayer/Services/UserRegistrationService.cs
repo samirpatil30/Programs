@@ -7,6 +7,7 @@
 namespace BusinessLayer.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using BusinessLayer.Interface;
     using CommanLayer.Model;
@@ -180,6 +181,89 @@ namespace BusinessLayer.Services
                 }
             }
             catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public async Task<bool> AdminRegistration(UserDetails adminDetails)
+        {
+            try
+            {
+                //// If user the user details is empty or not 
+                if (adminDetails != null)
+                {
+                    var result = await this._registration.AdminRegistration(adminDetails);
+                    if (result != false)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    throw new Exception("User is empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public async Task<string> AdminLogin(LoginModel loginModel)
+        {
+            try
+            {
+                //// If checks login details is empty or not 
+                if (loginModel != null)
+                {
+                    var loginResult = await this._registration.AdminLogin(loginModel);
+                    return loginResult;
+                }
+                else
+                {
+                    throw new Exception("admin is empty");
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public  Dictionary<string, int> UserStaticstics()
+        {
+            try
+            {
+                return _registration.UserStaticstics();
+            }
+            catch(Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public IList<UserDetails> ListOfUsers()
+        {
+            try
+            {
+                IList<UserDetails> result = new List<UserDetails>();
+                result = _registration.ListOfUsers();
+               
+                if(result != null)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new Exception("Unable to retrive list of users");
+                }
+            }
+            catch(Exception exception)
             {
                 throw exception;
             }

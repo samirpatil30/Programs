@@ -115,6 +115,9 @@ namespace RepositoryLayer.Interface
         /// <returns></returns>
         Task<bool> DeleteReminder(int id);
 
-        Task<bool> CollabrationNotes(CollabrationModel collabrationModel);
+        Task<bool> Collabrate(int Noteid, IList<string> senderId);
+
+        Task<bool> BulkTrash(IList<int> id);
+        IList<NotesModel> Search(string anything);
     }
 }

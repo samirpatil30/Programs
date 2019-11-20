@@ -17,6 +17,7 @@ namespace RepositoryLayer.Services
     using RepositoryLayer.Context;
     using RepositoryLayer.Interface;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -84,7 +85,7 @@ namespace RepositoryLayer.Services
         public IList<NotesModel> GetNotes(string UserId)
         {
             //// Here the Linq querey return the Record match in Database
-            var list = from notes in  this._authenticationContext.notesModels.Where(g => g.UserId == UserId && g.Trash == false && g.Archive == false) select notes;
+            var list = from notes in this._authenticationContext.notesModels.Where(g => g.UserId == UserId && g.Trash == false && g.Archive == false) select notes;
             return list.ToList();
         }
 
@@ -352,13 +353,15 @@ namespace RepositoryLayer.Services
         /// <returns></returns>
         public async Task<bool> AddReminder(int id, DateTime time)
         {
+            FireBaseNotification fireBaseNotification = new FireBaseNotification();
             //// Linq Query to select note id and time to Add reminder for note
             var Reminder = (from note in this._authenticationContext.notesModels
                             where note.Id == id
                             select note).FirstOrDefault();
-
-            Reminder.Reminder = time;
+            
+            Reminder.Reminder = time; 
             var result = await this._authenticationContext.SaveChangesAsync();
+          //  fireBaseNotification.Notification(Reminder);
 
             if (result != 0)
             {
@@ -379,8 +382,8 @@ namespace RepositoryLayer.Services
         {
             //// Linq Query to select note id and time to Delete reminder for note
             var DeleteReminder = (from note in this._authenticationContext.notesModels
-                            where note.Id == id
-                            select note).FirstOrDefault();
+                                  where note.Id == id
+                                  select note).FirstOrDefault();
 
             DeleteReminder.Reminder = DateTime.MinValue;
             var result = await this._authenticationContext.SaveChangesAsync();
@@ -395,32 +398,93 @@ namespace RepositoryLayer.Services
             }
         }
 
-        /// <summary>
-        /// Collabrations the notes.
-        /// </summary>
-        /// <param name="collabrationModel">The collabration model.</param>
-        /// <returns>result</returns>
-        public async Task<bool> CollabrationNotes(CollabrationModel collabrationModel)
+
+        public async Task<bool> Collabrate(int Noteid, IList<string> UserId)
         {
-            CollabrationModel NotesCollabration = new CollabrationModel()
+            try
             {
-                Id = collabrationModel.Id,
-                SenderId = collabrationModel.SenderId,
-                UserId = collabrationModel.UserId,
-                NoteId = collabrationModel.NoteId
-            };
+                var ListOFSenders = (from notes in _authenticationContext.notesModels
+                                     where notes.Id == Noteid
+                                     select notes).FirstOrDefault();
 
-            this._authenticationContext.Add(NotesCollabration);
+                foreach (var User in UserId)
+                {
+                    var list = new CollabrationModel();
+                    list.UserId = User;
+                    list.NoteId = Noteid;
+                    list.CurrentUserId = ListOFSenders.UserId;
+                    _authenticationContext.Add(list);
+                    var result = await this._authenticationContext.SaveChangesAsync();
+                }
 
-            //// save the the details in db and return a result
-            var result = await this._authenticationContext.SaveChangesAsync();
-            if (result != 0)
-            {
                 return true;
             }
-            else
+            catch (Exception exception)
             {
-                return false;
+                throw exception;
+            }
+        }
+
+        public async Task<bool> BulkTrash(IList<int> id)
+        {
+            foreach (var deleteId in id)
+            {
+                var Deletenote = (from note in _authenticationContext.notesModels
+                                  where note.Id == deleteId
+                                  select note).FirstOrDefault();
+                _authenticationContext.Remove(Deletenote);
+
+            }
+            var result = await this._authenticationContext.SaveChangesAsync();
+            return true;
+        }
+
+        public IList<NotesModel> Search(string anything)
+        {
+            IList<NotesModel> listResults = new List<NotesModel>();
+
+            try
+            {
+                var resultsFromLabel = (from lable in _authenticationContext.labelModels
+                                        where lable.Label == anything
+                                        select lable);
+
+                ///  int a=resultsFromLabel.where note.UserId == 
+
+                if (resultsFromLabel != null)
+                {
+                    foreach (LabelModel model in resultsFromLabel)
+                    {
+                        var result = (from note in _authenticationContext.notesModels
+
+                                   where note.UserId == model.UserId 
+
+                                   select note);
+
+                        ///  NotesModel notesModel =(NotesModel) res;
+
+                        foreach (NotesModel modelNote in result)
+                        {
+                            if (listResults.Contains(modelNote))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                               listResults.Add(modelNote);                              
+                            }
+                        }
+                    }
+                    return listResults.ToList();
+                }
+                else
+                {
+                    throw new Exception("Note not found");
+                }
+            }
+            catch(Exception exception)
+            {
+                throw exception;
             }
         }
     }

@@ -7,6 +7,7 @@
 namespace FundooProject.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using BusinessLayer.Interface;
     using CommanLayer.Model;
@@ -19,7 +20,7 @@ namespace FundooProject.Controllers
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Route("api/[controller]")]
-    [ApiController]
+    //[ApiController]
     ////Authorize attribute to the controller class, then any action methods on the controller will be only available to authenticated users. 
     [Authorize]
     public class NotesController : ControllerBase
@@ -35,7 +36,7 @@ namespace FundooProject.Controllers
         /// <param name="userNotes">The user notes.</param>
         public NotesController(IUserNotesBusiness userNotes)
         {
-            _userNotes = userNotes;
+            this._userNotes = userNotes;
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace FundooProject.Controllers
         ////[//Route("AddNotes")]
         public async Task<IActionResult> AddNotes(NotesModel notesModel)
         {
-            var result = await _userNotes.AddNotes(notesModel);
+            var result = await this._userNotes.AddNotes(notesModel);
             return this.Ok(new { result });
         }
 
@@ -105,7 +106,7 @@ namespace FundooProject.Controllers
         public IActionResult AddImage(string userId, int id, IFormFile file)
         {
             var urlOfImage = this._userNotes.AddImage(userId, id, file);
-            // return urlOfImage;
+            //// return urlOfImage;
             return this.Ok(new { urlOfImage });
         }
 
@@ -215,10 +216,27 @@ namespace FundooProject.Controllers
 
         [HttpPost]
         [Route("CollabrateNotes")]
-        public async Task<IActionResult> CollabrationNotes(CollabrationModel collabrationModel)
+        public async Task<IActionResult> Collabrate(int Noteid, IList<string> senderId)
         {
-            var result = await _userNotes.CollabrationNotes(collabrationModel);
-            return Ok(new { result } ); 
+            var result = await this._userNotes.Collabrate(Noteid,senderId);
+            return this.Ok(new { result } ); 
+        }
+
+        [HttpDelete]
+        [Route("BulkDelete")]
+        public async Task<IActionResult> BulkTrash(IList<int> id)
+        {
+            var result = await _userNotes.BulkTrash(id);
+            return Ok(new {result });
+        }
+
+        [HttpGet]
+        [Route("search")]
+
+        public IList<NotesModel> Search(string notes)
+        {
+            var result = _userNotes.Search(notes);
+            return result;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace FundooProject.Controllers
     public class LabelController : ControllerBase
     {
         /// <summary>
-        /// The bussiness manager
+        /// The business manager
         /// </summary>
         private readonly ILabelBussinessManager _bussinessManager;
 
