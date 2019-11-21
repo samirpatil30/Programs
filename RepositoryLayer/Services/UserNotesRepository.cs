@@ -82,11 +82,22 @@ namespace RepositoryLayer.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public IList<NotesModel> GetNotes(string UserId)
+        public IList<NotesModel> GetNotes(string UserId,int pageNumber, int NotePerPage)
         {
             //// Here the Linq querey return the Record match in Database
             var list = from notes in this._authenticationContext.notesModels.Where(g => g.UserId == UserId && g.Trash == false && g.Archive == false) select notes;
-            return list.ToList();
+            
+            int count = list.Count();
+            int CurrentPage = pageNumber;
+            int PageSize = NotePerPage;
+            int TotalCount = count;
+
+            // Calculating Totalpage by Dividing (No of Records / Pagesize)  
+            int TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
+            var items = list.Skip((CurrentPage - 1) * PageSize).Take(PageSize);
+   
+          //  return sourece1.ToList();
+            return items.ToList();
         }
 
         /// <summary>
@@ -361,8 +372,9 @@ namespace RepositoryLayer.Services
             
             Reminder.Reminder = time; 
             var result = await this._authenticationContext.SaveChangesAsync();
-          //  fireBaseNotification.Notification(Reminder);
-
+                     
+              fireBaseNotification.Notification(Reminder);
+            
             if (result != 0)
             {
                 return true;
@@ -448,18 +460,14 @@ namespace RepositoryLayer.Services
                 var resultsFromLabel = (from lable in _authenticationContext.labelModels
                                         where lable.Label == anything
                                         select lable);
-
-                ///  int a=resultsFromLabel.where note.UserId == 
-
+                
                 if (resultsFromLabel != null)
                 {
                     foreach (LabelModel model in resultsFromLabel)
                     {
                         var result = (from note in _authenticationContext.notesModels
-
-                                   where note.UserId == model.UserId 
-
-                                   select note);
+                                      where note.UserId == model.UserId 
+                                      select note);
 
                         ///  NotesModel notesModel =(NotesModel) res;
 

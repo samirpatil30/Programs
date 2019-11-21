@@ -59,9 +59,9 @@ namespace FundooProject.Controllers
         /// <returns>result</returns>
         [HttpGet]
         [Route("Get/{userId}")]
-        public IActionResult getNotes(string userId)
+        public IActionResult getNotes(string userId, int pageNumber, int NotePerPage)
         {
-            var result = this._userNotes.GetNotes(userId);
+            var result = this._userNotes.GetNotes(userId, pageNumber, NotePerPage);
             return this.Ok(new { result });
         }
 

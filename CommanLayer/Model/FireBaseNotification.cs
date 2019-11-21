@@ -9,7 +9,8 @@ namespace CommanLayer.Model
 {
     public class FireBaseNotification
     {
-        public IList<NotesModel> Notification(IList<NotesModel> noteDescription)
+           
+        public NotesModel Notification(NotesModel noteDescription)
         {
             var applicationId = "fundooproject - 5057d";
             var senderId = 990503402753;
@@ -30,6 +31,7 @@ namespace CommanLayer.Model
             var serializer = new JavaScriptSerializer();
             var json = serializer.Serialize(data);
             Byte[] byteArray = Encoding.UTF8.GetBytes(json);
+
             tRequest.Headers.Add(string.Format("Authorization: key={0}", applicationId));
             tRequest.Headers.Add(string.Format("Sender: id={0}", senderId));
             tRequest.ContentLength = byteArray.Length;
@@ -43,7 +45,7 @@ namespace CommanLayer.Model
  
             dataStream.Close();           
             tResponse.Close();
-            return noteDescription;
+            return noteDescription ;
             
         }
     }

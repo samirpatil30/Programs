@@ -29,7 +29,7 @@ namespace RepositoryLayer.Interface
         /// </summary>
         /// <param name="UserId">The user identifier.</param>
         /// <returns></returns>
-        IList<NotesModel> GetNotes(string UserId);
+        IList<NotesModel> GetNotes(string UserId,int pageNumber, int NotePerPage);
 
 
         /// <summary>
